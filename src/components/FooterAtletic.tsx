@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-export default function Footer() {
+export default function FooterAtletic() {
 
     const { oscuro } = useTema();
 
