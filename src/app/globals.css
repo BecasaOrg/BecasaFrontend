@@ -3,6 +3,24 @@
 :root {
   --background: #ffffff;
   --foreground: #000000;
+
+  /* este es para un diseño personalizado para el scroll de la pagina  */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #060f18;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #AAFF00, #6aff00);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #AAFF00;
+  }
 }
 
 @theme inline {

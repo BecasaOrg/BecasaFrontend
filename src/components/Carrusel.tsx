@@ -28,7 +28,7 @@ export default function Carrusel() {
   };
 
   return (
-    <div className={`relative w-full h-120 md:h-150 overflow-hidden ${oscuro ? "bg-white text-white" : "bg-white text-black"} `}>
+    <div className={`relative w-full h-120 md:h-150 lg:h-screen overflow-hidden ${oscuro ? "bg-black text-white" : "bg-white text-black"} `}>
 
       {slides.map((slide, index) => (
         <div
