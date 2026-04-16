@@ -1,7 +1,8 @@
 export const servicios = [
     {
         id: 1,
-        imagen: "/img/section/01.png",
+        imagen: "/img/section/01.webp",
+        alt: "Proceso de Evaluación Inicial",
         titulo: "Evaluación Inicial",
         subtitulo: "Evaluación completa de perfil deportivo y académico",
         descripcion:
@@ -9,7 +10,8 @@ export const servicios = [
     },
     {
         id: 2,
-        imagen: "/img/section/02.png",
+        imagen: "/img/section/02.webp",
+        alt: "Portatil con documentos",
         titulo: "Preparación de Documentos",
         subtitulo: "Asistencia en la preparación de documentación necesaria",
         descripcion:
@@ -17,7 +19,8 @@ export const servicios = [
     },
     {
         id: 3,
-        imagen: "/img/section/03.png",
+        imagen: "/img/section/03.webp",
+        alt: "Creación de Perfiles" ,
         titulo: "Creación de Perfiles",
         subtitulo: "Desarrollo de perfiles deportivos profesionales",
         descripcion:
@@ -25,7 +28,8 @@ export const servicios = [
     },
     {
         id: 4,
-        imagen: "/img/section/Servicio 4.png",
+        imagen: "/img/section/04.webp",
+        alt: "Producción de Material Audiovisual" ,
         titulo: "Producción de Material Audiovisual",
         subtitulo: "Análisis y mejora de videos deportivos",
         descripcion:
@@ -33,7 +37,8 @@ export const servicios = [
     },
     {
         id: 5,
-        imagen: "/img/section/Servicio 5.png",
+        imagen: "/img/section/05.webp",
+        alt: "Acompañamiento en Aplicaciones y Admisiones" ,
         titulo: "Acompañamiento en Aplicaciones y Admisiones",
         subtitulo: "Guía en el proceso de aplicación y adminsion",
         descripcion:
@@ -41,7 +46,8 @@ export const servicios = [
     },
     {
         id: 6,
-        imagen: "/img/section/Servicio 6.png",
+        imagen: "/img/section/06.webp",
+        alt: "" ,
         titulo: "Solicitud de Visa",
         subtitulo: "Soporte continuo durante todo el proceso",
         descripcion:
@@ -49,7 +55,8 @@ export const servicios = [
     },
     {
         id: 7,
-        imagen: "/img/section/Servicio 7.png",
+        imagen: "/img/section/07.webp",
+        alt: "Acompañamiento Uno a Uno" ,
         titulo: "Acompañamiento Uno a Uno",
         subtitulo: "Consultoría personalizada individual",
         descripcion:
@@ -57,7 +64,8 @@ export const servicios = [
     },
     {
         id: 8,
-        imagen: "/img/section/Servicio 8.png",
+        imagen: "/img/section/08.webp",
+        alt: "Soporte Durante el Período Académico" ,
         titulo: "Soporte Durante el Período Académico",
         subtitulo: "Apoyo completo en el proceso académico",
         descripcion:
@@ -65,7 +73,8 @@ export const servicios = [
     },
     {
         id: 9,
-        imagen: "/img/section/Servicio 9.png",
+        imagen: "/img/section/09.webp",
+        alt: "Acompañamiento en Entrevistas y Traducción" ,
         titulo: "Acompañamiento en Entrevistas y Traducción",
         subtitulo: "Guía en el proceso de admisión universitaria",
         descripcion:

@@ -35,7 +35,7 @@ export default function HeaderBecasa() {
             <nav className="w-full flex justify-center ">
 
                 {/* ── Barra principal ── */}
-                <div className={`flex w-[95%] justify-between items-center top-3 fixed z-[3] shadow-2xl transition-colors duration-300  bg-black/10 `} >
+                <div className={`flex w-[95%] justify-between items-center top-3 fixed z-[3] shadow-2xl transition-colors duration-300   bg-black/10 `} >
                     {/* Logo */}
                     <Link href="/" className="ml-6 flex-shrink-0">
                         <Image
@@ -49,7 +49,7 @@ export default function HeaderBecasa() {
                     </Link>
 
                     {/* Desktop nav */}
-                    <div className={`hidden lg:flex gap-5 mr-6 items-center backdrop-blur-sm py-3 px-7 rounded-full ${oscuro ? "bg-black/60 text-white" : "bg-white/60 text-black"} `}>
+                    <div className={`hidden lg:flex gap-5 mr-6 items-center backdrop-blur-sm py-3 px-7 rounded-full ${oscuro ? "bg-[#474a4d3f] bg-opacity-50  text-white" : "bg-[#474a4d3f] bg-opacity-50  text-white"} `}>
                         <ul className="flex gap-5">
                             {links.map((link) => {
                                 const activo = pathname === link.href;
