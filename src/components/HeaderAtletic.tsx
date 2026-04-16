@@ -40,7 +40,7 @@ export default function HeaderAtletic() {
           backdrop-blur-sm flex w-[95%] justify-between items-center
           py-3 rounded-tl-[2rem] rounded-br-[2rem]
           top-3 fixed z-[3] shadow-2xl
-          transition-colors duration-300 ${oscuro ? "bg-[#474a4d3f] bg-opacity-50 text-white" : "bg-[#474a4d3f] bg-opacity-50 text-black"}`}
+          transition-colors duration-300 ${oscuro ? "bg-black/60 text-white" : "bg-white/60 text-black"}`}
       >
         {/* Logo */}
         <Link href="/" className="ml-6 flex-shrink-0">
