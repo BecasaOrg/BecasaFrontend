@@ -1,7 +1,5 @@
+import ContactoForm from "@/components/ContactoForm";
+
 export default function Unete() {
-    return (
-        <div>
-            Estas en la pagina unete
-        </div>
-    )
+  return <ContactoForm />;
 }

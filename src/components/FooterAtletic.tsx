@@ -51,10 +51,10 @@ export default function FooterAtletic() {
 
                     {/* Redes sociales */}
                     <div className="flex gap-5 text-xl">
-                        <a href="#" className="hover:opacity-60 transition-opacity"><FaYoutube /></a>
-                        <a href="#" className="hover:opacity-60 transition-opacity"><FaTiktok /></a>
+                        <a href="https://www.facebook.com/people/Athletic-Scholarship-Agency/61578163787148/" target="_blank"  className="hover:opacity-60 transition-opacity"><FaYoutube /></a>
+                        <a href="https://www.tiktok.com/@athletic.sa1" target="_blank" className="hover:opacity-60 transition-opacity"><FaTiktok /></a>
                         <a href="#" className="hover:opacity-60 transition-opacity"><FaXTwitter /></a>
-                        <a href="#" className="hover:opacity-60 transition-opacity"><FaInstagram /></a>
+                        <a href="https://www.instagram.com/athletic.sa/" target="_blank" className="hover:opacity-60 transition-opacity"><FaInstagram /></a>
                     </div>
                 </div>
             </div>
