@@ -1,4 +1,8 @@
 import "./ContactoForm.css";
+import { FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
+
+
+
 export default function ContactoForm() {
   return (
     <div className="pt-24 sm:pt-32 p-3 sm:h-screen px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center items-center">
@@ -32,11 +36,11 @@ export default function ContactoForm() {
             </div>
 
             <div className="flex space-x-4">
-              <a href="https://www.tiktok.com/@athletic.sa1" className="social-icon">
-                <i className="fab fa-tiktok text-gray-900"></i>
+              <a href="https://www.tiktok.com/@athletic.sa1" target="_blank" className="social-icon">
+                <FaTiktok />
               </a>
-              <a href="https://www.instagram.com/athletic.sa/" className="social-icon">
-                <i className="fab fa-instagram text-gray-900"></i>
+              <a href="https://www.instagram.com/athletic.sa/" target="_blank" className="social-icon">
+                <FaInstagram />
               </a>
             </div>
           </div>
