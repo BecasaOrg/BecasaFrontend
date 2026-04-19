@@ -28,7 +28,7 @@ export default function Carrusel() {
   };
 
   return (
-    <div className={`relative w-full h-120 md:h-150 lg:h-screen overflow-hidden ${oscuro ? "bg-black text-white" : "bg-white text-black"} `}>
+    <div className={`relative w-full h-100 md:h-100 lg:h-[140vh] overflow-hidden ${oscuro ? "bg-black text-white" : "bg-white text-black"} `}>
 
       {slides.map((slide, index) => (
         <div
@@ -41,12 +41,12 @@ export default function Carrusel() {
             alt={slide.alt}
             fill
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-center rounded-bl-[26%]"
             priority={index === 0}
           />
 
           {/* degradado de la izquierda */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent " />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent rounded-bl-[26%]" />
 
           {/* Contenido de la imagen */}
           <div className="absolute inset-0 flex items-center z-1">
