@@ -8,17 +8,17 @@ export default function HistoriaEquipo() {
     const { oscuro } = useTema();
 
     return (
-        <section className={`relative w-full overflow-hidden max-w-7xl mx-auto px-6 py-10 md:py-24  ${oscuro ? "bg-black text-white" : "bg-white text-black"} `} >
+        <section className={`relative w-full overflow-hidden max-w-7xl mx-auto md:py-24 ${oscuro ? "bg-black text-white" : "bg-white text-black"} `} >
 
-            <div className="flex flex-col lg:flex-row items-center gap-10">
+            <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
 
-                <div className="flex flex-col gap-6 flex-1">
+                <div className=" md:bg-[url('/img/section/Servicio7.png')] md:bg-cover md:bg-top md:bg-no-repeat md:min-h-screen w-full relative ">
 
-                    <h2 className="text-neon font-black text-3xl md:text-5xl uppercase tracking-widest">
+                    <h2 className="font-black text-3xl md:text-5xl uppercase tracking-widest md:pl-10 md:py-10 pb-10">
                         Nuestra Historia
                     </h2>
 
-                    <p className="text-sm md:text-base leading-relaxed">
+                    <p className="text-sm md:text-base leading-relaxed max-w-2xl px-10 ">
                         La idea de Athletic Scholarship Agency nació de la experiencia personal
                         de alguien que decidió arriesgarlo todo para superar sus propios límites
                         y descubrir su verdadero potencial. Soy Sebastián, y en el 2022 llegué
@@ -29,7 +29,7 @@ export default function HistoriaEquipo() {
                         los límites.
                     </p>
 
-                    <p className="text-sm md:text-base leading-relaxed">
+                    <p className="text-sm md:text-base leading-relaxed max-w-3xl px-10">
                         Al llegar a Estados Unidos, me di cuenta del profundo impacto que una
                         beca deportiva puede tener en la vida de un atleta. Decidido a
                         perfeccionar el proceso y con el deseo de ayudar a otros a evitar los
@@ -39,7 +39,7 @@ export default function HistoriaEquipo() {
                         de nuestros atletas.
                     </p>
 
-                    <p className="text-sm md:text-base leading-relaxed">
+                    <p className="text-sm md:text-base leading-relaxed max-w-4xl px-10">
                         En el camino, me uní a Andres Guzmán, un amigo de muchos años y
                         compañero estudiante-atleta en Estados Unidos. Andres compartía mi
                         visión de generar un impacto más allá de lo deportivo y lo académico.
@@ -50,13 +50,13 @@ export default function HistoriaEquipo() {
                     </p>
                 </div>
 
-                <div className="relative w-full lg:w-[520px] min-w-0 lg:min-w-[520px] h-[320px] md:h-[450px] lg:h-[550px] rounded-tl-[80px] rounded-br-[80px] overflow-hidden shadow-2xl">
+                <div className="relative w-full min-w-0 h-[200px] sm:h-[300px] md:hidden overflow-hidden shadow-2xl mt-4 ">
                     <Image
-                        src="/img/section/Servicio 7.png"
+                        src="/img/section/Servicio7.png"
                         alt="Nuestra Historia"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 520px"
-                        className="object-cover object-center"
+                        className="object-cover object-top"
                     />
                     <div className="absolute inset-0 bg-black/10" />
                 </div>
