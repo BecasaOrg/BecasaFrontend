@@ -40,7 +40,7 @@ export default function VideoAthletic() {
                     {videoPlay && (
                         <iframe
                             className="absolute inset-0 w-full h-full"
-                            src="https://www.youtube.com/embed/V1Pl8CzNzCw?autoplay=1"
+                            src="https://youtube.com/embed/DCPyHNSZAKs?si=URL6c1mFtfwSA1xc"
                             allow="autoplay; fullscreen"
                             allowFullScreen
                         />

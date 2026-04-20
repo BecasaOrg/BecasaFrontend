@@ -9,7 +9,7 @@ export default function NuestraHistoria() {
     const { oscuro } = useTema();
 
     return (
-        <div className={`${oscuro ? "bg-black text-white" : "bg-white text-black"} `} >
+        <div className={`${oscuro ? "bg-black text-white" : "bg-white text-black"}`} >
             {/* mision y vision  */}
             <VisionMision />
             {/* nuestro equipo  */}
