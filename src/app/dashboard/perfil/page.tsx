@@ -1,0 +1,152 @@
+"use client";
+
+import React, { useState } from 'react';
+
+const PerfilPage = () => {
+  const [formData, setFormData] = useState({
+    nombres: 'Andres Sebastian',
+    apellidos: 'Guzmán Castillo',
+    email: 'athletic-scholarship-agency@gmail.com',
+    telefono: '+57 300 000 0000',
+    fechaNacimiento: '2000-05-15',
+    pais: 'Colombia',
+    deporte: 'Voleibol'
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Perfil guardado exitosamente.');
+  };
+
+  return (
+    <div className="w-full max-w-4xl mx-auto h-full overflow-y-auto pr-4 pb-10 custom-scrollbar mt-4">
+      <div className="bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl backdrop-blur-md">
+        <h1 className="text-3xl font-black text-white mb-2 tracking-tight">Ajustes de Cuenta</h1>
+        <p className="text-gray-400 font-light mb-10 text-sm">
+          Actualiza los datos de tu perfil de estudiante-atleta.
+        </p>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Nombres */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-300 tracking-wider">NOMBRES</label>
+              <input 
+                type="text" 
+                name="nombres"
+                value={formData.nombres}
+                onChange={handleChange}
+                className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#AAFF00]/50 focus:ring-1 focus:ring-[#AAFF00]/50 transition-all"
+              />
+            </div>
+
+            {/* Apellidos */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-300 tracking-wider">APELLIDOS</label>
+              <input 
+                type="text" 
+                name="apellidos"
+                value={formData.apellidos}
+                onChange={handleChange}
+                className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#AAFF00]/50 focus:ring-1 focus:ring-[#AAFF00]/50 transition-all"
+              />
+            </div>
+
+            {/* Correo */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-300 tracking-wider">CORREO ELECTRÓNICO</label>
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-500 cursor-not-allowed"
+                disabled
+              />
+            </div>
+
+            {/* Teléfono */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-300 tracking-wider">TELÉFONO</label>
+              <input 
+                type="tel" 
+                name="telefono"
+                value={formData.telefono}
+                onChange={handleChange}
+                className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#AAFF00]/50 focus:ring-1 focus:ring-[#AAFF00]/50 transition-all"
+              />
+            </div>
+
+            {/* Fecha de Nacimiento */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-300 tracking-wider">FECHA DE NACIMIENTO</label>
+              <input 
+                type="date" 
+                name="fechaNacimiento"
+                value={formData.fechaNacimiento}
+                onChange={handleChange}
+                className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#AAFF00]/50 focus:ring-1 focus:ring-[#AAFF00]/50 transition-all"
+                style={{ colorScheme: 'dark' }}
+              />
+            </div>
+
+            {/* País */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-300 tracking-wider">PAÍS</label>
+              <select 
+                name="pais"
+                value={formData.pais}
+                onChange={handleChange}
+                className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#AAFF00]/50 focus:ring-1 focus:ring-[#AAFF00]/50 transition-all appearance-none"
+              >
+                <option value="Colombia">Colombia</option>
+                <option value="Mexico">México</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Espana">España</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+              </select>
+            </div>
+
+            {/* Deporte */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-300 tracking-wider">DEPORTE PRINCIPAL</label>
+              <select 
+                name="deporte"
+                value={formData.deporte}
+                onChange={handleChange}
+                className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#AAFF00]/50 focus:ring-1 focus:ring-[#AAFF00]/50 transition-all appearance-none"
+              >
+                <option value="Voleibol">Voleibol</option>
+                <option value="Futbol">Fútbol</option>
+                <option value="Baloncesto">Baloncesto</option>
+                <option value="Tenis">Tenis</option>
+                <option value="Atletismo">Atletismo</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-4 mt-8 pt-6 border-t border-white/10">
+            <button 
+              type="button" 
+              className="px-6 py-3 rounded-full text-sm font-semibold text-white bg-white/5 hover:bg-white/10 transition-colors"
+            >
+              Cancelar
+            </button>
+            <button 
+              type="submit" 
+              className="px-8 py-3 rounded-full text-sm font-bold text-black bg-[#AAFF00] hover:scale-105 transition-transform shadow-[0_0_20px_rgba(170,255,0,0.3)]"
+            >
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default PerfilPage;
