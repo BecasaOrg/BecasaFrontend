@@ -2,8 +2,11 @@
 import React from 'react';
 import Image from 'next/image';
 import { CheckCircle, MapPin, Calendar, Phone, Trophy } from 'lucide-react';
+import { useProfile } from '@/context/ProfileContext';
 
 const StudentSidebar = () => {
+    const { profile } = useProfile();
+
     return (
         <div className="h-full bg-gradient-to-b from-[#1a1c2c] to-[#050d18] rounded-[40px] p-4 sm:p-8 flex flex-col items-center text-white border border-white/10 shadow-2xl backdrop-blur-sm relative overflow-y-auto overflow-x-hidden custom-scrollbar">
             {/* Background Glow */}
@@ -19,8 +22,8 @@ const StudentSidebar = () => {
             <div className="relative mb-6 z-10">
                 <div className="w-32 h-32 rounded-full border-4 border-[#AAFF00]/20 overflow-hidden shadow-[0_0_30px_rgba(170,255,0,0.1)] relative">
                     <Image
-                        src="https://randomuser.me/api/portraits/men/32.jpg"
-                        alt="Andres Sebastian Guzmán Castillo - Profile Picture"
+                        src={profile.avatar}
+                        alt={`${profile.nombres} ${profile.apellidos} - Profile Picture`}
                         fill
                         className="object-cover"
                     />
@@ -33,10 +36,10 @@ const StudentSidebar = () => {
             {/* Name & Title */}
             <div className="text-center mb-8 z-10">
                 <h2 className="text-xl font-black tracking-tight leading-tight mb-1">
-                    Andres Sebastian<br />Guzmán Castillo
+                    {profile.nombres}<br />{profile.apellidos}
                 </h2>
                 <p className="text-white/40 text-[10px] font-medium tracking-widest lowercase">
-                    athletic-scholarship-agency@gmail.com
+                    {profile.email}
                 </p>
             </div>
 
@@ -70,28 +73,28 @@ const StudentSidebar = () => {
                         <Trophy className="w-3.5 h-3.5 text-[#AAFF00]" />
                         Deporte
                     </span>
-                    <span className="font-bold">Voleibol</span>
+                    <span className="font-bold">{profile.deporte}</span>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-white/40 font-bold tracking-wider flex items-center gap-2">
                         <MapPin className="w-3.5 h-3.5 text-[#AAFF00]" />
                         País
                     </span>
-                    <span className="font-bold">Colombia</span>
+                    <span className="font-bold">{profile.pais}</span>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-white/40 font-bold tracking-wider flex items-center gap-2">
                         <Calendar className="w-3.5 h-3.5 text-[#AAFF00]" />
                         Fecha de nacimiento
                     </span>
-                    <span className="font-bold">05/15/2000</span>
+                    <span className="font-bold">{profile.fechaNacimiento}</span>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-white/40 font-bold tracking-wider flex items-center gap-2">
                         <Phone className="w-3.5 h-3.5 text-[#AAFF00]" />
                         Celular
                     </span>
-                    <span className="font-bold">+57 3339820565</span>
+                    <span className="font-bold">{profile.telefono}</span>
                 </div>
             </div>
 

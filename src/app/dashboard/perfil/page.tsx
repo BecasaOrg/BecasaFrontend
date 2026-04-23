@@ -1,24 +1,42 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
+import { Camera } from 'lucide-react';
+import { useProfile } from '@/context/ProfileContext';
 
 const PerfilPage = () => {
-  const [formData, setFormData] = useState({
-    nombres: 'Andres Sebastian',
-    apellidos: 'Guzmán Castillo',
-    email: 'athletic-scholarship-agency@gmail.com',
-    telefono: '+57 300 000 0000',
-    fechaNacimiento: '2000-05-15',
-    pais: 'Colombia',
-    deporte: 'Voleibol'
-  });
+  const { profile, updateProfile } = useProfile();
+  const [formData, setFormData] = useState(profile);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setFormData(profile);
+  }, [profile]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    updateProfile({
+      ...formData,
+      avatar: previewUrl || formData.avatar,
+    });
     alert('Perfil guardado exitosamente.');
   };
 
@@ -29,6 +47,34 @@ const PerfilPage = () => {
         <p className="text-gray-400 font-light mb-10 text-sm">
           Actualiza los datos de tu perfil de estudiante-atleta.
         </p>
+
+        {/* Avatar Upload UI */}
+        <div className="flex flex-col items-center mb-10">
+          <div 
+            className="relative w-32 h-32 rounded-full border-4 border-[#AAFF00]/20 overflow-hidden cursor-pointer group shadow-[0_0_30px_rgba(170,255,0,0.1)] transition-all hover:border-[#AAFF00]/60"
+            onClick={handleImageClick}
+          >
+            <Image
+              src={previewUrl || formData.avatar}
+              alt="Profile avatar"
+              fill
+              className="object-cover group-hover:opacity-50 transition-opacity"
+            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+              <Camera className="w-8 h-8 text-white" />
+            </div>
+          </div>
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            onChange={handleImageChange} 
+            accept="image/*" 
+            className="hidden" 
+          />
+          <p className="text-xs text-[#AAFF00] mt-4 font-semibold uppercase tracking-widest cursor-pointer hover:underline" onClick={handleImageClick}>
+            Cambiar Foto
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
