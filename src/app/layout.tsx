@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Barlow_Condensed } from 'next/font/google';
 import Footer from "@/components/FooterAtletic";
 import { TemaProvider } from "@/context/TemaContext";
 import MainWrapper from "./MainWrapper";
@@ -10,18 +11,24 @@ export const metadata: Metadata = {
   description: "Desbloqueando tu potencial como atleta",
 };
 
+const barlow = Barlow_Condensed({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-barlow'
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" className={barlow.variable}>
       <body className="flex flex-col min-h-screen">
         <TemaProvider>
           <HeaderGlobal />
 
-          <MainWrapper>{children}</MainWrapper> 
+          <MainWrapper>{children}</MainWrapper>
 
           <FooterGlobal />
         </TemaProvider>

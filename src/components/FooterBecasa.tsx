@@ -39,10 +39,10 @@ export default function FooterBecasa() {
 
   return (
     <footer
-      className={`relative w-full overflow-hidden bg-[#050d1f] `}
+      className={`relative w-full overflow-hidden bg-[#050d1f] flex justify-center `}
     >
 
-      <div className="relative z-1 md:max-w-5xl my-5 md:mx-0 mx-2 md:px-20 px-8 bg-black/50 backdrop-blur-sm rounded-4xl ">
+      <div className="relative z-1 md:w-[95%] my-5 md:mx-0 mx-2 md:px-20 px-8 bg-black/50 backdrop-blur-sm rounded-4xl ">
         {/* Parte superior */}
         <div className="flex flex-col items-center py-4 gap-6">
           {/* Logo */}
