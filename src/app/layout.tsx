@@ -29,7 +29,7 @@ export default function RootLayout({
           <HeaderGlobal />
 
           <MainWrapper>{children}</MainWrapper>
-
+          
           <FooterGlobal />
         </TemaProvider>
       </body>

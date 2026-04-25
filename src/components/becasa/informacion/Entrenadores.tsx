@@ -122,11 +122,11 @@ export default function Entrenadores() {
         <div className="text-center mb-10">
           <h2
             className="uppercase text-3xl md:text-4xl tracking-widest mb-4"
-            style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif" }}
+            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}
           >
             Entrenadores
           </h2>
-          <p className={`text-sm max-w-2xl mx-auto leading-relaxed ${oscuro ? " text-white/55" : "text-black/55"} `}>
+          <p className={`text-sm max-w-2xl mx-auto leading-relaxed ${oscuro ? " text-white/75" : "text-black/75"} `} >
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
             laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
             ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
@@ -191,11 +191,15 @@ export default function Entrenadores() {
         </div>
 
         {/* Pie de sección */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 items-start">
-          <h3 className="font-black text-xl md:text-2xl leading-tight">
+        <div className="grid grid-cols-1 sm:grid-cols-2 mt-10 items-start" >
+          <h3
+            className="font-black text-lg md:text-xl leading-tight"
+            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}>
             Entrenadores internacionales que<br />vienen desde Estados Unidos
           </h3>
-          <p className="text-sm leading-relaxed">
+          <p
+            className="text-sm leading-relaxed pt-4 sm:pt-0"
+            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 300, letterSpacing: "-0.01em"}}>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
             laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.
           </p>

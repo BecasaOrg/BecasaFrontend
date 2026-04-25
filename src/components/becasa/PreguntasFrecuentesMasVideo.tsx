@@ -8,29 +8,36 @@ import PreguntasFrecuentes from "./PreguntasFrecuentes";
 export default function PreguntasFrecuentesMasVideo() {
   const { oscuro } = useTema();
 
-  const cambioTemaDegradado = oscuro ? "linear-gradient(to bottom, #080808 0%, #050d1f 50%, #050d1f 100%)" : "linear-gradient(to top, #050d1f 0%, #0a1628 25%, #1a2744 58%, #2d4060 70%, #3a5070 75%, #ffffff 100%)";
-
   return (
-    <section className="w-full py-16 px-4 overflow-hidden "
-      style={{
-        background: cambioTemaDegradado
-      }}
-    >
+    <section className="w-full py-16 px-4 overflow-hidden relative " >
+      <div
+        className="absolute right-0 -bottom-50 h-full pointer-events-none z-0"
+        style={{
+          backgroundImage: "url('/img/becasa/Vector.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
+          backgroundSize: "auto 100%",
+          width: "100%",
+        }}
+      />
       {/* Título */}
       <h2
         className="text-center text-[#AAFF00] text-3xl md:text-4xl tracking-widest uppercase mb-10"
-        style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif", letterSpacing: "0.12em" }}
-      >
+        style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}>
         Preguntas Mas Frecuentes
       </h2>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
         {/* Columna izquierda: acordeón*/}
-        <PreguntasFrecuentes />
+        <div className="z-1 lg:w-[45vw] order-2 lg:order-1 ">
+          <PreguntasFrecuentes />
+        </div>
 
         {/*  Columna derecha: video + chevron decorativo */}
-       <VideoAthletic />
+        <div className="lg:w-[47vw] order-1 lg:order-2 ">
+          <VideoAthletic />
+        </div>
 
       </div>
     </section>

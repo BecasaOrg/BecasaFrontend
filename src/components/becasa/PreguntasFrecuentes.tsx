@@ -56,7 +56,7 @@ export default function PreguntasFrecuentes() {
   const toggle = (id: number) => setAbierto((prev) => (prev === id ? null : id));
 
   return (
-    <section className="w-full overflow-hidden ">
+    <section className="w-full overflow-hidden z-1 ">
 
         {/* preguntas acordeón*/}
         <div className="flex flex-col gap-1">

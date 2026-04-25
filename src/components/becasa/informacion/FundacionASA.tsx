@@ -23,37 +23,37 @@ export default function FundacionASA() {
         };
     }, [openModal]);
 
-    const cambioTemaDegradado = oscuro ? "linear-gradient(to bottom, #080808 0%, #050d1f 50%, #050d1f 100%)" : "linear-gradient(to top, #050d1f 0%, #0a1628 25%, #1a2744 58%, #2d4060 70%, #3a5070 75%, #ffffff 100%)";
+    const cambioTemaDegradado = oscuro ? "linear-gradient(to bottom, #080808 0%, #0A0E2A 50%, #0A0E2A 100%)" : "linear-gradient(to top, #0A0E2A 0%, #0d1235 25%, #1e2a50 58%, #2a3560 70%, #4a5578 75%, #8a92a8 88%, #ffffff 100%)";
+
+    const fadedCircle = "w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,_rgba(170,255,0,0.8)_0%,_rgba(170,255,0,0.3)_50%,_transparent_80%)] blur-2xl absolute "
 
     return (
         <div className="w-full">
 
-            {/* ── Botones superiores ── */}
-            <div className="w-full flex flex-wrap justify-center py-4 px-4"
-                style={{
-                    background: "",
-                }}
-            >
-                <div className="flex md:justify-center flex-col md:flex-row gap-4 md:gap-8 bg-[#060f18] w-[90vw] rounded-3xl py-2 ">
+            {/* Botones superiores */}
+            <div className="w-full flex flex-wrap justify-center py-4 px-4 bg-[#0A0E2A] relative overflow-hidden " >
+                <div className={` ${fadedCircle} -top-30 left-0`} />
+                <div className={` ${fadedCircle} top-0 left-[50%] `} />
+                <div className={` ${fadedCircle} -bottom-10 right-0`} />
+                <div className="flex md:justify-center flex-col md:flex-row gap-4 md:gap-8 bg-[#0A0E2A] w-[90vw] rounded-3xl relative w-[90%] ">
                     <button
                         onClick={() => setOpenModal("faq")}
-                        className="bg-[#AAFF00] text-black font-bold text-sm px-8 py-2.5 rounded-full hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200"
+                        className="bg-[#AAFF00] text-black font-bold text-sm px-8 py-0.5 rounded-full hover:opacity-90 hover:scale-105 transition-all duration-200"
                     >
                         Preguntas frecuentes
                     </button>
                     <button
                         onClick={() => setOpenModal("politicas")}
-                        className="bg-[#AAFF00] text-black font-bold text-sm px-8 py-2.5 rounded-full hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200"
+                        className="bg-[#AAFF00] text-black font-bold text-sm px-8 py-0.5 rounded-full hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200 "
                     >
                         Políticas y condiciones
                     </button>
                 </div>
             </div>
             {openModal && (
-                <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-5">
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-5">
                     <div className="bg-[#060f18] text-white p-6 rounded-2xl w-[95%] sm:w-[80%] md:w-[70%] h-[80vh]  overflow-x-auto relative">
 
-                        {/* Botón cerrar */}
                         <button
                             onClick={() => setOpenModal(null)}
                             className="absolute top-2 right-3 text-white text-xl"
@@ -61,7 +61,6 @@ export default function FundacionASA() {
                             ✕
                         </button>
 
-                        {/* Contenido dinámico */}
                         {openModal === "faq" && (
                             <div>
                                 <PreguntasFrecuentes />
@@ -77,28 +76,21 @@ export default function FundacionASA() {
                     </div>
                 </div>
             )}
-            {/* ── Sección Fundación ── */}
+            {/* Sección Fundación */}
             <section
-                className="w-full relative overflow-hidden py-6 px-4"
+                className="w-full relative overflow-hidden pt-6 px-4"
                 style={{
                     background: cambioTemaDegradado,
                 }}
             >
-                {/* Glow derecha */}
-                <div
-                    className="absolute right-0 top-0 h-full w-80 pointer-events-none"
-                    style={{
-                        background: "radial-gradient(ellipse at right center, #7fff0033 0%, transparent 70%)",
-                    }}
-                />
 
                 <div className="relative z-1 grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-black/40 backdrop-blur-md rounded-3xl px-6 py-8 ">
 
-                    {/* ── Texto ── */}
+                    {/* Texto */}
                     <div>
                         <h2
                             className="text-[#AAFF00] uppercase text-2xl md:text-3xl tracking-wide mb-2"
-                            style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif" }}
+                           style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}
                         >
                             Fundación ASA Más
                         </h2>
@@ -132,7 +124,6 @@ export default function FundacionASA() {
                         </p>
                     </div>
 
-                    {/* ── Imagen ── */}
                     <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
                         <Image
                             src="/img/becasa/fundacion-ASA.jpg"
@@ -143,6 +134,7 @@ export default function FundacionASA() {
                     </div>
 
                 </div>
+            <hr className="text-white mt-5" />
             </section>
         </div>
     );

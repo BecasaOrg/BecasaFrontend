@@ -43,7 +43,9 @@ export default function PatrocinadoresAliados() {
 
         {/* Patrocinadores */}
         <div className="flex flex-col items-center gap-4">
-          <p className="font-black text-xs uppercase tracking-[0.2em]">
+          <p
+            className="text-md uppercase tracking-[0.2em]"
+            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "0.10em", transform: "scaleY(1.2)" }}>
             Patrocinadores
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -55,7 +57,9 @@ export default function PatrocinadoresAliados() {
 
         {/* Aliados */}
         <div className="flex flex-col items-center gap-4">
-          <p className="font-black text-xs uppercase tracking-[0.2em]">
+          <p
+            className="text-md uppercase tracking-[0.2em]"
+            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "0.10em", transform: "scaleY(1.2)" }}>
             Aliados
           </p>
           <div className="flex flex-wrap justify-center gap-3">

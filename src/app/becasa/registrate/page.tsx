@@ -48,10 +48,22 @@ export default function FormularioRegistro() {
     const labelClass = "block text-white/60 text-xs mb-1";
 
     return (
-        <section className="min-h-screen bg-[#050d1f] flex items-center justify-center px-4 pb-12 pt-17 ">
-            <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-0 rounded-2xl overflow-hidden shadow-2xl border border-white/5 px-5 py-5 bg-[#060f18]">
+        <section className="min-h-screen bg-[#0A0E2A] flex items-center justify-center px-4 pb-12 pt-17 relative ">
 
-                {/* ── Columna izquierda: formulario ── */}
+            <div
+                className="absolute right-0 -bottom-50 h-full pointer-events-none z-0"
+                style={{
+                    backgroundImage: "url('/img/becasa/Vector.png')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "right center",
+                    backgroundSize: "auto 100%",
+                    width: "100%",
+                }}
+            />
+
+            <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-0 rounded-2xl overflow-hidden shadow-2xl border border-white/5 px-5 py-5 bg-[#060f18]/80 backdrop-blur-lg relative ">
+
+                {/* Columna izquierda: formulario */}
                 <div className="bg-[#0a1520]/50 px-8 py-10 rounded-2xl">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
 

@@ -117,7 +117,7 @@ export default function BecasaCard() {
       <div className="bg-[#0A0E2A]/80 py-5 rounded-3xl relative ">
         {/* Filtros */}
         <div className="mb-8 flex flex-col items-center ">
-          <div className="gap-3 bg-white/70 rounded-full px-5 py-0.5 w-[90%] flex overflow-y-scroll [scrollbar-width:none] ">
+          <div className="gap-3 bg-white/70 rounded-full px-5 py-0.5 w-[90%] md:w-auto flex overflow-y-scroll [scrollbar-width:none] ">
             {DEPORTES.map((d) => (
               <button
                 key={d}
@@ -188,7 +188,7 @@ export default function BecasaCard() {
                 </div>
 
                 {/*cupos */}
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#AAFF00] flex flex-col items-center justify-center absolute -top-4 -right-6 sm:static md:absolute md:-top-4 md:-right-6 lg:static " >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#AAFF00] flex flex-col items-center justify-center absolute -top-4 -right-3 sm:static md:absolute md:-top-4 md:-right-6 lg:static " >
                   <span className="text-[18px] font-black text-black leading-none">{beca.cupos}</span>
                   <span className="text-[8px] font-black text-black tracking-widest">CUPOS</span>
                 </div>

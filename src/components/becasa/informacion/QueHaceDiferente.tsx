@@ -4,17 +4,17 @@ import { useTema } from "@/context/TemaContext";
 import VideoAthletic from "../VideoAthletic";
 
 export default function QueHaceDiferente() {
-    const {oscuro} = useTema();
+    const { oscuro } = useTema();
 
     return (
         <section className={`w-full py-12 px-6 ${oscuro ? " text-white bg-black" : "text-black bg-white"} `}>
-            <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center border rounded-3xl p-4  ${oscuro ? "border-white/60" : "border-black/60"} `}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center border rounded-3xl p-4 ${oscuro ? "border-white/60 " : "border-black/60"} `}>
 
-                {/* ── Columna izquierda: texto ── */}
+                {/*Columna izquierda: texto */}
                 <div>
                     <h2
-                        className="uppercase text-xl md:text-2xl tracking-wide mb-2"
-                        style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif" }}
+                        className="uppercase text-xl md:text-2xl mb-2"
+                        style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}
                     >
                         ¿Que hace diferente al Becasa Camp?:
                     </h2>

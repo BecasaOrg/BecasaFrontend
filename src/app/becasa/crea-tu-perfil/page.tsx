@@ -8,8 +8,18 @@ export default function CreaTuPerfil() {
     const [showP2, setShowP2] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#050d1f] flex justify-center pb-10 ">
-            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen w-[95vw] bg-[#080808]/60 backdrop-blur-sm mt-20 rounded-3xl border border-white/40 ">
+        <div className="min-h-screen bg-[#0A0E2A] flex justify-center pb-10 relative ">
+            <div
+                className="absolute right-0 -bottom-50 h-full pointer-events-none z-0"
+                style={{
+                    backgroundImage: "url('/img/becasa/Vector.png')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "right center",
+                    backgroundSize: "auto 100%",
+                    width: "100%",
+                }}
+            />
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen w-[95vw] bg-[#080808]/60 backdrop-blur-lg mt-20 rounded-3xl border border-white/40 ">
 
                 {/*DERECHA: título (arriba en móvil) */}
                 <div className="lg:order-last relative flex flex-col items-center justify-center px-8 py-10 mx-8 my-10 lg:py-0 overflow-hidden">

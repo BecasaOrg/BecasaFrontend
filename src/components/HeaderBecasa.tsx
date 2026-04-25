@@ -10,7 +10,7 @@ const links = [
     { href: "/nuestra-historia", label: "Nuestra Historia" },
     { href: "/servicios", label: "Servicios" },
     { href: "/disciplinas", label: "Disciplinas" },
-    // { href: "/becasa", label: "Becasa" },
+    { href: "/becasa", label: "Becasa" },
 ];
 
 export default function HeaderBecasa() {
@@ -34,8 +34,8 @@ export default function HeaderBecasa() {
         <header>
             <nav className="w-full flex justify-center ">
 
-                {/* ── Barra principal ── */}
-                <div className={`flex w-[95%] justify-between items-center top-3 fixed z-[3] shadow-2xl transition-colors duration-300   bg-black/10 `} >
+                {/* Barra principal */}
+                <div className={`flex w-[95%] justify-between items-center top-3 fixed z-[3] shadow-2xl transition-colors duration-300 bg-black/70 p-2 rounded-2xl `} >
                     {/* Logo */}
                     <Link href="/" className="ml-6 flex-shrink-0">
                         <Image
@@ -86,7 +86,7 @@ export default function HeaderBecasa() {
                     </button>
                 </div>
 
-                {/* ── Menú móvil ── */}
+                {/* Menú móvil */}
                 <div
                     className={` fixed w-full bg-black/95 backdrop-blur-md z-[2] flex flex-col px-8 pt-28 pb-8 gap-6 lg:hidden transition-all duration-400 ${menuAbierto ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
                     {/* Links */}
@@ -112,7 +112,7 @@ export default function HeaderBecasa() {
                     </div>
 
                     <Link href="/becasa/crea-tu-perfil" className="bg-[#AAFF00] whitespace-nowrap px-8 py-3 rounded-tr-full rounded-tl-full rounded-bl-full text-black font-bold text-lg hover:opacity-90 active:scale-95 transition-all duration-200 self-start" >
-                        Únete a Nosotros
+                        Crea tu perfil
                     </Link>
                 </div>
             </nav>

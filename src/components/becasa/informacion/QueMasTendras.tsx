@@ -36,7 +36,7 @@ const beneficios = [
 ];
 
 export default function QueMasTendras() {
-  const {oscuro} = useTema();
+  const { oscuro } = useTema();
   return (
     <section className={`w-full py-14 px-4 ${oscuro ? " text-white bg-black" : "text-black bg-white"} `}>
 
@@ -46,7 +46,7 @@ export default function QueMasTendras() {
         <div className="text-center mb-10">
           <h2
             className="uppercase text-3xl md:text-4xl tracking-widest mb-4"
-            style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif", letterSpacing: "0.1em" }}
+            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "0.10em", transform: "scaleY(1.2)" }}
           >
             Que Mas Tendras
           </h2>

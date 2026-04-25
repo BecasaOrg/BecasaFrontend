@@ -73,7 +73,7 @@ export default function BecasaHeroSlider() {
         className={`absolute inset-0 flex flex-col items-center justify-center text-center px-6 transition-all duration-400 `}
       >
         <h1 className="font-black uppercase text-[#c8f500] leading-none tracking-tight drop-shadow-lg mb-6"
-          style={{ fontSize: "clamp(3.5rem, 10vw, 7.5rem)" }}
+          style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)", fontSize: "clamp(3.5rem, 10vw, 7.5rem)" }}
         >
           BECASA CAMP 2026
         </h1>
@@ -87,10 +87,10 @@ export default function BecasaHeroSlider() {
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center">
-          <button className="px-4 py-2 rounded-full border-2 border-white text-white font-bold text-md tracking-wide uppercase hover:bg-white/15 transition-all duration-200 hover:scale-105">
+          <button className="px-4 py-2 rounded-full bg-white text-black font-bold text-md tracking-wide transition-all duration-200 hover:scale-105" >
             Campamentos
           </button>
-          <Link href="/becasa/crea-tu-perfil" className="px-4 py-2 rounded-full bg-[#c8f500] text-black font-bold text-md tracking-wide uppercase shadow-[0_4px_24px_rgba(200,245,0,0.4)] hover:bg-[#d6ff1a] hover:scale-105 hover:shadow-[0_6px_32px_rgba(200,245,0,0.6)] transition-all duration-200">
+          <Link href="/becasa/crea-tu-perfil" className="px-4 py-2 rounded-full bg-[#c8f500] text-black font-bold text-md tracking-wide shadow-[0_4px_24px_rgba(200,245,0,0.4)] hover:bg-[#d6ff1a] hover:scale-105 hover:shadow-[0_6px_32px_rgba(200,245,0,0.6)] transition-all duration-200">
             Crea tu perfil
           </Link>
         </div>

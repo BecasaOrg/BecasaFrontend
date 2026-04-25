@@ -8,17 +8,18 @@ export default function DirigidoA() {
     const { oscuro } = useTema();
 
     return (
-        <section className={`w-full py-14 px-6 md:px-12 ${oscuro ? "bg-black text-white " : "bg-white text-black shadow-2xl"}` }>
+        <section className={`w-full px-6 md:px-12 ${oscuro ? "bg-black text-white " : "bg-white text-black shadow-2xl"}`}>
+
+            <hr className="pt-6" />
+
+            <h2 className="uppercase text-center text-3xl md:text-4xl tracking-widest mb-8" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }} >
+                Dirigido A:
+            </h2>
+
             <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
                 {/* ── Columna izquierda: texto ── */}
                 <div>
-                    <h2
-                        className="uppercase text-3xl md:text-4xl tracking-widest mb-8"
-                        style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif" }}
-                    >
-                        Dirigido A:
-                    </h2>
 
                     <h3 className="font-bold text-xl mb-3">
                         Lorem ipsum dolor sit amet, consectetuer

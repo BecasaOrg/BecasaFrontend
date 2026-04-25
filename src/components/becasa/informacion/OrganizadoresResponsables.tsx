@@ -41,7 +41,7 @@ export default function OrganizadoresResponsables() {
                 <div className="text-center mb-10">
                     <h2
                         className={`uppercase text-md sm:text-xl md:text-3xl lg:text-4xl tracking-widest mb-4 ${oscuro ? " text-white" : "text-black"} `}
-                        style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif", letterSpacing: "0.1em" }}
+                        style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}
                     >
                         Organizadores/Responsables
                     </h2>
@@ -53,13 +53,13 @@ export default function OrganizadoresResponsables() {
                 </div>
 
                 {/* Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
+                <div className="grid grid-cols-2 gap-5 max-w-2xl mx-auto">
                     {organizadores.map((org) => {
                         const estaActivo = hover === org.id;
                         return (
                             <div
                                 key={org.id}
-                                className="relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer group"
+                                className="relative rounded-2xl overflow-hidden aspect-[3/4.5] cursor-pointer group"
                                 onMouseEnter={() => setHover(org.id)}
                                 onMouseLeave={() => setHover(null)}
                             >
