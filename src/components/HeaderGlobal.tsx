@@ -8,6 +8,10 @@ export default function HeaderGlobal() {
     
     const pathname = usePathname();
 
+    if (pathname.startsWith('/dashboard')) {
+        return null;
+    }
+
     if (pathname.startsWith('/becasa')) {
         return <HeaderBecasa />
     }

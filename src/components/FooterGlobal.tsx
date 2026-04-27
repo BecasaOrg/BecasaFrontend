@@ -8,6 +8,10 @@ export default function FooterGlobal() {
 
     const pathname = usePathname();
 
+    if (pathname.startsWith('/dashboard')) {
+        return null;
+    }
+
     if (pathname.startsWith('/becasa')) {
         return <FooterBecasa />
     }
