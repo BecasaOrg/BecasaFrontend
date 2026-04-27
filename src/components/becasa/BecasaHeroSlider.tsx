@@ -81,15 +81,13 @@ export default function BecasaHeroSlider() {
         <p className="max-w-2xl text-white/90 leading-relaxed mb-10"
           style={{ fontSize: "clamp(0.9rem, 1.4vw, 1.05rem)" }}
         >
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-          laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip
+          Tu talento no es suficiente si no sabes qué hacer con él. BECASA CAMP te da la claridad, la mentoría y las herramientas para convertirlo en un camino real donde puedes combinar la academia y el deporte.
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center">
-          <button className="px-4 py-2 rounded-full bg-white text-black font-bold text-md tracking-wide transition-all duration-200 hover:scale-105" >
+          <Link href="/becasa#becasaCampamento" className="px-4 py-2 rounded-full bg-white text-black font-bold text-md tracking-wide transition-all duration-200 hover:scale-105" >
             Campamentos
-          </button>
+          </Link>
           <Link href="/becasa/crea-tu-perfil" className="px-4 py-2 rounded-full bg-[#c8f500] text-black font-bold text-md tracking-wide shadow-[0_4px_24px_rgba(200,245,0,0.4)] hover:bg-[#d6ff1a] hover:scale-105 hover:shadow-[0_6px_32px_rgba(200,245,0,0.6)] transition-all duration-200">
             Crea tu perfil
           </Link>

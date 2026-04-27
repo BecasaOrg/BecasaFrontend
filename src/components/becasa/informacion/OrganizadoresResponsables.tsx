@@ -10,18 +10,18 @@ import { FaInstagram } from "react-icons/fa";
 const organizadores = [
     {
         id: 1,
-        nombre: "Nombre Apellido",
+        nombre: "Juan Sebastián Rodríguez Ortiz",
         descripcion:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+            "Estudiante-atleta colombiano de Psicología en Bethel University (Indiana, EE. UU.), donde combina sus estudios universitarios con el voleibol de alto rendimiento. Cofundador de Athletic Scholarship Agency (ASA) y de la Fundación ASA Mas, conoce de primera mano los retos y oportunidades de conseguir una beca deportiva en Estados Unidos. Su propósito es servir como mentor y plataforma de impulso para que más jóvenes utilicen sus talentos y construyan un futuro mejor para ellos, sus familias y sus comunidades.",
         foto: "/img/nuestroEquipo/ORGANIZADORES2.jpg",
         instagram: "",
         slug: "organizador-1",
     },
     {
         id: 2,
-        nombre: "Nombre Apellido",
+        nombre: "Andrés Felipe Guzmán Gutiérrez",
         descripcion:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+            "Cofundador de Athletic Scholarship Agency (ASA) y la Fundación ASA Mas, e Ingeniero Civil de profesión. Fue jugador de voleibol de la Selección Bogotá y de la Selección Colombia. Entre 2021 y 2025 se desempeñó como estudiante-atleta en Dordt University (Iowa, EE. UU.). Hoy combina su recorrido profesional en Estados Unidos con su pasión por abrir caminos a jóvenes deportistas latinoamericanos. Su misión es desbloquear el máximo potencial humano en más colombianos, formando líderes y agentes de cambio que impacten sus comunidades.",
         foto: "/img/nuestroEquipo/foto-web-asa-ANDRES2.png",
         instagram: "",
         slug: "organizador-2",
@@ -46,9 +46,7 @@ export default function OrganizadoresResponsables() {
                         Organizadores/Responsables
                     </h2>
                     <p className={`text-black/50 text-sm max-w-2xl mx-auto leading-relaxed ${oscuro ? " text-white/55" : "text-black/55"} `}>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
+                        Detrás de BECASA hay personas que entienden lo que significa soñar con un futuro más grande. Por eso, cada detalle del campamento está pensado para servir, orientar y hacer que cada atleta y cada familia vivan una experiencia cercana, valiosa y llena de propósito.
                     </p>
                 </div>
 

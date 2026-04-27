@@ -51,10 +51,16 @@ export default function QueMasTendras() {
             Que Mas Tendras
           </h2>
           <p className="text-sm max-w-2xl mx-auto leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
+            Además de las actividades formativas y deportivas, los participantes del <strong>BECASA CAMP 2026</strong> recibirán una serie de recursos y experiencias diseñadas para enriquecer su participación y acompañar su proceso como estudiantes-atletas.
           </p>
+             <ol>
+              <li>1- BECASA pack: Camisa oficial del BECASA Camp, Pasaporte BECASA y Nametag.</li>
+              <li>2- Scorecard ASA:  Evaluación deportiva y académica elaborado por los mentores ASA.</li>
+              <li>3- Hidratación: Para los participantes durante las sesiones deportivas y actividades programadas.</li>
+              <li>4- Premios: Reconocimientos a los atletas que se destaquen en diferentes aspectos del campamento</li>
+              <li>5- Material Audiovisual:  Fotografías oficiales del evento y Grabación de entrenamientos, prácticas y competencias</li>
+              <li>6- Certificado de participación: Tu recuerdo de haber participado exitosamente en nuestro evento.</li>
+             </ol> 
         </div>
 
         {/* Iconos */}

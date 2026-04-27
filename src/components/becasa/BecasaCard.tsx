@@ -140,7 +140,7 @@ export default function BecasaCard() {
             No hay becas disponibles para este deporte aún.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 px-3 sm:px-10 ">
+          <div id="becasaCampamento" className="grid grid-cols-1 md:grid-cols-2 gap-3 px-3 sm:px-10 ">
             {becasFiltradas.map((beca) => (
               <div
                 key={beca.id}

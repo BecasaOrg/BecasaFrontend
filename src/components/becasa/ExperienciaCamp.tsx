@@ -174,7 +174,7 @@ export default function ExperienciaCamp() {
                                 {/* Caption overlay solo en la slide principal */}
                                 {i === 0 && (
                                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/75 to-transparent pt-10 px-4 pb-4 z-10">
-                                        <p className="text-white text-xs m-0 leading-[1.4]">
+                                        <p className="text-white p-8 rounded-md backdrop-blur-sm  bg-[#00000042] text-xs m-0 leading-[1.4]">
                                             {slide.caption}
                                         </p>
                                     </div>

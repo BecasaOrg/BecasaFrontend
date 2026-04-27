@@ -20,28 +20,22 @@ export default function QueHaceDiferente() {
                     </h2>
 
                     <h3 className="font-bold text-lg md:text-xl mb-4">
-                        Lorem ipsum dolor sit amet, consectetue.
+                        Alto rendimiento dentro y fuera de la cancha.
                     </h3>
 
                     <p className={`text-sm leading-relaxed mb-4 ${oscuro ? " text-white/55 bg-black" : "text-black/55 bg-white"} `}>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-                        tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
-                        iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat
-                        nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                        zzril delenit augue duis dolore te feugait nulla facilisi.
+                        No es solo una vitrina de talentos para reclutadores ni solo un campamento de entrenamiento. Es una experiencia sin precedentes en Colombia que combina el alto rendimiento deportivo con formación académica y vocacional. BECASA integra:
                     </p>
 
                     <p className={`text-sm leading-relaxed mb-4 ${oscuro ? " text-white/55 bg-black" : "text-black/55 bg-white"} `}>
-                        Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-                        tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                       <strong>Aula:</strong>  Aquí los participantes trabajan en la práctica del inglés, exploración vocacional y autoconocimiento, elementos fundamentales para quienes aspiran a convertirse en estudiantes-atletas internacionales.
                     </p>
 
                     <p className={`text-sm leading-relaxed mb-4 ${oscuro ? " text-white/55 bg-black" : "text-black/55 bg-white"} `}>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-                        tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum.
+                      <strong>Training:</strong>   Sesiones de entrenamiento técnico, táctico y estratégico orientadas al aprendizaje y desarrollo deportivo, tanto dentro como fuera de la cancha.
+                    </p>
+                    <p className={`text-sm leading-relaxed mb-4 ${oscuro ? " text-white/55 bg-black" : "text-black/55 bg-white"} `}>
+                       <strong>Showcase:</strong> Los atletas compiten en dinámicas y partidos que simulan el nivel y la organización de eventos deportivos del sistema universitario estadounidense, brindando visibilidad, medición de desempeño y experiencia competitiva.
                     </p>
                 </div>
 

@@ -22,34 +22,19 @@ export default function DirigidoA() {
                 <div>
 
                     <h3 className="font-bold text-xl mb-3">
-                        Lorem ipsum dolor sit amet, consectetuer
+                        Ruta Discovery
                     </h3>
 
                     <p className="text-sm leading-relaxed mb-5">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                        tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                        quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                        consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                        consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-                        odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                        nulla facilisi.
+                        está diseñada para atletas en etapa de formación, entre los 11 y 14 años, que están empezando a construir su camino en el deporte con más intención. Es una experiencia pensada para quienes sueñan con llevar su talento más lejos, pero todavía necesitan entender mejor qué significa realmente convertirse en un estudiante-atleta y qué pasos deben empezar a dar desde ahora.
                     </p>
 
                     <p className="text-sm leading-relaxed mb-5">
-                        Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod
-                        tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                        quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                        consequat.
+                        En esta ruta, el enfoque no está solo en entrenar, sino en formar bases sólidas. Los atletas fortalecen fundamentos técnicos, aprenden mejores hábitos, reciben orientación sobre su desarrollo deportivo y comienzan a ganar visión sobre cómo el deporte, la educación y el carácter pueden trabajar juntos para abrir oportunidades reales en el futuro.
                     </p>
 
                     <p className="text-sm leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                        tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                        quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                        consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                        consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-                        odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                        nulla facilisi.
+                        La Ruta Discovery también busca que las familias comprendan mejor este camino. Por eso, integra espacios que acercan a los participantes a la experiencia del estudiante-atleta, combinando entrenamiento, aprendizaje, autoconocimiento y mentoría en un entorno que inspira, reta y acompaña.
                     </p>
                 </div>
 

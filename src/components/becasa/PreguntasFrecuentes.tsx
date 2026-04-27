@@ -5,48 +5,53 @@ import { useState } from "react";
 const faqs = [
   {
     id: 1,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip",
+    pregunta: "¿Qué es exactamente BECASA CAMP?",
+    respuesta: "BECASA CAMP es mucho más que un campamento: es una experiencia diseñada para encender la visión de un atleta. Aquí entrenas, compites, aprendes y descubres que aquello que amas hacer sí puede abrirte puertas reales para tu futuro.",
   },
   {
     id: 2,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    pregunta: "¿Para quién está dirigido?",
+    respuesta: "Está dirigido a atletas con ganas de crecer, soñar en grande y vivir una experiencia que les demuestre que su talento puede llevarlos más lejos. Desde quienes apenas están empezando hasta quienes ya compiten a buen nivel, aquí todos pueden avanzar.",
   },
   {
     id: 3,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    pregunta: "¿Qué incluye la inscripción?",
+    respuesta: "La inscripción incluye acceso al campamento, entrenamientos, espacios de formación, evaluación, hidratación, materiales oficiales y certificado.  Todo está pensado para que el atleta viva una experiencia completa y valiosa. *No incluye alimentación, alojamiento ni transporte.",
   },
   {
     id: 4,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+    pregunta: "¿Qué hace único a este campamento?",
+    respuesta: "Lo que hace único a BECASA CAMP es que no solo entrena atletas: despierta visión. Integra  exigencia deportiva, formación personal y una mirada real al camino universitario, para que cada participante salga inspirado, retado y con más claridad sobre su futuro.",
   },
   {
     id: 5,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+    pregunta: "¿Qué actividades vivirán los atletas?",
+    respuesta: "Los atletas participarán en entrenamientos, showcases, competencia, espacios de formación, recruiting lab y momentos en comunidad. Cada actividad está diseñada para elevar su nivel, fortalecer su mentalidad y ayudarles a ver con más claridad su camino.",
   },
   {
     id: 6,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip",
+    pregunta: "¿Van a asistir  entrenadores o scouts de EE. UU.?",
+    respuesta: "Sí. BECASA CAMP contará con entrenadores invitados vinculados al entorno universitario de EE. UU., quienes aportarán experiencia, evaluación y una perspectiva real sobre el nivel, la preparación y la mentalidad que este camino exige.",
   },
   {
     id: 7,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+    pregunta: "¿Este evento garantiza una beca o ser reclutado?",
+    respuesta: "No garantiza una beca ni reclutamiento, pero si abre el camino  si el atleta destaca lo suficiente.  Ofrece evaluación, formación, exposición y una visión más clara de lo que se necesita para construir oportunidades reales en el deporte universitario.",
   },
   {
     id: 8,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+    pregunta: "¿Cómo funciona la inscripción y el pago?",
+    respuesta: "La inscripción se realiza a través  del sitio web oficial, donde podrás crear tu cuenta personal y encontrar toda la información del evento e  instrucciones de pago. Después, solo queda prepararte para vivir la experiencia. ",
   },
   {
     id: 9,
-    pregunta: "¿Orem ipsum dolor sit amet, consectetuer adipiscing elit?",
-    respuesta: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+    pregunta: "¿Qué puedo hacer si después del evento si quiero seguir con ASA?",
+    respuesta: "Después del evento, quienes deseen continuar  su proceso podrán acercarse a ASA para recibirmentoría continua. BECASA CAMP es el primer paso de una ruta con más dirección, preparación y acompañamiento sin importar la etapa del atleta.",
+  },
+    {
+    id: 10,
+    pregunta: "¿Por qué vale la pena para una familia invertir en BECASA CAMP?",
+    respuesta: "Porque no están pagando solo por unos días de entrenamiento. Están invirtiendo en una experiencia que puede elevar el nivel de su hijo, ampliar su visión, darle dirección y mostrarle que su talento puede convertirse en oportunidades concretas.",
   },
 ];
 

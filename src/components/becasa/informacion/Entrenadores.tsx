@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 interface Entrenador {
   id: number;
   nombre: string;
+  resumen: string;
   descripcion: string;
   foto: string;
   instagram: string;
@@ -17,39 +18,43 @@ interface Entrenador {
 const entrenadores: Entrenador[] = [
   {
     id: 1,
-    nombre: "Nombre Apellido",
+    nombre: "Adam Brewster",
+    resumen: "Head coach de Tabor, exarmador NCAA y profesional en Dinamarca. Aporta alto nivel técnico y gran desarrollo de talento.", 
     descripcion:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+      "Adam Brewster tiene una trayectoria muy fuerte como jugador. Se formó en clubes como MAVS, KAMO y HPSTL, donde acumuló reconocimientos importantes, incluyendo una medalla de bronce en la Open Division de USAV Nationals y selección al All-Tournament Team. Luego jugó a nivel NCAA en Lindenwood University, donde fue armador All-Conference en dos ocasiones y récord histórico del programa. Más adelante dio el salto al profesionalismo en Nordenskov, Dinamarca, donde ganó bronce en la Danish Cup y plata en la Danish Volley Ligaen. <br>Como entrenador, Brewster suma una década de experiencia y un recorrido amplio en diferentes niveles. Ha trabajado con más de 15 equipos de club, fue asistente en MidAmerica Nazarene University y Ottawa University, además de desempeñarse con Indy Ignite Pro Volleyball. En 2022 fue nombrado NAIA Assistant Coach of the Year, ha sido presentado en espacios de AVCA y Coaches Insider, y ha contribuido al desarrollo de All-Americans en NAIA. Actualmente vive su primera experiencia como head coach universitario en Tabor College.",
     foto: "/img/becasa/entrenadores/entrenadores1.jpg",
     instagram: "",
-    slug: "entrenador-1",
+    slug: "Head Coach at Tabor College",
   },
   {
     id: 2,
-    nombre: "Nombre Apellido",
+    nombre: "Dillon Dahl",
+    resumen: "Head coach de ONU y ex Asistente del Año AVCA NAIA 2023. Lidera un programa histórico, competitivo y sólido en NAIA.", 
     descripcion:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+      "Antes de consolidarse como entrenador de voleibol, Dillon Dahl construyó una base competitiva desde el deporte universitario, compitiendo en decatlón y jabalina durante cuatro temporadas en Northern State. Esa etapa refleja un perfil disciplinado, versátil y orientado al alto rendimiento, complementado además por reconocimientos académicos de conferencia que hablan de su constancia dentro y fuera del deporte. <br>Como entrenador, ha tenido un ascenso muy sólido. Fue asistente en Dordt University y Black Hills State University antes de asumir como head coach del programa masculino de Olivet Nazarene University en 2024. Bajo su dirección, ONU logró temporadas competitivas en 2024 y 2025, llegó por primera vez a una final de conferencia, venció a un equipo top 7 nacional y llevó al programa a liderar la NAIA en blocks por set, además de sumar múltiples reconocimientos All-CCAC.",
     foto: "/img/becasa/entrenadores/entrenadores2.jpg",
     instagram: "",
-    slug: "entrenador-2",
+    slug: "Head Coach at Olivet Nazarene University."
   },
   {
     id: 3,
-    nombre: "Nombre Apellido",
+    nombre: "Audrye Alejandro-Rivera",
+    resumen: "Coach de Webber con pasado profesional en Puerto Rico y experiencia NCAA/NAIA. Forma equipos competitivos con liderazgo y método.", 
     descripcion:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+      "Audrye Alejandro-Rivera llega con una trayectoria muy completa como deportista. Jugó voleibol universitario durante tres años en Elms College, donde fue top 10 líbero nacional, Freshman Athlete of the Year y NECC Defensive Player of the Year. Luego continuó su carrera en Warner University como estudiante de maestría, siendo reconocido dos veces como Mid-South Conference Defensive Player of the Week y como NCCAA Scholar Athlete. Después de esa etapa, fue reclutado por la liga profesional de Puerto Rico, consolidando así una carrera competitiva de 17 años. <br> Su recorrido como entrenador también es amplio y progresivo. Empezó en Elms como Student Intern Coach, luego trabajó durante cuatro temporadas en Warner, donde ayudó al equipo masculino a terminar invicto en temporada regular de conferencia y fue nombrado Assistant Coach of the Year en 2023. Más adelante pasó por Polk State College, dirigió en 2024 a Culver-Stockton College con una mejora de 10 victorias y actualmente lidera el programa de Webber University. Además, ha trabajado en voleibol de club con Top Select Club.",
     foto: "/img/becasa/entrenadores/entrenadores3.jpg",
     instagram: "",
-    slug: "entrenador-3",
+    slug: "Head Coach at Webber International University",
   },
   {
     id: 4,
-    nombre: "Nombre Apellido",
+    nombre: "Andrés Mauricio Rosas",
+    resumen: "Head coach de Tabor, exarmador NCAA y profesional en Dinamarca. Aporta alto nivel técnico y gran desarrollo de talento.", 
     descripcion:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+      "Su identidad dentro del voleibol se ve marcada por más de 15 años de trabajo en desarrollo, perfeccionamiento y alto rendimiento, con una mirada muy enfocada en la evolución integral del atleta. <br>Como entrenador, Rosas ha dirigido en escenarios importantes del voleibol colombiano. Actualmente está vinculado a la Selección Colombia Sub-17 Masculina y también ha liderado procesos con Zion en la Superliga de Bogotá, la Universidad Central, CNG Athletics y la Selección Bogotá en distintas categorías. Su metodología se describe como sistémico-relacional, influenciada por principios del sistema americano de voleibol, con especial énfasis en táctica por posiciones, transición al alto rendimiento y cultura de equipo.",
     foto: "/img/becasa/entrenadores/entrenadores4.jpg",
     instagram: "",
-    slug: "entrenador-4",
+    slug: "Head Coach at Selección Colombia U-17",
   },
 ];
 
@@ -86,7 +91,7 @@ function EntrenadorWindow({ entrenador, onCerrar }: { entrenador: Entrenador | n
               {entrenador.nombre}
             </h2>
             <h3 className="text-black font-bold text-lg mb-5">
-              Lorem ipsum dolor sit amet, consectetuer
+              {entrenador.slug}
             </h3>
             <div className="flex flex-col gap-4">
               {[entrenador.descripcion, entrenador.descripcion, entrenador.descripcion].map((p, i) => (
@@ -127,9 +132,7 @@ export default function Entrenadores() {
             Entrenadores
           </h2>
           <p className={`text-sm max-w-2xl mx-auto leading-relaxed ${oscuro ? " text-white/75" : "text-black/75"} `} >
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
+            Tener a estos entrenadores en BECASA significa acceder a una perspectiva distinta: una que enseña, te reta, exige y también inspira. Su presencia eleva la experiencia del campamento, enriquece cada entrenamiento y acerca a cada atleta a encontrar ese plan de vida deportivo y académico.
           </p>
         </div>
 
@@ -183,7 +186,7 @@ export default function Entrenadores() {
 
                   <h5 className="text-white text-sm leading-relaxed">{e.nombre}</h5>
 
-                  <p className="text-[0.60rem] leading-relaxed text-wrap text-white/70">{e.descripcion}</p>
+                  <p className="text-[0.60rem] leading-relaxed text-wrap text-white/70">{e.resumen}</p>
                 </div>
               </div>
             )
@@ -199,9 +202,8 @@ export default function Entrenadores() {
           </h3>
           <p
             className="text-sm leading-relaxed pt-4 sm:pt-0"
-            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 300, letterSpacing: "-0.01em"}}>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-            laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.
+            style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 300, letterSpacing: "-0.01em" }}>
+            Cada uno llega con experiencia real en formación, competencia y desarrollo de atletas, para brindarte una experiencia exigente, cercana y de alto valor dentro y fuera de la cancha.
           </p>
         </div>
 
