@@ -30,7 +30,7 @@ export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titu
     return () => clearInterval(timer);
   }, [current]);
 
-  const goTo = (index) => {
+  const goTo = (index: number) => {
     if (fading || index === current) return;
     setFading(true);
     setTimeout(() => {

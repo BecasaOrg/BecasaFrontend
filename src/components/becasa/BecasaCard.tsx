@@ -48,6 +48,7 @@ export default function BecasaCard() {
         const response = await fetch("https://athleticscholarshipagency.com/api/camps");
         const data = await response.json();
         
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const campamentosFormateados: Beca[] = data.data.map((camp: any) => {
           const apiSportLower = (camp.sport_type || "").toLowerCase();
           const deporteMapeado = mapDeporte[apiSportLower] || camp.sport_type || "Fútbol";

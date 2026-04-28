@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FaApple, FaGoogle } from "react-icons/fa";
+import { FaApple } from "react-icons/fa";
 
 interface SelectItem {
     id: number | string;
@@ -97,9 +97,9 @@ export default function CreaTuPerfil() {
                 }
                 setMessage({ type: "error", text: errorMsg });
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("Fetch error:", error);
-            setMessage({ type: "error", text: "Error: " + (error.message || "Problema de conexión") });
+            setMessage({ type: "error", text: "Error: " + ((error as Error).message || "Problema de conexión") });
         } finally {
             setIsSubmitting(false);
         }
