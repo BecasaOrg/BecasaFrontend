@@ -19,7 +19,7 @@ const slides = [
   },
 ];
 
-export default function BecasaHeroSlider() {
+export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titulo?: string }) {
   const [current, setCurrent] = useState(0);
   const [fading, setFading] = useState(false);
 
@@ -30,7 +30,7 @@ export default function BecasaHeroSlider() {
     return () => clearInterval(timer);
   }, [current]);
 
-  const goTo = (index) => {
+  const goTo = (index: number) => {
     if (fading || index === current) return;
     setFading(true);
     setTimeout(() => {
@@ -75,7 +75,7 @@ export default function BecasaHeroSlider() {
         <h1 className="font-black uppercase text-[#c8f500] leading-none tracking-tight drop-shadow-lg mb-6"
           style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)", fontSize: "clamp(3.5rem, 10vw, 7.5rem)" }}
         >
-          BECASA CAMP 2026
+          {titulo}
         </h1>
 
         <p className="max-w-2xl text-white/90 leading-relaxed mb-10"

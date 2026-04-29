@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 const posiciones = [
     "Delantero", "Mediocampista", "Defensor", "Portero",
@@ -10,10 +11,13 @@ const posiciones = [
     "Sprinter", "Fondista", "Saltador", "Lanzador",
 ];
 
-const nivelesJuego = ["Principiante", "Intermedio", "Avanzado", "Élite / Competitivo"];
+const nivelesJuego = ["principiante", "intermedio", "avanzado", "Élite / Competitivo"];
 const tallasCalcetas = ["XS", "S", "M", "L", "XL", "XXL"];
 
-export default function FormularioRegistro() {
+function FormularioRegistroInner() {
+    const searchParams = useSearchParams();
+    const campId = searchParams.get("camp_id");
+
     const [posicionesSeleccionadas, setPosicionesSeleccionadas] = useState<string[]>([]);
     const [clubsSeleccionados, setClubsSeleccionados] = useState<string[]>([]);
     const [posicionInput, setPosicionInput] = useState("");
@@ -21,6 +25,9 @@ export default function FormularioRegistro() {
     const [posicionOpen, setPosicionOpen] = useState(false);
     const [archivoNombre, setArchivoNombre] = useState<string | null>(null);
     const fileRef = useRef<HTMLInputElement>(null);
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [message, setMessage] = useState<{ type: "success" | "error", text: string } | null>(null);
 
     const posicionesFiltradas = posiciones.filter(
         (p) => p.toLowerCase().includes(posicionInput.toLowerCase()) && !posicionesSeleccionadas.includes(p)
@@ -39,6 +46,63 @@ export default function FormularioRegistro() {
                 setClubsSeleccionados((prev) => [...prev, clubInput.trim()]);
             }
             setClubInput("");
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setMessage(null);
+        setIsSubmitting(true);
+
+        const userId = localStorage.getItem("user_id");
+        const token = localStorage.getItem("auth_token");
+
+        if (!userId || !token) {
+            setMessage({ type: "error", text: "Por favor inicia sesión para continuar con el registro." });
+            setIsSubmitting(false);
+            return;
+        }
+
+        const formElement = e.currentTarget;
+        const formData = new FormData(formElement);
+
+        if (campId) formData.append("camp_id", campId);
+        
+        formData.append("user_id", userId); 
+
+        formData.append("position", posicionesSeleccionadas.join(", "));
+        formData.append("club_name", clubsSeleccionados.join(", "));
+
+        const fileInput = formData.get("health_insurance_path");
+        if (fileInput instanceof File && fileInput.size === 0) {
+            formData.delete("health_insurance_path");
+        }
+
+        try {
+            const response = await fetch("https://athleticscholarshipagency.com/api/registrations", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                setMessage({ type: "success", text: "Inscripción exitosa. Redirigiendo a pago..." });
+                if (data.checkout_url) {
+                    window.location.href = data.checkout_url;
+                }
+            } else {
+                setMessage({ type: "error", text: data.message || "Hubo un error al registrarse." });
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setMessage({ type: "error", text: "Error de conexión. Intente nuevamente." });
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -61,22 +125,28 @@ export default function FormularioRegistro() {
                 }}
             />
 
-            <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-0 rounded-2xl overflow-hidden shadow-2xl border border-white/5 px-5 py-5 bg-[#060f18]/80 backdrop-blur-lg relative ">
+            <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-0 rounded-2xl overflow-hidden shadow-2xl border border-white/5 px-5 py-5 bg-[#060f18]/80 backdrop-blur-lg relative z-10">
 
                 {/* Columna izquierda: formulario */}
                 <div className="bg-[#0a1520]/50 px-8 py-10 rounded-2xl">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
+                    <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
+
+                        {message && (
+                            <div className={`sm:col-span-2 p-3 rounded-lg text-sm ${message.type === 'success' ? 'bg-[#AAFF00]/20 text-[#AAFF00]' : 'bg-red-500/20 text-red-400'}`}>
+                                {message.text}
+                            </div>
+                        )}
 
                         {/* Número de identificación */}
                         <div>
                             <label className={labelClass}>Número de identificación (C.C o T.I) *</label>
-                            <input type="text" placeholder="Numero..." className={inputClass} />
+                            <input name="identification_number" type="text" placeholder="Numero..." className={inputClass} required />
                         </div>
 
                         {/* Años de experiencia */}
                         <div>
                             <label className={labelClass}>Años de experiencia competitiva *</label>
-                            <input type="number" placeholder="Numero..." className={inputClass} />
+                            <input name="years_experience" type="number" placeholder="Numero..." className={inputClass} required min="0" />
                         </div>
 
                         {/* Posición en la cancha — multiselect */}
@@ -89,7 +159,7 @@ export default function FormularioRegistro() {
                                 {posicionesSeleccionadas.map((p) => (
                                     <span key={p} className="bg-[#AAFF00]/15 text-[#AAFF00] text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
                                         {p}
-                                        <button onClick={(e) => { e.stopPropagation(); togglePosicion(p); }} className="hover:text-white transition-colors">×</button>
+                                        <button type="button" onClick={(e) => { e.stopPropagation(); togglePosicion(p); }} className="hover:text-white transition-colors">×</button>
                                     </span>
                                 ))}
                                 <input
@@ -99,12 +169,14 @@ export default function FormularioRegistro() {
                                     onBlur={() => setTimeout(() => setPosicionOpen(false), 150)}
                                     placeholder={posicionesSeleccionadas.length === 0 ? "Escribe/Selecciona Múltiples Opciones" : ""}
                                     className="bg-transparent text-white text-sm placeholder:text-white/25 outline-none flex-1 min-w-[160px]"
+                                    onKeyDown={(e) => { if (e.key === "Enter") e.preventDefault(); }}
                                 />
                             </div>
                             {posicionOpen && posicionesFiltradas.length > 0 && (
                                 <div className="absolute top-full left-0 right-0 z-20 bg-[#0d1b2a] border border-[#1e3a4a] rounded-lg mt-1 max-h-40 overflow-y-auto shadow-xl">
                                     {posicionesFiltradas.map((p) => (
                                         <button
+                                            type="button"
                                             key={p}
                                             onMouseDown={() => { togglePosicion(p); setPosicionInput(""); }}
                                             className="w-full text-left px-4 py-2 text-sm text-white/80 hover:bg-[#AAFF00]/10 hover:text-[#AAFF00] transition-colors"
@@ -120,9 +192,9 @@ export default function FormularioRegistro() {
                         <div>
                             <label className={labelClass}>Nivel de juego estimado *</label>
                             <div className="relative">
-                                <select className={`${inputClass} appearance-none cursor-pointer`} defaultValue="">
+                                <select name="skill_level" className={`${inputClass} appearance-none cursor-pointer`} defaultValue="" required>
                                     <option value="" disabled>Seleccione</option>
-                                    {nivelesJuego.map((n) => <option key={n}>{n}</option>)}
+                                    {nivelesJuego.map((n) => <option key={n} value={n.toLowerCase()}>{n}</option>)}
                                 </select>
                                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none text-xs">▼</span>
                             </div>
@@ -132,9 +204,9 @@ export default function FormularioRegistro() {
                         <div>
                             <label className={labelClass}>Talla de camiseta *</label>
                             <div className="relative">
-                                <select className={`${inputClass} appearance-none cursor-pointer`} defaultValue="">
+                                <select name="shirt_size" className={`${inputClass} appearance-none cursor-pointer`} defaultValue="" required>
                                     <option value="" disabled>Seleccione</option>
-                                    {tallasCalcetas.map((t) => <option key={t}>{t}</option>)}
+                                    {tallasCalcetas.map((t) => <option key={t} value={t}>{t}</option>)}
                                 </select>
                                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none text-xs">▼</span>
                             </div>
@@ -147,7 +219,7 @@ export default function FormularioRegistro() {
                                 {clubsSeleccionados.map((c) => (
                                     <span key={c} className="bg-[#AAFF00]/15 text-[#AAFF00] text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
                                         {c}
-                                        <button onClick={() => setClubsSeleccionados((prev) => prev.filter((x) => x !== c))} className="hover:text-white transition-colors">×</button>
+                                        <button type="button" onClick={() => setClubsSeleccionados((prev) => prev.filter((x) => x !== c))} className="hover:text-white transition-colors">×</button>
                                     </span>
                                 ))}
                                 <input
@@ -163,7 +235,7 @@ export default function FormularioRegistro() {
                         {/* Nombre del colegio */}
                         <div className="sm:col-span-2">
                             <label className={labelClass}>Nombre del colegio o universidad actual *</label>
-                            <input type="text" placeholder="Escribe..." className={inputClass} />
+                            <input name="school_name" type="text" placeholder="Escribe..." className={inputClass} required />
                         </div>
 
                         {/* Certificado EPS */}
@@ -173,24 +245,24 @@ export default function FormularioRegistro() {
                                 className="w-full bg-[#0d1b2a] border border-[#1e3a4a] rounded-lg px-4 py-2.5 flex items-center justify-between cursor-pointer hover:border-[#AAFF00]/40 transition-colors"
                                 onClick={() => fileRef.current?.click()}
                             >
-                                <span className="text-sm text-white/25">{archivoNombre ?? "Adjuntar Archivo"}</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-white/30">
+                                <span className="text-sm text-white/25 truncate mr-2">{archivoNombre ?? "Adjuntar Archivo"}</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-white/30 flex-shrink-0">
                                     <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                                <input ref={fileRef} type="file" className="hidden" onChange={(e) => setArchivoNombre(e.target.files?.[0]?.name ?? null)} />
+                                <input name="health_insurance_path" ref={fileRef} type="file" className="hidden" onChange={(e) => setArchivoNombre(e.target.files?.[0]?.name ?? null)} />
                             </div>
                         </div>
 
                         {/* Restricción alimenticia */}
                         <div>
                             <label className={labelClass}>¿Tiene alguna restricción alimenticia o alergias? *</label>
-                            <input type="text" placeholder="Escribe..." className={inputClass} />
+                            <input name="dietary_restrictions" type="text" placeholder="Escribe..." className={inputClass} />
                         </div>
 
                         {/* Condición médica */}
                         <div className="sm:col-span-2">
                             <label className={labelClass}>¿Tiene alguna condición médica que debamos conocer?</label>
-                            <input type="text" placeholder="Escribe..." className={inputClass} />
+                            <input name="medical_conditions" type="text" placeholder="Escribe..." className={inputClass} />
                         </div>
 
                         {/* Separador acudiente */}
@@ -199,32 +271,33 @@ export default function FormularioRegistro() {
                         {/* Nombre acudiente */}
                         <div>
                             <label className={labelClass}>Nombre completo del acudiente *</label>
-                            <input type="text" placeholder="Nombre Completo" className={inputClass} />
+                            <input name="guardian_name" type="text" placeholder="Nombre Completo" className={inputClass} required />
                         </div>
 
                         {/* Teléfono acudiente */}
                         <div>
                             <label className={labelClass}>Número de contacto del acudiente *</label>
-                            <input type="tel" placeholder="+57" className={inputClass} />
+                            <input name="guardian_phone" type="tel" placeholder="+57" className={inputClass} required />
                         </div>
 
                         {/* Email acudiente */}
                         <div>
                             <label className={labelClass}>Email del acudiente *</label>
-                            <input type="email" placeholder="Usuario@Gmail.Com" className={inputClass} />
+                            <input name="guardian_email" type="email" placeholder="Usuario@Gmail.Com" className={inputClass} required />
                         </div>
 
                         {/* Botón */}
                         <div className="flex items-end">
                             <button
                                 type="submit"
-                                className="w-full bg-[#AAFF00] text-black font-bold text-base rounded-full py-2.5 hover:opacity-90 hover:scale-[1.02] active:scale-95 transition-all duration-200"
+                                disabled={isSubmitting}
+                                className="w-full bg-[#AAFF00] text-black font-bold text-base rounded-full py-2.5 hover:opacity-90 hover:scale-[1.02] active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:scale-100"
                             >
-                                Registrarse
+                                {isSubmitting ? "Registrando..." : "Registrarse"}
                             </button>
                         </div>
 
-                    </div>
+                    </form>
                 </div>
 
                 {/* ── Columna derecha: info ── */}
@@ -273,5 +346,13 @@ export default function FormularioRegistro() {
 
             </div>
         </section>
+    );
+}
+
+export default function FormularioRegistro() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#0A0E2A] flex items-center justify-center text-white">Cargando formulario...</div>}>
+            <FormularioRegistroInner />
+        </Suspense>
     );
 }

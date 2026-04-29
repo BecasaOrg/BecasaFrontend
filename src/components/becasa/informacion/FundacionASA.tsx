@@ -7,7 +7,7 @@ import PreguntasFrecuentes from "../PreguntasFrecuentes";
 import PoliticasPrivacidad from "../PoliticasCondiciones";
 
 export default function FundacionASA() {
-    const [openModal, setOpenModal] = useState(null);
+    const [openModal, setOpenModal] = useState<string | null>(null);
     const { oscuro } = useTema();
 
     useEffect(() => {

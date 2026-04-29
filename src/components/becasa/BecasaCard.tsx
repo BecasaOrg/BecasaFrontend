@@ -1,106 +1,84 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTema } from "@/context/TemaContext";
 
+interface Beca {
+  id: number;
+  titulo: string;
+  ciudad: string;
+  fecha: string;
+  edad: string;
+  cupos: number;
+  deporte: string;
+  logo: string;
+  slug: string;
+}
+
 const DEPORTES = ["Fútbol", "Voleibol", "Natación", "Tenis", "Atletismo", "Béisbol", "Basquetbol"];
 
-const becas = [
-  {
-    id: 1,
-    titulo: "BECASA CAMP 2026 - SOCCER",
-    ciudad: "Barranquilla",
-    fecha: "21 / 06 / 2026",
-    edad: "12 a 25 años",
-    cupos: 45,
-    deporte: "Fútbol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-soccer",
-  },
-  {
-    id: 2,
-    titulo: "BECASA CAMP 2026 - VOLLEY",
-    ciudad: "Bogotá",
-    fecha: "10 / 06 / 2026",
-    edad: "15 a 25 años",
-    cupos: 20,
-    deporte: "Voleibol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-volley",
-  },
-  {
-    id: 3,
-    titulo: "BECASA CAMP 2026 - SOCCER",
-    ciudad: "Barranquilla",
-    fecha: "21 / 06 / 2026",
-    edad: "12 a 25 años",
-    cupos: 45,
-    deporte: "Fútbol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-soccer",
-  },
-  {
-    id: 4,
-    titulo: "BECASA CAMP 2026 - VOLLEY",
-    ciudad: "Bogotá",
-    fecha: "10 / 06 / 2026",
-    edad: "15 a 25 años",
-    cupos: 20,
-    deporte: "Voleibol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-volley",
-  },
-  {
-    id: 5,
-    titulo: "BECASA CAMP 2026 - SOCCER",
-    ciudad: "Barranquilla",
-    fecha: "21 / 06 / 2026",
-    edad: "12 a 25 años",
-    cupos: 45,
-    deporte: "Fútbol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-soccer",
-  },
-  {
-    id: 6,
-    titulo: "BECASA CAMP 2026 - VOLLEY",
-    ciudad: "Bogotá",
-    fecha: "10 / 06 / 2026",
-    edad: "15 a 25 años",
-    cupos: 20,
-    deporte: "Voleibol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-volley",
-  },
-  {
-    id: 7,
-    titulo: "BECASA CAMP 2026 - SOCCER",
-    ciudad: "Barranquilla",
-    fecha: "21 / 06 / 2026",
-    edad: "12 a 25 años",
-    cupos: 45,
-    deporte: "Fútbol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-soccer",
-  },
-  {
-    id: 8,
-    titulo: "BECASA CAMP 2026 - SOCCER",
-    ciudad: "Barranquilla",
-    fecha: "21 / 06 / 2026",
-    edad: "12 a 25 años",
-    cupos: 45,
-    deporte: "Fútbol",
-    logo: "/img/becasa/becasa_camp.jpg",
-    slug: "becasa-camp-2026-soccer",
-  },
-];
+const mapDeporte: Record<string, string> = {
+  "futbol": "Fútbol",
+  "voleibol": "Voleibol",
+  "natacion": "Natación",
+  "tenis": "Tenis",
+  "atletismo": "Atletismo",
+  "beisbol": "Béisbol",
+  "basquetbol": "Basquetbol",
+  "football": "Fútbol",
+  "volleyball": "Voleibol",
+  "swimming": "Natación",
+  "tennis": "Tenis",
+  "athletics": "Atletismo",
+  "baseball": "Béisbol",
+  "basketball": "Basquetbol"
+};
 
 export default function BecasaCard() {
   const [deporteActivo, setDeporteActivo] = useState("Fútbol");
+  const [becas, setBecas] = useState<Beca[]>([]);
+  const [cargando, setCargando] = useState(true);
   const { oscuro } = useTema();
+
+  useEffect(() => {
+    const fetchCampamentos = async () => {
+      try {
+        const response = await fetch("https://athleticscholarshipagency.com/api/camps");
+        const data = await response.json();
+        
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const campamentosFormateados: Beca[] = data.data.map((camp: any) => {
+          const apiSportLower = (camp.sport_type || "").toLowerCase();
+          const deporteMapeado = mapDeporte[apiSportLower] || camp.sport_type || "Fútbol";
+
+          const fechaObj = new Date(camp.start_date);
+          const fechaFormateada = `${fechaObj.getDate().toString().padStart(2, '0')} / ${(fechaObj.getMonth() + 1).toString().padStart(2, '0')} / ${fechaObj.getFullYear()}`;
+
+          return {
+            id: camp.id,
+            titulo: camp.name,
+            ciudad: camp.city?.name || "No especificada",
+            fecha: fechaFormateada,
+            edad: `${camp.min_age} a ${camp.max_age} años`,
+            cupos: parseInt(camp.capacity, 10),
+            deporte: deporteMapeado,
+            logo: "/img/becasa/becasa_camp.jpg",
+            slug: camp.id.toString(),
+          };
+        });
+
+        setBecas(campamentosFormateados);
+      } catch (error) {
+        console.error("Error fetching campamentos:", error);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    fetchCampamentos();
+  }, []);
 
   const becasFiltradas = becas.filter((b) => b.deporte === deporteActivo);
 
@@ -135,7 +113,11 @@ export default function BecasaCard() {
         </div>
 
         {/* Grid */}
-        {becasFiltradas.length === 0 ? (
+        {cargando ? (
+          <div className="flex justify-center items-center py-20">
+             <div className="w-10 h-10 border-4 border-[#AAFF00] border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : becasFiltradas.length === 0 ? (
           <p className="text-center text-white/35 py-12 text-sm">
             No hay becas disponibles para este deporte aún.
           </p>
@@ -173,7 +155,7 @@ export default function BecasaCard() {
                   {/* Botones */}
                   <div className="flex gap-2 whitespace-nowrap">
                     <Link
-                      href={`/becasa/informacion`}
+                      href={`/becasa/informacion?id=${beca.id}`}
                       className="text-[12px] font-bold rounded-full py-1 px-2 sm:px-5 bg-white transition-colors whitespace-nowrap text-black "
                     >
                       Información

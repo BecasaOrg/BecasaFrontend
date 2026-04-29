@@ -1,10 +1,28 @@
 import Link from "next/link";
 
-export default function FechasInscripciones() {
+interface FechasInscripcionesProps {
+  precioNormal?: string | number;
+  precioExtraordinario?: string | number;
+  textoFechaNormal?: string;
+  textoFechaExtraordinaria?: string;
+  campId?: string | number;
+}
+
+export default function FechasInscripciones({ 
+  precioNormal = "497000", 
+  precioExtraordinario = "550000",
+  textoFechaNormal = "Por atleta del 15 de agosto hasta el 05 de Octubre",
+  textoFechaExtraordinaria = "Por atleta del 15 de agosto hasta el 05 de Octubre",
+  campId
+}: FechasInscripcionesProps) {
 
   const fadedCircleOne = "w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,_rgba(170,255,0,0.8)_0%,_rgba(170,255,0,0.3)_50%,_transparent_80%)] blur-2xl absolute "
 
   const fadedCircleTwo = "w-[400px] h-[500px] rounded-full bg-[radial-gradient(circle,_rgba(170,255,0,0.8)_0%,_rgba(170,255,0,0.3)_50%,_transparent_80%)] blur-2xl absolute "
+
+  const formatPrice = (price: string | number) => {
+    return new Intl.NumberFormat("es-CO").format(Number(price));
+  };
 
   return (
     <section
@@ -13,14 +31,6 @@ export default function FechasInscripciones() {
       <div className={` ${fadedCircleOne} -top-30 -left-60`} />
       <div className={` ${fadedCircleTwo} -top-30 left-[50%] `} />
       <div className={` ${fadedCircleOne} -bottom-40 -right-60 `} />
-
-      {/* sombra de la derecha */}
-      {/* <div
-        className="absolute right-0 top-0 h-full w-80 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse at right center, #7fff0044 0%, transparent 70%)",
-        }}
-      /> */}
 
       <div className="relative z-1 flex flex-col items-center gap-6 bg-[#0A0E2A] w-[95vw] px-[5vw] py-[5vh] rounded-2xl ">
 
@@ -52,14 +62,14 @@ export default function FechasInscripciones() {
             </p>
             <div className="flex items-end justify-center gap-1 leading-none mb-3">
               <span className="text-[#AAFF00] font-black italic text-4xl md:text-5xl">
-                $ 497.000
+                $ {formatPrice(precioNormal)}
               </span>
               <span className="text-[#AAFF00]/70 font-bold text-base mb-1">
                 COP
               </span>
             </div>
             <p className="text-white/40 text-xs">
-              Por atleta del 15 de agosto hasta el 05 de Octubre
+              {textoFechaNormal}
             </p>
           </div>
 
@@ -75,14 +85,14 @@ export default function FechasInscripciones() {
             </p>
             <div className="flex items-end justify-center gap-1 leading-none mb-3">
               <span className="text-[#AAFF00] font-black italic text-4xl md:text-5xl">
-                $ 550.000
+                $ {formatPrice(precioExtraordinario)}
               </span>
               <span className="text-[#AAFF00]/70 font-bold text-base mb-1">
                 COP
               </span>
             </div>
             <p className="text-white/40 text-xs">
-              Por atleta del 15 de agosto hasta el 05 de Octubre
+              {textoFechaExtraordinaria}
             </p>
           </div>
 
@@ -90,7 +100,7 @@ export default function FechasInscripciones() {
 
         {/* Botón */}
         <Link
-          href="/becasa/registrate"
+          href={campId ? `/becasa/registrate?camp_id=${campId}` : "/becasa/registrate"}
           className="bg-[#AAFF00] text-[#0A0E2A] font-bold text-sm px-10 py-3 rounded-full
             hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200
             shadow-[0_4px_24px_rgba(170,255,0,0.35)]"

@@ -4,7 +4,7 @@ import { SLIDES_DATA } from "@/data/experienciaBecasa";
 import Image from "next/image";
 import { useState } from "react";
 
-const TABS = [
+const TABS: { id: keyof typeof SLIDES_DATA; label: string }[] = [
     { id: "rendimiento", label: "Rendimiento" },
     { id: "aula", label: "Aula Becasa" },
     { id: "autoconocimiento", label: "Autoconocimiento" },
@@ -13,7 +13,7 @@ const TABS = [
 ];
 
 export default function ExperienciaCamp() {
-    const [activeTab, setActiveTab] = useState("rendimiento");
+    const [activeTab, setActiveTab] = useState<keyof typeof SLIDES_DATA>("rendimiento");
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -27,7 +27,7 @@ export default function ExperienciaCamp() {
         visibleSlides.push(slides[(currentSlide + i) % total]);
     }
 
-    const goToSlide = (direction) => {
+    const goToSlide = (direction: "next" | "prev") => {
         if (isTransitioning) return;
         setIsTransitioning(true);
         setCurrentSlide((prev) =>
@@ -38,7 +38,7 @@ export default function ExperienciaCamp() {
         setTimeout(() => setIsTransitioning(false), 400);
     };
 
-    const handleTabChange = (tabId) => {
+    const handleTabChange = (tabId: keyof typeof SLIDES_DATA) => {
         setActiveTab(tabId);
         setCurrentSlide(0);
     };
