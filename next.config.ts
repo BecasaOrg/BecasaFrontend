@@ -13,14 +13,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'https://athleticscholarshipagency.com/api/:path*',
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: 'https://athleticscholarshipagency.com/api/:path*',
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;

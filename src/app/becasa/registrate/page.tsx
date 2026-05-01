@@ -79,7 +79,7 @@ function FormularioRegistroInner() {
         }
 
         try {
-            const response = await fetch("/api/registrations", {
+            const response = await fetch("https://athleticscholarshipagency.com/api/registrations", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
