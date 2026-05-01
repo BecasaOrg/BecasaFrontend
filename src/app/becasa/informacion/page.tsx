@@ -34,6 +34,7 @@ interface CampData {
     };
 }
 
+
 // ... dentro de InformacionContent:
 const [campData, setCampData] = useState<CampData | null>(null);
     const [loading, setLoading] = useState(true);
@@ -58,6 +59,16 @@ const [campData, setCampData] = useState<CampData | null>(null);
 
     // Si está cargando, mostramos un estado inicial para que no se vea vacío
     if (loading) return <div className="min-h-screen flex items-center justify-center">Cargando información del campamento...</div>;
+
+    let campData = null;
+    try {
+        const res = await fetch(`/api/camps/${id}`, { cache: "no-store" });
+        if (res.ok) {
+            campData = await res.json();
+        }
+    } catch (e) {
+        console.error("Error fetching camp:", e);
+    }
 
     const titulo = campData?.name || "BECASA CAMP 2026";
     const fechaInicio = campData?.start_date;

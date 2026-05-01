@@ -45,7 +45,7 @@ export default function BecasaCard() {
   useEffect(() => {
     const fetchCampamentos = async () => {
       try {
-        const response = await fetch("https://athleticscholarshipagency.com/api/camps");
+        const response = await fetch("/api/camps");
         const data = await response.json();
         
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

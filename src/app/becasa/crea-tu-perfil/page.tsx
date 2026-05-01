@@ -22,7 +22,7 @@ export default function CreaTuPerfil() {
 
     useEffect(() => {
         // Fetch Countries
-        fetch("https://athleticscholarshipagency.com/api/countries")
+        fetch("/api/countries")
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setCountries(data);
@@ -31,7 +31,7 @@ export default function CreaTuPerfil() {
             .catch(err => console.error("Error fetching countries:", err));
 
         // Fetch States
-        fetch("https://athleticscholarshipagency.com/api/states")
+        fetch("/api/states")
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setStates(data);
@@ -40,7 +40,7 @@ export default function CreaTuPerfil() {
             .catch(err => console.error("Error fetching states:", err));
 
         // Fetch Cities
-        fetch("https://athleticscholarshipagency.com/api/cities")
+        fetch("/api/cities")
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setCities(data);
@@ -66,7 +66,7 @@ export default function CreaTuPerfil() {
         }
 
         try {
-            const response = await fetch("https://athleticscholarshipagency.com/api/register", {
+            const response = await fetch("/api/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
