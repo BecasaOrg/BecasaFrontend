@@ -22,7 +22,7 @@ export default function CreaTuPerfil() {
 
     useEffect(() => {
         // Fetch Countries
-        fetch("/api/countries")
+        fetch("https://athleticscholarshipagency.com/api/countries")
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setCountries(data);
@@ -31,7 +31,7 @@ export default function CreaTuPerfil() {
             .catch(err => console.error("Error fetching countries:", err));
 
         // Fetch States
-        fetch("/api/states")
+        fetch("https://athleticscholarshipagency.com/api/states")
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setStates(data);
@@ -40,7 +40,7 @@ export default function CreaTuPerfil() {
             .catch(err => console.error("Error fetching states:", err));
 
         // Fetch Cities
-        fetch("/api/cities")
+        fetch("https://athleticscholarshipagency.com/api/cities")
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setCities(data);
@@ -66,7 +66,7 @@ export default function CreaTuPerfil() {
         }
 
         try {
-            const response = await fetch("/api/register", {
+            const response = await fetch("https://athleticscholarshipagency.com/api/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export default function CreaTuPerfil() {
                 localStorage.setItem("auth_token", data.token);
                 localStorage.setItem("user_id", data.user.id);
                 setMessage({ type: "success", text: "¡Cuenta creada exitosamente!" });
-                
+
                 // Redirect to dashboard
                 setTimeout(() => {
                     router.push("/dashboard/perfil");
@@ -131,7 +131,7 @@ export default function CreaTuPerfil() {
                 {/* IZQUIERDA: formulario*/}
                 <div className="flex flex-col gap-4 px-5 py-8 lg:px-10 lg:py-10 bg-[#080808]/10 backdrop-blur-sm rounded-3xl border border-white/40 m-5 ">
                     <form onSubmit={handleRegister} className="flex flex-col gap-4">
-                        
+
                         {message && (
                             <div className={`p-3 rounded-lg text-sm ${message.type === 'success' ? 'bg-[#AAFF00]/20 text-[#AAFF00]' : 'bg-red-500/20 text-red-400'}`}>
                                 {message.text}

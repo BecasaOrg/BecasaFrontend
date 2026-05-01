@@ -24,7 +24,7 @@ const StudentHeader = () => {
   return (
     <div className="relative" ref={menuRef}>
       {/* Dropdown Menu */}
-      <div 
+      <div
         className={`absolute top-0 right-0 w-[240px] rounded-[2.5rem] pt-16 pb-4 px-3 
           bg-[#0d1424]/95 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5
           transition-all duration-400 origin-top z-10
@@ -32,28 +32,28 @@ const StudentHeader = () => {
         `}
       >
         <div className="flex flex-col gap-1.5 mt-2">
-          <Link 
-            href="/dashboard/perfil" 
+          <Link
+            href="/dashboard/perfil"
             className="flex items-center gap-3 text-white/80 hover:text-[#AAFF00] hover:bg-[#AAFF00]/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide group"
           >
             <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
             Ajuste de cuenta
           </Link>
-          <Link 
-            href="/dashboard/facturas" 
+          <Link
+            href="/dashboard/facturas"
             className="flex items-center gap-3 text-white/80 hover:text-[#AAFF00] hover:bg-[#AAFF00]/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide group"
           >
             <FileText className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />
             Facturas
           </Link>
-          
+
           <div className="h-[1px] bg-white/5 my-1 mx-4"></div>
-          
+
           <button className="flex items-center gap-3 text-white/50 hover:text-white hover:bg-white/5 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide w-full text-left group">
             <LogOut className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             Cerrar sesión
           </button>
-          
+
           <div className="mt-1">
             <button className="flex items-center gap-3 text-red-400/80 hover:text-red-400 hover:bg-red-500/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide w-full text-left group">
               <Trash2 className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
@@ -64,16 +64,16 @@ const StudentHeader = () => {
       </div>
 
       {/* Botón Principal */}
-      <div 
+      <div
         className={`relative z-20 flex items-center justify-between gap-4 bg-[#050b14] text-white px-2.5 py-2 rounded-full shadow-xl cursor-pointer transition-all duration-300 border 
           ${isOpen ? 'border-[#AAFF00]/40 shadow-[0_0_20px_rgba(170,255,0,0.15)] ring-2 ring-[#AAFF00]/20' : 'border-white/5 hover:border-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]'}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="font-extrabold text-[13px] tracking-tight pl-4 text-white/90">Hola Andres</span>
         <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-white/5 relative shrink-0 border border-white/10 shadow-inner">
-          <Image 
-            src="https://randomuser.me/api/portraits/men/32.jpg" 
-            alt="Andres Profile" 
+          <Image
+            src="https://randomuser.mehttps://athleticscholarshipagency.com/api/portraits/men/32.jpg"
+            alt="Andres Profile"
             fill
             className="object-cover"
           />

@@ -67,8 +67,8 @@ function FormularioRegistroInner() {
         const formData = new FormData(formElement);
 
         if (campId) formData.append("camp_id", campId);
-        
-        formData.append("user_id", userId); 
+
+        formData.append("user_id", userId);
 
         formData.append("position", posicionesSeleccionadas.join(", "));
         formData.append("club_name", clubsSeleccionados.join(", "));
@@ -79,7 +79,7 @@ function FormularioRegistroInner() {
         }
 
         try {
-            const response = await fetch("/api/registrations", {
+            const response = await fetch("https://athleticscholarshipagency.com/api/registrations", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
