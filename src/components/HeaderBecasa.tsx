@@ -16,8 +16,13 @@ const links = [
 export default function HeaderBecasa() {
 
     const [menuAbierto, setMenuAbierto] = useState<boolean>(false);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const { oscuro } = useTema();
     const pathname = usePathname();
+
+    useEffect(() => {
+        setIsLoggedIn(!!localStorage.getItem("auth_token"));
+    }, []);
 
     // Cerrar menú al cambiar de ruta
     useEffect(() => {

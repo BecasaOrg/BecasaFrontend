@@ -29,8 +29,8 @@ const nextConfig: NextConfig = {
   // async rewrites() {
   //   return [
   //     {
-  //       source: 'https://athleticscholarshipagency.com/api/:path*',
-  //       destination: 'https://athleticscholarshipagency.comhttps://athleticscholarshipagency.com/api/:path*',
+  //       source: '/api/:path*',
+  //       destination: 'https://athleticscholarshipagency.com/api/:path*',
   //     },
   //   ];
   // },

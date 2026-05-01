@@ -9,6 +9,8 @@ const PerfilPage = () => {
   const { profile, updateProfile } = useProfile();
   const [formData, setFormData] = useState(profile);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -26,18 +28,62 @@ const PerfilPage = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setImageFile(file);
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateProfile({
-      ...formData,
-      avatar: previewUrl || formData.avatar,
-    });
-    alert('Perfil guardado exitosamente.');
+    setIsSaving(true);
+
+    const token = localStorage.getItem("auth_token");
+    if (!token) return;
+
+    const body = new FormData();
+    body.append('name', formData.nombres);
+    body.append('last_name', formData.apellidos);
+    body.append('phone', formData.telefono);
+    body.append('birth_date', formData.fechaNacimiento);
+    body.append('sport', formData.deporte);
+    body.append('country', formData.pais);
+    
+    if (imageFile) {
+      body.append('avatar_file', imageFile);
+    }
+
+    try {
+      const res = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/json"
+        },
+        body: body
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        updateProfile({
+          nombres: data.name || data.nombres,
+          apellidos: data.last_name || data.apellidos,
+          telefono: data.phone || data.telefono,
+          fechaNacimiento: data.birth_date || data.fechaNacimiento,
+          deporte: data.sport || data.deporte,
+          avatar: data.avatar || profile.avatar,
+        });
+        alert('Perfil guardado exitosamente.');
+      } else {
+        alert('Error al guardar el perfil: ' + (data.message || 'Error desconocido'));
+      }
+    } catch (error) {
+      console.error("Error saving profile:", error);
+      alert('Error de conexión al guardar el perfil.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -184,9 +230,10 @@ const PerfilPage = () => {
             </button>
             <button 
               type="submit" 
-              className="px-8 py-3 rounded-full text-sm font-bold text-black bg-[#AAFF00] hover:scale-105 transition-transform shadow-[0_0_20px_rgba(170,255,0,0.3)]"
+              disabled={isSaving}
+              className={`px-8 py-3 rounded-full text-sm font-bold text-black bg-[#AAFF00] hover:scale-105 transition-transform shadow-[0_0_20px_rgba(170,255,0,0.3)] ${isSaving ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              Guardar Cambios
+              {isSaving ? 'Guardando...' : 'Guardar Cambios'}
             </button>
           </div>
         </form>
