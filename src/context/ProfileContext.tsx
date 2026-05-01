@@ -26,7 +26,7 @@ const defaultProfile: ProfileData = {
   fechaNacimiento: "2000-05-15",
   pais: "Colombia",
   deporte: "Voleibol",
-  avatar: "https://randomuser.mehttps://athleticscholarshipagency.com/api/portraits/men/32.jpg",
+  avatar: "https://randomuser.me/api/portraits/men/32.jpg",
 };
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
@@ -47,13 +47,13 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
       .then(data => {
         if (data && !data.message) {
           setProfile({
-            nombres: data.name || "",
-            apellidos: data.last_name || "",
+            nombres: data.name || data.nombres || "",
+            apellidos: data.last_name || data.apellidos || "",
             email: data.email || "",
-            telefono: data.phone || "",
-            fechaNacimiento: data.birth_date || "",
-            pais: data.birth_country_id ? "Colombia" : "Colombia", // Simplificado por ahora
-            deporte: data.sport || "",
+            telefono: data.phone || data.telefono || "",
+            fechaNacimiento: data.birth_date || data.fechaNacimiento || "",
+            pais: data.country || "Colombia",
+            deporte: data.sport || data.deporte || "",
             avatar: data.avatar || "https://randomuser.me/api/portraits/men/32.jpg",
           });
         }
