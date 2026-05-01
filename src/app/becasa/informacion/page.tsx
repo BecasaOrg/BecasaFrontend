@@ -15,7 +15,7 @@ export default async function Informacion({ searchParams }: { searchParams: Prom
 
     let campData = null;
     try {
-        const res = await fetch(`https://athleticscholarshipagency.com/api/camps/${id}`, { cache: "no-store" });
+        const res = await fetch(`/api/camps/${id}`, { cache: "no-store" });
         if (res.ok) {
             campData = await res.json();
         }
