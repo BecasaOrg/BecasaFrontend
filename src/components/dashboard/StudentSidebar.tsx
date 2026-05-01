@@ -1,7 +1,8 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
-import { CheckCircle, MapPin, Calendar, Phone, Trophy } from 'lucide-react';
+import Link from 'next/link';
+import { CheckCircle, MapPin, Calendar, Phone, Trophy, LayoutDashboard } from 'lucide-react';
 import { useProfile } from '@/context/ProfileContext';
 
 const StudentSidebar = () => {
@@ -14,9 +15,9 @@ const StudentSidebar = () => {
             <div className="absolute bottom-1/4 -right-20 w-64 h-64 bg-[#00aaff]/10 rounded-full blur-[100px]" />
 
             {/* Logo */}
-            <div className="mb-10 z-10">
+            <Link href="/dashboard" className="mb-10 z-10 hover:opacity-80 transition-opacity cursor-pointer">
                 <Image src="/icon.svg" alt="ASA Logo" width={60} height={180} className="brightness-110" />
-            </div>
+            </Link>
 
             {/* Profile Pic */}
             <div className="relative mb-6 z-10">
@@ -45,12 +46,13 @@ const StudentSidebar = () => {
 
             {/* Action Buttons */}
             <div className="flex gap-3 mb-10 w-full z-10 px-2">
-                <button className="flex-1 bg-[#AAFF00] text-black font-black py-2.5 rounded-full text-xs hover:scale-105 transition-transform shadow-[0_4px_15px_rgba(170,255,0,0.3)]">
-                    Editar perfil
-                </button>
-                <button className="flex-1 border border-white/20 bg-white/5 backdrop-blur-md text-[#AAFF00] font-black py-2.5 rounded-full text-xs hover:bg-white/10 transition-colors">
-                    Ver perfil
-                </button>
+                <Link href="/dashboard" className="flex-1 flex items-center justify-center gap-1.5 bg-white/5 border border-white/20 text-[#AAFF00] font-black py-2.5 rounded-full text-xs hover:bg-white/10 transition-colors">
+                    <LayoutDashboard className="w-3.5 h-3.5" />
+                    Panel
+                </Link>
+                <Link href="/dashboard/perfil" className="flex-1 flex items-center justify-center bg-[#AAFF00] text-black font-black py-2.5 rounded-full text-xs hover:scale-105 transition-transform shadow-[0_4px_15px_rgba(170,255,0,0.3)]">
+                    Perfil
+                </Link>
             </div>
 
             {/* Progress Section */}

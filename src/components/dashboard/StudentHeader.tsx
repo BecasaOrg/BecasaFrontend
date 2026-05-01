@@ -3,11 +3,35 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Settings, FileText, LogOut, Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Settings, FileText, LogOut, Trash2, LayoutDashboard } from 'lucide-react';
+import { useProfile } from '@/context/ProfileContext';
 
 const StudentHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { profile } = useProfile();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("auth_token");
+    if (token) {
+      try {
+        await fetch("/api/logout", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json"
+          }
+        });
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    }
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("user_id");
+    router.push("/becasa/login");
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,8 +56,15 @@ const StudentHeader = () => {
         `}
       >
         <div className="flex flex-col gap-1.5 mt-2">
-          <Link
-            href="/dashboard/perfil"
+          <Link 
+            href="/dashboard" 
+            className="flex items-center gap-3 text-white/80 hover:text-[#AAFF00] hover:bg-[#AAFF00]/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide group"
+          >
+            <LayoutDashboard className="w-4 h-4" />
+            Panel Principal
+          </Link>
+          <Link 
+            href="/dashboard/perfil" 
             className="flex items-center gap-3 text-white/80 hover:text-[#AAFF00] hover:bg-[#AAFF00]/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide group"
           >
             <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
@@ -48,8 +79,11 @@ const StudentHeader = () => {
           </Link>
 
           <div className="h-[1px] bg-white/5 my-1 mx-4"></div>
-
-          <button className="flex items-center gap-3 text-white/50 hover:text-white hover:bg-white/5 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide w-full text-left group">
+          
+          <button 
+            onClick={handleLogout}
+            className="flex items-center gap-3 text-white/50 hover:text-white hover:bg-white/5 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide w-full text-left group"
+          >
             <LogOut className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             Cerrar sesión
           </button>
@@ -69,11 +103,12 @@ const StudentHeader = () => {
           ${isOpen ? 'border-[#AAFF00]/40 shadow-[0_0_20px_rgba(170,255,0,0.15)] ring-2 ring-[#AAFF00]/20' : 'border-white/5 hover:border-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]'}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="font-extrabold text-[13px] tracking-tight pl-4 text-white/90">Hola Andres</span>
+        <span className="font-extrabold text-[13px] tracking-tight pl-4 text-white/90">Hola {profile.nombres}</span>
         <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-white/5 relative shrink-0 border border-white/10 shadow-inner">
-          <Image
-            src="https://randomuser.mehttps://athleticscholarshipagency.com/api/portraits/men/32.jpg"
-            alt="Andres Profile"
+          <Image 
+            src={profile.avatar} 
+            alt={`${profile.nombres} Profile`} 
+
             fill
             className="object-cover"
           />

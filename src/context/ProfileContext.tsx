@@ -34,6 +34,34 @@ const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
 export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   const [profile, setProfile] = useState<ProfileData>(defaultProfile);
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("auth_token");
+    if (token) {
+      fetch("/api/user", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && !data.message) {
+          setProfile({
+            nombres: data.name || "",
+            apellidos: data.last_name || "",
+            email: data.email || "",
+            telefono: data.phone || "",
+            fechaNacimiento: data.birth_date || "",
+            pais: data.birth_country_id ? "Colombia" : "Colombia", // Simplificado por ahora
+            deporte: data.sport || "",
+            avatar: data.avatar || "https://randomuser.me/api/portraits/men/32.jpg",
+          });
+        }
+      })
+      .catch(err => console.error("Error fetching profile:", err));
+    }
+  }, []);
+
   const updateProfile = (newData: Partial<ProfileData>) => {
     setProfile((prev) => ({ ...prev, ...newData }));
   };
