@@ -26,7 +26,7 @@ const defaultProfile: ProfileData = {
   fechaNacimiento: "2000-05-15",
   pais: "Colombia",
   deporte: "Voleibol",
-  avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+  avatar: "https://randomuser.mehttps://athleticscholarshipagency.com/api/portraits/men/32.jpg",
 };
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);

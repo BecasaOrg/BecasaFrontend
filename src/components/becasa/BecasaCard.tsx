@@ -45,9 +45,9 @@ export default function BecasaCard() {
   useEffect(() => {
     const fetchCampamentos = async () => {
       try {
-        const response = await fetch("/api/camps");
+        const response = await fetch("https://athleticscholarshipagency.com/api/camps");
         const data = await response.json();
-        
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const campamentosFormateados: Beca[] = data.data.map((camp: any) => {
           const apiSportLower = (camp.sport_type || "").toLowerCase();
@@ -115,7 +115,7 @@ export default function BecasaCard() {
         {/* Grid */}
         {cargando ? (
           <div className="flex justify-center items-center py-20">
-             <div className="w-10 h-10 border-4 border-[#AAFF00] border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-10 h-10 border-4 border-[#AAFF00] border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : becasFiltradas.length === 0 ? (
           <p className="text-center text-white/35 py-12 text-sm">

@@ -67,8 +67,8 @@ function FormularioRegistroInner() {
         const formData = new FormData(formElement);
 
         if (campId) formData.append("camp_id", campId);
-        
-        formData.append("user_id", userId); 
+
+        formData.append("user_id", userId);
 
         formData.append("position", posicionesSeleccionadas.join(", "));
         formData.append("club_name", clubsSeleccionados.join(", "));

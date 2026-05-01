@@ -36,7 +36,7 @@ export default function Login() {
                 localStorage.setItem("auth_token", data.token);
                 localStorage.setItem("user_id", data.user.id);
                 setMessage({ type: "success", text: "¡Inicio de sesión exitoso!" });
-                
+
                 // Redirect to dashboard
                 setTimeout(() => {
                     router.push("/dashboard/perfil");
@@ -76,7 +76,7 @@ export default function Login() {
                 {/* IZQUIERDA: formulario*/}
                 <div className="flex flex-col gap-6 px-5 py-12 lg:px-12 lg:py-16 bg-[#080808]/10 backdrop-blur-sm rounded-3xl border border-white/40 m-5 ">
                     <form onSubmit={handleLogin} className="flex flex-col gap-5">
-                        
+
                         {message && (
                             <div className={`p-3 rounded-lg text-sm text-center ${message.type === 'success' ? 'bg-[#AAFF00]/20 text-[#AAFF00]' : 'bg-red-500/20 text-red-400'}`}>
                                 {message.text}
