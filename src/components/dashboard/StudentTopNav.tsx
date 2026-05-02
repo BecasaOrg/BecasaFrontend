@@ -8,7 +8,7 @@ const StudentTopNav = () => {
     { name: 'Nuestra Historia', href: '/nuestra-historia' },
     { name: 'Servicios', href: '/servicios' },
     { name: 'Disciplinas', href: '/disciplinas' },
-    { name: 'Eventos', href: '/eventos', hasArrow: true },
+    // { name: 'Eventos', href: '/eventos', hasArrow: true }, // Próximamente
   ];
 
   return (

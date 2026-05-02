@@ -43,7 +43,7 @@ function InformacionContent() {
         const fetchData = async () => {
             try {
                 // Quitamos el { cache: "no-store" } porque en el cliente no existe esa opción de Next
-                const res = await fetch(`https://athleticscholarshipagency.com/api/camps/${id}`);
+                const res = await fetch(`/api/camps/${id}`);
                 if (res.ok) {
                     const data = await res.json();
                     setCampData(data);
