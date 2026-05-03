@@ -3,12 +3,12 @@ import React from 'react';
 import Link from 'next/link';
 
 const StudentTopNav = () => {
-  const links = [
+  const links: { name: string; href: string; hasArrow?: boolean }[] = [
     { name: 'Inicio', href: '/' },
     { name: 'Nuestra Historia', href: '/nuestra-historia' },
     { name: 'Servicios', href: '/servicios' },
     { name: 'Disciplinas', href: '/disciplinas' },
-    { name: 'Eventos', href: '/eventos', hasArrow: true },
+    // { name: 'Eventos', href: '/eventos', hasArrow: true }, // Próximamente
   ];
 
   return (

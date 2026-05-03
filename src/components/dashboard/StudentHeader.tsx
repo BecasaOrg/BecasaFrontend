@@ -70,13 +70,13 @@ const StudentHeader = () => {
             <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
             Ajuste de cuenta
           </Link>
-          <Link
-            href="/dashboard/facturas"
-            className="flex items-center gap-3 text-white/80 hover:text-[#AAFF00] hover:bg-[#AAFF00]/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide group"
+          <span
+            className="flex items-center gap-3 text-white/30 px-4 py-2.5 rounded-2xl text-[13px] font-semibold tracking-wide cursor-not-allowed"
+            title="Próximamente"
           >
-            <FileText className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            <FileText className="w-4 h-4" />
             Facturas
-          </Link>
+          </span>
 
           <div className="h-[1px] bg-white/5 my-1 mx-4"></div>
           

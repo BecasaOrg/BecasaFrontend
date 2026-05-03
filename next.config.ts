@@ -2,14 +2,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // 1. Genera archivos HTML/CSS/JS puros para Netfirms
-  output: 'export',
-  
+  // Configurado para Vercel (servidor completo, no exportación estática)
   images: {
-    // 2. CRUCIAL: Desactiva la optimización automática porque requiere Node.js.
-    // Esto permitirá que las etiquetas <Image> funcionen como <img> normales.
-    unoptimized: true, 
-    
     remotePatterns: [
       {
         protocol: 'https',
@@ -19,21 +13,20 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
-      // He añadido este porque es tu dominio de la API
       {
         protocol: 'https',
         hostname: 'athleticscholarshipagency.com',
       },
     ],
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       destination: 'https://athleticscholarshipagency.com/api/:path*',
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://athleticscholarshipagency.com/api/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

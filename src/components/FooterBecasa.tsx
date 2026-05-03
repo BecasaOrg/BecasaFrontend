@@ -8,7 +8,7 @@ const links = [
   { href: "/nuestra-historia", label: "Nuestra Historia" },
   { href: "/servicios", label: "Servicios" },
   { href: "/disciplinas", label: "Disciplinas" },
-  { href: "/eventos", label: "Eventos" },
+  // { href: "/eventos", label: "Eventos" }, // Próximamente
 ];
 
 const redes = [

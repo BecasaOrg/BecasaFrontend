@@ -20,7 +20,7 @@ export default function Login() {
         const body = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch("https://athleticscholarshipagency.com/api/login", {
+            const response = await fetch("/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,9 +100,9 @@ export default function Login() {
                         </Field>
 
                         <div className="flex justify-end">
-                            <Link href="/recuperar-password" className="text-[11px] font-bold text-[#AAFF00] hover:underline tracking-wider uppercase">
+                            <span className="text-[11px] font-bold text-[#AAFF00]/50 tracking-wider uppercase cursor-not-allowed">
                                 ¿Olvidaste tu contraseña?
-                            </Link>
+                            </span>
                         </div>
 
                         {/* Entrar */}
