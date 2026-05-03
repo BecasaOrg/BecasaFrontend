@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import DashboardTabs from '@/components/dashboard/DashboardTabs';
 import BecasaBanner from '@/components/dashboard/BecasaBanner';
 import { Trophy, Users, BookOpen, CheckCircle, Clock } from 'lucide-react';
+import { getCamps } from '../actions/camp.action';
 
 export default function DashboardPage() {
     const [activeTab, setActiveTab] = useState('TABLERO');
@@ -82,13 +83,13 @@ export default function DashboardPage() {
             </div>
         </div>
     );
-
-    const renderCampamentos = () => (
+    // [
+    //                 { name: 'BECASA CAMP VOLEIBOL 2026', city: 'Bogotá, COL', date: 'Julio 15 - 20', status: 'Inscrito', img: 'https://images.unsplash.com/photo-1592656094267-764a45160876?q=80&w=400&auto=format&fit=crop' },
+    //                 { name: 'ATHLETIC SHOWCASE MIAMI', city: 'Miami, USA', date: 'Agosto 05 - 10', status: 'Abierto', img: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400&auto=format&fit=crop' }
+    //             ]
+    const renderCampamentos = (camps: any) => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {[
-                { name: 'BECASA CAMP VOLEIBOL 2026', city: 'Bogotá, COL', date: 'Julio 15 - 20', status: 'Inscrito', img: 'https://images.unsplash.com/photo-1592656094267-764a45160876?q=80&w=400&auto=format&fit=crop' },
-                { name: 'ATHLETIC SHOWCASE MIAMI', city: 'Miami, USA', date: 'Agosto 05 - 10', status: 'Abierto', img: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400&auto=format&fit=crop' }
-            ].map((camp, idx) => (
+            {camps.map((camp, idx) => (
                 <div key={idx} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
                     <div className="h-40 relative">
                         <img src={camp.img} alt={camp.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -112,6 +113,16 @@ export default function DashboardPage() {
         </div>
     );
 
+    const obtenerCampamentos = async () => {
+        try {
+            const { data: campaments } = await getCamps();
+            console.log(await getCamps());
+            return campaments;
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     const renderVerificarPerfil = () => (
         <div className="bg-gray-50 rounded-[40px] p-10 border border-gray-100 animate-in fade-in zoom-in duration-500">
             <h3 className="text-gray-800 font-black text-xl mb-2 flex items-center gap-3">
@@ -119,7 +130,7 @@ export default function DashboardPage() {
                 Verificación de Perfil
             </h3>
             <p className="text-gray-400 text-xs mb-8">Completa la siguiente lista de documentos para elevar tu perfil a <span className="text-[#AAFF00] font-black uppercase">Verificado</span>.</p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                     { label: 'Documento de Identidad', status: 'Completado' },
@@ -131,24 +142,22 @@ export default function DashboardPage() {
                 ].map((doc, idx) => (
                     <div key={idx} className="bg-white p-5 rounded-2xl flex items-center justify-between border border-gray-100 shadow-sm">
                         <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                                doc.status === 'Completado' ? 'bg-[#AAFF00]/10 text-[#AAFF00]' : 
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${doc.status === 'Completado' ? 'bg-[#AAFF00]/10 text-[#AAFF00]' :
                                 doc.status === 'En Revisión' ? 'bg-blue-50 text-blue-400' : 'bg-gray-50 text-gray-300'
-                            }`}>
+                                }`}>
                                 {doc.status === 'Completado' ? <CheckCircle className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
                             </div>
                             <span className="text-xs font-bold text-gray-700">{doc.label}</span>
                         </div>
-                        <span className={`text-[10px] font-black uppercase tracking-tighter ${
-                            doc.status === 'Completado' ? 'text-[#AAFF00]' : 
+                        <span className={`text-[10px] font-black uppercase tracking-tighter ${doc.status === 'Completado' ? 'text-[#AAFF00]' :
                             doc.status === 'En Revisión' ? 'text-blue-400' : 'text-gray-300'
-                        }`}>
+                            }`}>
                             {doc.status}
                         </span>
                     </div>
                 ))}
             </div>
-            
+
             <button className="mt-8 mx-auto flex items-center gap-2 bg-[#1a1c2c] text-[#AAFF00] px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform shadow-lg">
                 Subir Documentos Pendientes
             </button>
@@ -158,7 +167,7 @@ export default function DashboardPage() {
     const renderContent = () => {
         switch (activeTab) {
             case 'TABLERO': return renderTablero();
-            case 'CAMPAMENTOS': return renderCampamentos();
+            case 'CAMPAMENTOS': return renderCampamentos(obtenerCampamentos());
             case 'VERIFICAR PERFIL': return renderVerificarPerfil();
             default: return (
                 <div className="mt-10 p-20 text-center animate-in fade-in duration-700">

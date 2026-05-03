@@ -89,7 +89,7 @@ const StudentSidebar = () => {
                         <Calendar className="w-3.5 h-3.5 text-[#AAFF00]" />
                         Fecha de nacimiento
                     </span>
-                    <span className="font-bold">{profile.fechaNacimiento}</span>
+                    <span className="font-bold">{profile.fechaNacimiento.split('T')[0]}</span>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-white/40 font-bold tracking-wider flex items-center gap-2">

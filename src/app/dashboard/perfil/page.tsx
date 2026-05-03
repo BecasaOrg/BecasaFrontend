@@ -54,7 +54,7 @@ const PerfilPage = () => {
     }
 
     try {
-      const res = await fetch("/api/user", {
+      const res = await fetch("https://athleticscholarshipagency.com/api/user", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,

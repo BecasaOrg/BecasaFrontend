@@ -37,7 +37,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   React.useEffect(() => {
     const token = localStorage.getItem("auth_token");
     if (token) {
-      fetch("/api/user", {
+      fetch("https://athleticscholarshipagency.com/api/user", {
         headers: {
           "Authorization": `Bearer ${token}`,
           "Accept": "application/json"
