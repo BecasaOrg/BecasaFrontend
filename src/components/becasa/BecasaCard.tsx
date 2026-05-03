@@ -17,7 +17,7 @@ interface Beca {
   slug: string;
 }
 
-const DEPORTES = ["Fútbol", "Voleibol", "Natación", "Tenis", "Atletismo", "Béisbol", "Basquetbol"];
+const DEPORTES = ["Voleibol", "Fútbol", "Natación", "Tenis", "Atletismo", "Béisbol", "Basquetbol"];
 
 const mapDeporte: Record<string, string> = {
   "futbol": "Fútbol",

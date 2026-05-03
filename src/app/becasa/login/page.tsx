@@ -39,7 +39,7 @@ export default function Login() {
 
                 // Redirect to dashboard
                 setTimeout(() => {
-                    router.push("/dashboard/perfil");
+                    router.push("/dashboard");
                 }, 1000);
             } else {
                 setMessage({ type: "error", text: data.message || "Credenciales incorrectas." });
