@@ -42,7 +42,7 @@ interface Camp {
 
 export default function DashboardPage() {
     const router = useRouter();
-    const [activeTab, setActiveTab] = useState('TABLERO');
+    const [activeTab, setActiveTab] = useState('CAMPAMENTOS');
     const [camps, setCamps] = useState<Camp[]>([]);
     const [loadingCamps, setLoadingCamps] = useState(false);
 
@@ -175,7 +175,8 @@ export default function DashboardPage() {
                                 onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}`)}
                                 className="mt-4 w-full py-2 bg-gray-50 text-gray-500 font-bold text-xs rounded-xl hover:bg-[#AAFF00] hover:text-black transition-colors uppercase tracking-widest"
                             >
-                                Ver Detalles
+                                {/* Ver Detalles */}
+                                Inscribirse
                             </button>
                         </div>
                     </div>

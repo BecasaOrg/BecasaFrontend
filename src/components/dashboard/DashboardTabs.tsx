@@ -5,8 +5,8 @@ interface DashboardTabsProps {
 
 const DashboardTabs: React.FC<DashboardTabsProps> = ({ activeTab, onTabChange }) => {
     const tabs = [
-        'TABLERO',
         'CAMPAMENTOS',
+        'TABLERO',
         'MIS CURSOS',
         'VERIFICAR PERFIL',
         'CHAT',
@@ -19,11 +19,10 @@ const DashboardTabs: React.FC<DashboardTabsProps> = ({ activeTab, onTabChange })
                 <button
                     key={tab}
                     onClick={() => onTabChange(tab)}
-                    className={`flex-1 py-3 px-4 text-[10px] font-black tracking-widest rounded-full transition-all ${
-                        activeTab === tab 
-                        ? 'bg-[#AAFF00] text-black shadow-[0_2px_10px_rgba(170,255,0,0.3)]' 
-                        : 'text-gray-400 hover:text-gray-600'
-                    }`}
+                    className={`flex-1 py-3 px-4 text-[10px] font-black tracking-widest rounded-full transition-all ${activeTab === tab
+                            ? 'bg-[#AAFF00] text-black shadow-[0_2px_10px_rgba(170,255,0,0.3)]'
+                            : 'text-gray-400 hover:text-gray-600'
+                        }`}
                 >
                     {tab}
                 </button>

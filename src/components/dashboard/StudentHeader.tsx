@@ -56,15 +56,15 @@ const StudentHeader = () => {
         `}
       >
         <div className="flex flex-col gap-1.5 mt-2">
-          <Link 
-            href="/dashboard" 
+          <Link
+            href="/dashboard"
             className="flex items-center gap-3 text-white/80 hover:text-[#AAFF00] hover:bg-[#AAFF00]/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide group"
           >
             <LayoutDashboard className="w-4 h-4" />
             Panel Principal
           </Link>
-          <Link 
-            href="/dashboard/perfil" 
+          <Link
+            href="/dashboard/perfil"
             className="flex items-center gap-3 text-white/80 hover:text-[#AAFF00] hover:bg-[#AAFF00]/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide group"
           >
             <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
@@ -79,8 +79,8 @@ const StudentHeader = () => {
           </span>
 
           <div className="h-[1px] bg-white/5 my-1 mx-4"></div>
-          
-          <button 
+
+          <button
             onClick={handleLogout}
             className="flex items-center gap-3 text-white/50 hover:text-white hover:bg-white/5 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide w-full text-left group"
           >
@@ -88,12 +88,12 @@ const StudentHeader = () => {
             Cerrar sesión
           </button>
 
-          <div className="mt-1">
+          {/* <div className="mt-1">
             <button className="flex items-center gap-3 text-red-400/80 hover:text-red-400 hover:bg-red-500/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide w-full text-left group">
               <Trash2 className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
               Eliminar perfil
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -105,9 +105,9 @@ const StudentHeader = () => {
       >
         <span className="font-extrabold text-[13px] tracking-tight pl-4 text-white/90">Hola {profile.nombres}</span>
         <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-white/5 relative shrink-0 border border-white/10 shadow-inner">
-          <Image 
-            src={profile.avatar} 
-            alt={`${profile.nombres} Profile`} 
+          <Image
+            src={profile.avatar}
+            alt={`${profile.nombres} Profile`}
 
             fill
             className="object-cover"

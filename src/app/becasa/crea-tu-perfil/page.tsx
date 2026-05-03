@@ -19,6 +19,8 @@ export default function CreaTuPerfil() {
     const [countries, setCountries] = useState<SelectItem[]>([]);
     const [states, setStates] = useState<SelectItem[]>([]);
     const [cities, setCities] = useState<SelectItem[]>([]);
+    const [selectedCountry, setSelectedCountry] = useState<SelectItem | null>(null);
+    const [selectedState, setSelectedState] = useState<SelectItem | null>(null);
 
     useEffect(() => {
         // Fetch Countries
@@ -31,23 +33,35 @@ export default function CreaTuPerfil() {
             .catch(err => console.error("Error fetching countries:", err));
 
         // Fetch States
-        fetch("/api/states")
-            .then(res => res.json())
-            .then(data => {
-                if (Array.isArray(data)) setStates(data);
-                else if (data.data && Array.isArray(data.data)) setStates(data.data);
-            })
-            .catch(err => console.error("Error fetching states:", err));
+        // fetch("/api/states")
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (Array.isArray(data)) setStates(data);
+        //         else if (data.data && Array.isArray(data.data)) setStates(data.data);
+        //     })
+        //     .catch(err => console.error("Error fetching states:", err));
 
-        // Fetch Cities
-        fetch("/api/cities")
-            .then(res => res.json())
-            .then(data => {
-                if (Array.isArray(data)) setCities(data);
-                else if (data.data && Array.isArray(data.data)) setCities(data.data);
-            })
-            .catch(err => console.error("Error fetching cities:", err));
+        // // Fetch Cities
+        // fetch("/api/cities")
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (Array.isArray(data)) setCities(data);
+        //         else if (data.data && Array.isArray(data.data)) setCities(data.data);
+        //     })
+        //     .catch(err => console.error("Error fetching cities:", err));
     }, []);
+
+    useEffect(() => {
+        if (selectedCountry) {
+            fetch(`/api/countries/${selectedCountry.id}/states`)
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data)) setStates(data);
+                    else if (data.data && Array.isArray(data.data)) setStates(data.data);
+                })
+                .catch(err => console.error("Error fetching states:", err));
+        }
+    }, [selectedCountry])
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
