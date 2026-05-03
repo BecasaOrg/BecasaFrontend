@@ -19,8 +19,8 @@ export default function CreaTuPerfil() {
     const [countries, setCountries] = useState<SelectItem[]>([]);
     const [states, setStates] = useState<SelectItem[]>([]);
     const [cities, setCities] = useState<SelectItem[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<SelectItem | null>(null);
-    const [selectedState, setSelectedState] = useState<SelectItem | null>(null);
+    const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+    const [selectedState, setSelectedState] = useState<string | null>(null);
 
     useEffect(() => {
         // Fetch Countries
@@ -53,7 +53,8 @@ export default function CreaTuPerfil() {
 
     useEffect(() => {
         if (selectedCountry) {
-            fetch(`/api/countries/${selectedCountry.id}/states`)
+            console.log(selectedCountry);
+            fetch(`/api/countries/${selectedCountry}/states`)
                 .then(res => res.json())
                 .then(data => {
                     if (Array.isArray(data)) setStates(data);
@@ -61,7 +62,17 @@ export default function CreaTuPerfil() {
                 })
                 .catch(err => console.error("Error fetching states:", err));
         }
-    }, [selectedCountry])
+
+        if (selectedState) {
+            fetch(`/api/states/${selectedState}/cities`)
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data)) setCities(data);
+                    else if (data.data && Array.isArray(data.data)) setCities(data.data);
+                })
+                .catch(err => console.error("Error fetching cities:", err));
+        }
+    }, [selectedCountry, selectedState])
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -167,7 +178,7 @@ export default function CreaTuPerfil() {
                         {/* País / Estado */}
                         <div className="grid grid-cols md:grid-cols-2 gap-3">
                             <Field label="País de nacimiento *">
-                                <select name="birth_country_id" defaultValue="" required>
+                                <select onChange={(e) => setSelectedCountry(e.target.value)} name="birth_country_id" defaultValue="" required>
                                     <option value="" disabled>Seleccione un País</option>
                                     {countries.map(c => (
                                         <option key={c.id} value={c.id}>{c.name}</option>
@@ -176,7 +187,7 @@ export default function CreaTuPerfil() {
                                 </select>
                             </Field>
                             <Field label="Estado / Departamento">
-                                <select name="state_id" defaultValue="">
+                                <select onChange={(e) => setSelectedState(e.target.value)} name="state_id" defaultValue="">
                                     <option value="" disabled>Seleccione un Estado</option>
                                     {states.map(s => (
                                         <option key={s.id} value={s.id}>{s.name}</option>
