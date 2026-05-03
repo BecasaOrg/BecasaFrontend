@@ -279,7 +279,7 @@ export default function CreaTuPerfil() {
                                         })()}
                                         {countries.length === 0 && <option value="+57">+57</option>}
                                     </select>
-                                    <input name="phone" type="tel" placeholder="300 000 0000" required />
+                                    <input name="phone" type="tel" placeholder="300 000 0000" required maxLength={10} />
                                 </div>
                             </Field>
                             <Field label="Sexo *">
