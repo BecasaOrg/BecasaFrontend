@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import DashboardTabs from '@/components/dashboard/DashboardTabs';
 import BecasaBanner from '@/components/dashboard/BecasaBanner';
 import Loader from '../../../components/dashboard/Loader';
@@ -7,39 +8,40 @@ import { Trophy, Users, BookOpen, CheckCircle, Clock } from 'lucide-react';
 import { getCamps } from '../actions/camp.action';
 
 interface City {
-  id: number;
-  name: string;
-  state_id: string;
-  created_at: string;
-  updated_at: string;
+    id: number;
+    name: string;
+    state_id: string;
+    created_at: string;
+    updated_at: string;
 }
 
 interface Camp {
-  id: number;
-  name: string;
-  address?: string;
-  capacity: string;
-  city: City;
-  city_id: string;
-  created_at: string;
-  deleted_at: null | string;
-  description: string;
-  end_date: string;
-  extraordinary_price: string;
-  is_active: boolean;
-  max_age: string;
-  min_age: string;
-  price: string;
-  registration_end_date: string;
-  registration_start_date: string;
-  schedule: string;
-  sport_type: string;
-  start_date: string;
-  updated_at: string;
-  img?: string;
+    id: number;
+    name: string;
+    address?: string;
+    capacity: string;
+    city: City;
+    city_id: string;
+    created_at: string;
+    deleted_at: null | string;
+    description: string;
+    end_date: string;
+    extraordinary_price: string;
+    is_active: boolean;
+    max_age: string;
+    min_age: string;
+    price: string;
+    registration_end_date: string;
+    registration_start_date: string;
+    schedule: string;
+    sport_type: string;
+    start_date: string;
+    updated_at: string;
+    img?: string;
 }
 
 export default function DashboardPage() {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState('TABLERO');
     const [camps, setCamps] = useState<Camp[]>([]);
     const [loadingCamps, setLoadingCamps] = useState(false);
@@ -147,11 +149,12 @@ export default function DashboardPage() {
                 {camps.map((camp: Camp, idx) => (
                     <div key={idx} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
                         <div className="h-40 relative bg-gray-200 flex items-center justify-center">
-                            {camp.img ? (
+                            {/* {camp.img ? (
                                 <img src={camp.img} alt={camp.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                             ) : (
                                 <span className="text-gray-400 text-xs font-bold uppercase">Sin imagen</span>
-                            )}
+                            )} */}
+                            <img src={'https://imgs.search.brave.com/4rJFrAIVHuu2Bhh6RTS-Ugsc6xDf5ZiEDeD-fynrJm4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC9jQU81dVhq/LmpwZw'} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                             <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-white uppercase border border-white/20">
                                 {camp.is_active ? 'Activo' : 'Inactivo'}
                             </div>
@@ -166,9 +169,12 @@ export default function DashboardPage() {
                             <div className="flex items-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-tight mt-1">
                                 <span>{camp.sport_type}</span>
                                 <span>•</span>
-                                <span>${camp.price}</span>
+                                <span>${Number(camp.price).toLocaleString('es-CO')}</span>
                             </div>
-                            <button className="mt-4 w-full py-2 bg-gray-50 text-gray-500 font-bold text-xs rounded-xl hover:bg-[#AAFF00] hover:text-black transition-colors uppercase tracking-widest">
+                            <button
+                                onClick={() => router.push(`/registro?camp_id=${camp.id}`)}
+                                className="mt-4 w-full py-2 bg-gray-50 text-gray-500 font-bold text-xs rounded-xl hover:bg-[#AAFF00] hover:text-black transition-colors uppercase tracking-widest"
+                            >
                                 Ver Detalles
                             </button>
                         </div>
