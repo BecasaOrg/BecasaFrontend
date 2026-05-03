@@ -7,6 +7,7 @@ import { FaApple } from "react-icons/fa";
 interface SelectItem {
     id: number | string;
     name: string;
+    phone_code?: string;
 }
 
 export default function CreaTuPerfil() {
@@ -54,12 +55,13 @@ export default function CreaTuPerfil() {
     }, []);
 
     useEffect(() => {
+
         if (!selectedCountry) {
             setStates([]);
             setSelectedState(null);
             return;
         }
-        
+
         setLoadingStates(true);
         fetch(`/api/countries/${selectedCountry}/states`)
             .then(res => res.json())
@@ -76,7 +78,7 @@ export default function CreaTuPerfil() {
             setCities([]);
             return;
         }
-        
+
         setLoadingCities(true);
         fetch(`/api/states/${selectedState}/cities`)
             .then(res => res.json())
@@ -192,14 +194,14 @@ export default function CreaTuPerfil() {
                         {/* País / Estado */}
                         <div className="grid grid-cols md:grid-cols-2 gap-3">
                             <Field label="País de nacimiento *">
-                                <select 
+                                <select
                                     onChange={(e) => {
                                         setSelectedCountry(e.target.value);
                                         setSelectedState(null);
                                         setCities([]);
-                                    }} 
-                                    name="birth_country_id" 
-                                    defaultValue="" 
+                                    }}
+                                    name="birth_country_id"
+                                    defaultValue=""
                                     required
                                 >
                                     <option value="" disabled>Seleccione un País</option>
@@ -210,9 +212,9 @@ export default function CreaTuPerfil() {
                                 </select>
                             </Field>
                             <Field label="Estado / Departamento">
-                                <select 
-                                    onChange={(e) => setSelectedState(e.target.value)} 
-                                    name="state_id" 
+                                <select
+                                    onChange={(e) => setSelectedState(e.target.value)}
+                                    name="state_id"
                                     defaultValue=""
                                     disabled={loadingStates || !selectedCountry}
                                 >
@@ -229,9 +231,9 @@ export default function CreaTuPerfil() {
                         {/* Ciudad / Deporte */}
                         <div className="grid grid-cols md:grid-cols-2 gap-3">
                             <Field label="Ciudad de residencia *">
-                                <select 
-                                    name="city_id" 
-                                    defaultValue="" 
+                                <select
+                                    name="city_id"
+                                    defaultValue=""
                                     required
                                     disabled={loadingCities || !selectedState}
                                 >
@@ -261,8 +263,22 @@ export default function CreaTuPerfil() {
                         {/* Teléfono / Sexo */}
                         <div className="grid grid-cols md:grid-cols-2 gap-3">
                             <Field label="Número de celular *">
-                                <div className="grid grid-cols-[60px_1fr] gap-2">
-                                    <input type="text" defaultValue="+57" className="text-center" />
+                                <div className="grid grid-cols-[100px_1fr] gap-2">
+                                    <select name="phone_code" defaultValue="+57" className="text-center">
+                                        {(() => {
+                                            const uniqueCodes = new Map();
+                                            countries.forEach(c => {
+                                                const phoneCode = c.phone_code?.startsWith('+') ? c.phone_code : `+${c.phone_code || '57'}`;
+                                                if (!uniqueCodes.has(phoneCode)) {
+                                                    uniqueCodes.set(phoneCode, true);
+                                                }
+                                            });
+                                            return Array.from(uniqueCodes.keys()).map((phoneCode, idx) => (
+                                                <option key={idx} value={phoneCode}>{phoneCode}</option>
+                                            ));
+                                        })()}
+                                        {countries.length === 0 && <option value="+57">+57</option>}
+                                    </select>
                                     <input name="phone" type="tel" placeholder="300 000 0000" required />
                                 </div>
                             </Field>
