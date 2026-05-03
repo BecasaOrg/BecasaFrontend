@@ -172,7 +172,7 @@ export default function DashboardPage() {
                                 <span>${Number(camp.price).toLocaleString('es-CO')}</span>
                             </div>
                             <button
-                                onClick={() => router.push(`/registro?camp_id=${camp.id}`)}
+                                onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}`)}
                                 className="mt-4 w-full py-2 bg-gray-50 text-gray-500 font-bold text-xs rounded-xl hover:bg-[#AAFF00] hover:text-black transition-colors uppercase tracking-widest"
                             >
                                 Ver Detalles

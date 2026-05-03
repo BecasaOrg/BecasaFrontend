@@ -161,7 +161,7 @@ export default function BecasaCard() {
                       Información
                     </Link>
                     <Link
-                      href={`becasa/registrate`}
+                      href={`becasa/registrate?camp_id=${beca.id}`}
                       className="text-[12px] font-bold text-black bg-[#AAFF00] rounded-full py-1 px-2 sm:px-5 hover:opacity-85 transition-opacity whitespace-nowrap"
                     >
                       Regístrate
