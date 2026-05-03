@@ -21,6 +21,8 @@ export default function CreaTuPerfil() {
     const [cities, setCities] = useState<SelectItem[]>([]);
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [selectedState, setSelectedState] = useState<string | null>(null);
+    const [loadingStates, setLoadingStates] = useState(false);
+    const [loadingCities, setLoadingCities] = useState(false);
 
     useEffect(() => {
         // Fetch Countries
@@ -52,27 +54,39 @@ export default function CreaTuPerfil() {
     }, []);
 
     useEffect(() => {
-        if (selectedCountry) {
-            console.log(selectedCountry);
-            fetch(`/api/countries/${selectedCountry}/states`)
-                .then(res => res.json())
-                .then(data => {
-                    if (Array.isArray(data)) setStates(data);
-                    else if (data.data && Array.isArray(data.data)) setStates(data.data);
-                })
-                .catch(err => console.error("Error fetching states:", err));
+        if (!selectedCountry) {
+            setStates([]);
+            setSelectedState(null);
+            return;
         }
+        
+        setLoadingStates(true);
+        fetch(`/api/countries/${selectedCountry}/states`)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) setStates(data);
+                else if (data.data && Array.isArray(data.data)) setStates(data.data);
+            })
+            .catch(err => console.error("Error fetching states:", err))
+            .finally(() => setLoadingStates(false));
+    }, [selectedCountry]);
 
-        if (selectedState) {
-            fetch(`/api/states/${selectedState}/cities`)
-                .then(res => res.json())
-                .then(data => {
-                    if (Array.isArray(data)) setCities(data);
-                    else if (data.data && Array.isArray(data.data)) setCities(data.data);
-                })
-                .catch(err => console.error("Error fetching cities:", err));
+    useEffect(() => {
+        if (!selectedState) {
+            setCities([]);
+            return;
         }
-    }, [selectedCountry, selectedState])
+        
+        setLoadingCities(true);
+        fetch(`/api/states/${selectedState}/cities`)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) setCities(data);
+                else if (data.data && Array.isArray(data.data)) setCities(data.data);
+            })
+            .catch(err => console.error("Error fetching cities:", err))
+            .finally(() => setLoadingCities(false));
+    }, [selectedState]);
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -178,7 +192,16 @@ export default function CreaTuPerfil() {
                         {/* País / Estado */}
                         <div className="grid grid-cols md:grid-cols-2 gap-3">
                             <Field label="País de nacimiento *">
-                                <select onChange={(e) => setSelectedCountry(e.target.value)} name="birth_country_id" defaultValue="" required>
+                                <select 
+                                    onChange={(e) => {
+                                        setSelectedCountry(e.target.value);
+                                        setSelectedState(null);
+                                        setCities([]);
+                                    }} 
+                                    name="birth_country_id" 
+                                    defaultValue="" 
+                                    required
+                                >
                                     <option value="" disabled>Seleccione un País</option>
                                     {countries.map(c => (
                                         <option key={c.id} value={c.id}>{c.name}</option>
@@ -187,12 +210,18 @@ export default function CreaTuPerfil() {
                                 </select>
                             </Field>
                             <Field label="Estado / Departamento">
-                                <select onChange={(e) => setSelectedState(e.target.value)} name="state_id" defaultValue="">
-                                    <option value="" disabled>Seleccione un Estado</option>
+                                <select 
+                                    onChange={(e) => setSelectedState(e.target.value)} 
+                                    name="state_id" 
+                                    defaultValue=""
+                                    disabled={loadingStates || !selectedCountry}
+                                >
+                                    <option value="" disabled>
+                                        {loadingStates ? 'Cargando...' : selectedCountry ? 'Seleccione un Estado' : 'Primero elige un país'}
+                                    </option>
                                     {states.map(s => (
                                         <option key={s.id} value={s.id}>{s.name}</option>
                                     ))}
-                                    {states.length === 0 && <option value="1">Cesar (Fallback)</option>}
                                 </select>
                             </Field>
                         </div>
@@ -200,12 +229,18 @@ export default function CreaTuPerfil() {
                         {/* Ciudad / Deporte */}
                         <div className="grid grid-cols md:grid-cols-2 gap-3">
                             <Field label="Ciudad de residencia *">
-                                <select name="city_id" defaultValue="" required>
-                                    <option value="" disabled>Seleccione una Ciudad</option>
+                                <select 
+                                    name="city_id" 
+                                    defaultValue="" 
+                                    required
+                                    disabled={loadingCities || !selectedState}
+                                >
+                                    <option value="" disabled>
+                                        {loadingCities ? 'Cargando...' : selectedState ? 'Seleccione una Ciudad' : 'Primero elige un estado'}
+                                    </option>
                                     {cities.map(c => (
                                         <option key={c.id} value={c.id}>{c.name}</option>
                                     ))}
-                                    {cities.length === 0 && <option value="1">Valledupar (Fallback)</option>}
                                 </select>
                             </Field>
                             <Field label="Deporte *">
