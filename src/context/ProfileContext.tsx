@@ -37,7 +37,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   React.useEffect(() => {
     const token = localStorage.getItem("auth_token");
     if (token) {
-      fetch("https://athleticscholarshipagency.com/api/user", {
+      fetch("/api/user", {
         headers: {
           "Authorization": `Bearer ${token}`,
           "Accept": "application/json"
@@ -47,7 +47,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
       .then(data => {
         if (data && !data.message) {
           const avatarUrl = data.avatar 
-            ? (data.avatar.startsWith('http') ? data.avatar : `https://athleticscholarshipagency.com/storage/${data.avatar}`)
+            ? (data.avatar.startsWith('http') ? data.avatar : `/storage/${data.avatar}`)
             : "https://randomuser.me/api/portraits/men/32.jpg";
 
           setProfile({
@@ -67,8 +67,8 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const updateProfile = (newData: Partial<ProfileData>) => {
-    if (newData.avatar && !newData.avatar.startsWith('http') && !newData.avatar.startsWith('blob:')) {
-      newData.avatar = `https://athleticscholarshipagency.com/storage/${newData.avatar}`;
+    if (newData.avatar && !newData.avatar.startsWith('http') && !newData.avatar.startsWith('blob:') && !newData.avatar.startsWith('/')) {
+      newData.avatar = `/storage/${newData.avatar}`;
     }
     setProfile((prev) => ({ ...prev, ...newData }));
   };

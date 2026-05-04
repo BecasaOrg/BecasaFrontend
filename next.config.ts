@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
         source: '/api/:path*',
         destination: 'https://athleticscholarshipagency.com/api/:path*',
       },
+      {
+        source: '/storage/:path*',
+        destination: 'https://athleticscholarshipagency.com/storage/:path*',
+      },
     ];
   },
 };
