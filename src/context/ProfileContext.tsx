@@ -67,6 +67,9 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const updateProfile = (newData: Partial<ProfileData>) => {
+    if (newData.avatar && !newData.avatar.startsWith('http') && !newData.avatar.startsWith('blob:')) {
+      newData.avatar = `https://athleticscholarshipagency.com/storage/${newData.avatar}`;
+    }
     setProfile((prev) => ({ ...prev, ...newData }));
   };
 

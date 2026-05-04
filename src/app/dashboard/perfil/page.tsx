@@ -74,6 +74,8 @@ const PerfilPage = () => {
           deporte: data.sport || data.deporte,
           avatar: data.avatar || profile.avatar,
         });
+        setPreviewUrl(null);
+        setImageFile(null);
         alert('Perfil guardado exitosamente.');
       } else {
         alert('Error al guardar el perfil: ' + (data.message || 'Error desconocido'));
