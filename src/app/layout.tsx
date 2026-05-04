@@ -6,6 +6,7 @@ import { TemaProvider } from "@/context/TemaContext";
 import MainWrapper from "./MainWrapper";
 import HeaderGlobal from "@/components/HeaderGlobal";
 import FooterGlobal from "@/components/FooterGlobal";
+import { ProfileProvider } from "@/context/ProfileContext";
 export const metadata: Metadata = {
   title: "Athletic Scholarship Agency",
   description: "Desbloqueando tu potencial como atleta",
@@ -26,11 +27,13 @@ export default function RootLayout({
     <html lang="es" className={barlow.variable}>
       <body className="flex flex-col min-h-screen">
         <TemaProvider>
-          <HeaderGlobal />
+          <ProfileProvider>
+            <HeaderGlobal />
 
-          <MainWrapper>{children}</MainWrapper>
-          
-          <FooterGlobal />
+            <MainWrapper>{children}</MainWrapper>
+            
+            <FooterGlobal />
+          </ProfileProvider>
         </TemaProvider>
       </body>
     </html>

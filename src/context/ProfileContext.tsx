@@ -46,15 +46,19 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
       .then(res => res.json())
       .then(data => {
         if (data && !data.message) {
+          const avatarUrl = data.avatar 
+            ? (data.avatar.startsWith('http') ? data.avatar : `https://athleticscholarshipagency.com/storage/${data.avatar}`)
+            : "https://randomuser.me/api/portraits/men/32.jpg";
+
           setProfile({
             nombres: data.name || data.nombres || "",
             apellidos: data.last_name || data.apellidos || "",
             email: data.email || "",
             telefono: data.phone || data.telefono || "",
             fechaNacimiento: data.birth_date || data.fechaNacimiento || "",
-            pais: data.country || "Colombia",
+            pais: data.country || data.birth_country?.name || "Colombia",
             deporte: data.sport || data.deporte || "",
-            avatar: data.avatar || "https://randomuser.me/api/portraits/men/32.jpg",
+            avatar: avatarUrl,
           });
         }
       })

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import BtnCambiarTema from "./BtnCambiarTema";
+import { useProfile } from "@/context/ProfileContext";
+import StudentHeader from "./dashboard/StudentHeader";
 
 const links = [
     { href: "/", label: "Inicio" },
@@ -18,6 +20,7 @@ export default function HeaderBecasa() {
     const [menuAbierto, setMenuAbierto] = useState<boolean>(false);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const { oscuro } = useTema();
+    const { profile } = useProfile();
     const pathname = usePathname();
 
     useEffect(() => {
@@ -73,11 +76,24 @@ export default function HeaderBecasa() {
                         <BtnCambiarTema />
 
                     </div>
-                    <Link
-                        href="/becasa/crea-tu-perfil"
-                        className="bg-[#AAFF00] text-black whitespace-nowrap px-5 py-2 rounded-tr-full rounded-tl-full rounded-bl-full font-bold hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200 hidden lg:flex">
-                        Crea tu perfil
-                    </Link>
+                    {isLoggedIn ? (
+                        <div className="hidden lg:flex items-center gap-4">
+                            <Link
+                                href="/dashboard"
+                                className="bg-[#AAFF00] text-black whitespace-nowrap px-5 py-2 rounded-full font-bold hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200"
+                            >
+                                Ir al Panel
+                            </Link>
+                            <StudentHeader />
+                        </div>
+                    ) : (
+                        <Link
+                            href="/becasa/crea-tu-perfil"
+                            className="bg-[#AAFF00] text-black whitespace-nowrap px-5 py-2 rounded-tr-full rounded-tl-full rounded-bl-full font-bold hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200 hidden lg:flex"
+                        >
+                            Crea tu perfil
+                        </Link>
+                    )}
 
                     {/* Boton hamburguesa */}
                     <button
@@ -116,9 +132,15 @@ export default function HeaderBecasa() {
                         <BtnCambiarTema />
                     </div>
 
-                    <Link href="/becasa/crea-tu-perfil" className="bg-[#AAFF00] whitespace-nowrap px-8 py-3 rounded-tr-full rounded-tl-full rounded-bl-full text-black font-bold text-lg hover:opacity-90 active:scale-95 transition-all duration-200 self-start" >
-                        Crea tu perfil
-                    </Link>
+                    {isLoggedIn ? (
+                        <Link href="/dashboard" className="bg-[#AAFF00] whitespace-nowrap px-8 py-3 rounded-full text-black font-bold text-lg hover:opacity-90 active:scale-95 transition-all duration-200 self-start">
+                            Ir al Panel
+                        </Link>
+                    ) : (
+                        <Link href="/becasa/crea-tu-perfil" className="bg-[#AAFF00] whitespace-nowrap px-8 py-3 rounded-tr-full rounded-tl-full rounded-bl-full text-black font-bold text-lg hover:opacity-90 active:scale-95 transition-all duration-200 self-start" >
+                            Crea tu perfil
+                        </Link>
+                    )}
                 </div>
             </nav>
         </header>
