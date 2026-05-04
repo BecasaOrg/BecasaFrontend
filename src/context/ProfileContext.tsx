@@ -19,13 +19,13 @@ interface ProfileContextType {
 }
 
 const defaultProfile: ProfileData = {
-  nombres: "Andres Sebastian",
-  apellidos: "Guzmán Castillo",
-  email: "athletic-scholarship-agency@gmail.com",
-  telefono: "+57 3339820565",
-  fechaNacimiento: "2000-05-15",
-  pais: "Colombia",
-  deporte: "Voleibol",
+  nombres: "",
+  apellidos: "",
+  email: "",
+  telefono: "",
+  fechaNacimiento: "",
+  pais: "",
+  deporte: "",
   avatar: "https://randomuser.me/api/portraits/men/32.jpg",
 };
 
