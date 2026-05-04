@@ -108,8 +108,8 @@ const StudentHeader = () => {
           <Image
             src={profile.avatar}
             alt={`${profile.nombres} Profile`}
-
             fill
+            unoptimized
             className="object-cover"
           />
         </div>

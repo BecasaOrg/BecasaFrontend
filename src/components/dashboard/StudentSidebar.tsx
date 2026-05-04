@@ -26,6 +26,7 @@ const StudentSidebar = () => {
                         src={profile.avatar}
                         alt={`${profile.nombres} ${profile.apellidos} - Profile Picture`}
                         fill
+                        unoptimized
                         className="object-cover"
                     />
                 </div>
