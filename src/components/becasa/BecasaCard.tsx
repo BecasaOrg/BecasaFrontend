@@ -119,7 +119,7 @@ export default function BecasaCard() {
           </div>
         ) : becasFiltradas.length === 0 ? (
           <p className="text-center text-white/35 py-12 text-sm">
-            No hay becas disponibles para este deporte aún.
+            Próximamente nuevos campamentos BECASA.
           </p>
         ) : (
           <div id="becasaCampamento" className="grid grid-cols-1 md:grid-cols-2 gap-3 px-3 sm:px-10 ">
