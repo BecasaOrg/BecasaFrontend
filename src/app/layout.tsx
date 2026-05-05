@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Barlow_Condensed } from 'next/font/google';
+import LocalFont from 'next/font/local'
 import Footer from "@/components/FooterAtletic";
 import { TemaProvider } from "@/context/TemaContext";
 import MainWrapper from "./MainWrapper";
 import HeaderGlobal from "@/components/HeaderGlobal";
 import FooterGlobal from "@/components/FooterGlobal";
 import { ProfileProvider } from "@/context/ProfileContext";
+
 export const metadata: Metadata = {
   title: "Athletic Scholarship Agency",
   description: "Desbloqueando tu potencial como atleta",
 };
 
-const barlow = Barlow_Condensed({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-barlow'
-})
+/*const barlow = LocalFont({
+  src:'../public/fonts/AcuminVariableConcept.otf',
+  variable: '--font-barlow',
+  display: "swap",
+})*/
 
 export default function RootLayout({
   children,
@@ -24,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={barlow.variable}>
+    <html lang="es" >
       <body className="flex flex-col min-h-screen">
         <TemaProvider>
           <ProfileProvider>

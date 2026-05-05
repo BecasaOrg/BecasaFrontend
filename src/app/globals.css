@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Acumin';
+  src: url('/fonts/AcuminVariableConcept.otf') format('opentype');
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #000000;
+  font-family: 'Acumin';
 
   /* este es para un diseño personalizado para el scroll de la pagina  */
   ::-webkit-scrollbar {
@@ -21,6 +28,10 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #AAFF00;
   }
+}
+
+body {
+  font-family: 'Acumin' !important;
 }
 
 @theme inline {
