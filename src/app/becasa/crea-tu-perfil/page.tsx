@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaApple } from "react-icons/fa";
@@ -9,6 +9,39 @@ interface SelectItem {
     name: string;
     phone_code?: string;
 }
+
+const phoneCodes = [
+    { code: "+57", country: "co" },
+    { code: "+1", country: "us" },
+    { code: "+34", country: "es" },
+    { code: "+52", country: "mx" },
+    { code: "+54", country: "ar" },
+    { code: "+55", country: "br" },
+    { code: "+56", country: "cl" },
+    { code: "+58", country: "ve" },
+    { code: "+51", country: "pe" },
+    { code: "+53", country: "cu" },
+    { code: "+593", country: "ec" },
+    { code: "+591", country: "bo" },
+    { code: "+595", country: "py" },
+    { code: "+598", country: "uy" },
+    { code: "+502", country: "gt" },
+    { code: "+503", country: "sv" },
+    { code: "+504", country: "hn" },
+    { code: "+505", country: "ni" },
+    { code: "+506", country: "cr" },
+    { code: "+507", country: "pa" },
+    { code: "+509", country: "do" },
+    { code: "+44", country: "gb" },
+    { code: "+33", country: "fr" },
+    { code: "+49", country: "de" },
+    { code: "+39", country: "it" },
+    { code: "+351", country: "pt" },
+    { code: "+91", country: "in" },
+    { code: "+86", country: "cn" },
+    { code: "+81", country: "jp" },
+    { code: "+82", country: "kr" },
+];
 
 export default function CreaTuPerfil() {
     const [showP1, setShowP1] = useState(false);
@@ -21,6 +54,9 @@ export default function CreaTuPerfil() {
     const [states, setStates] = useState<SelectItem[]>([]);
     const [cities, setCities] = useState<SelectItem[]>([]);
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+    const [selectedPhone, setSelectedPhone] = useState("+57");
+    const [phoneOpen, setPhoneOpen] = useState(false);
+    const phoneRef = useRef<HTMLDivElement>(null);
     const [selectedState, setSelectedState] = useState<string | null>(null);
     const [loadingStates, setLoadingStates] = useState(false);
     const [loadingCities, setLoadingCities] = useState(false);
@@ -89,6 +125,16 @@ export default function CreaTuPerfil() {
             .catch(err => console.error("Error fetching cities:", err))
             .finally(() => setLoadingCities(false));
     }, [selectedState]);
+
+    useEffect(() => {
+        function handleClick(e: MouseEvent) {
+            if (phoneRef.current && !phoneRef.current.contains(e.target as Node)) {
+                setPhoneOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClick);
+        return () => document.removeEventListener("mousedown", handleClick);
+    }, []);
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -263,22 +309,38 @@ export default function CreaTuPerfil() {
                         {/* Teléfono / Sexo */}
                         <div className="grid grid-cols md:grid-cols-2 gap-3">
                             <Field label="Número de celular *">
-                                <div className="grid grid-cols-[100px_1fr] gap-2">
-                                    <select name="phone_code" defaultValue="+57" className="text-center">
-                                        {(() => {
-                                            const uniqueCodes = new Map();
-                                            countries.forEach(c => {
-                                                const phoneCode = c.phone_code?.startsWith('+') ? c.phone_code : `+${c.phone_code || '57'}`;
-                                                if (!uniqueCodes.has(phoneCode)) {
-                                                    uniqueCodes.set(phoneCode, true);
-                                                }
-                                            });
-                                            return Array.from(uniqueCodes.keys()).map((phoneCode, idx) => (
-                                                <option key={idx} value={phoneCode}>{phoneCode}</option>
-                                            ));
-                                        })()}
-                                        {countries.length === 0 && <option value="+57">+57</option>}
-                                    </select>
+                                <div className="grid grid-cols-[110px_1fr] gap-2">
+                                    <div ref={phoneRef} className="relative">
+                                        <input type="hidden" name="phone_code" value={selectedPhone} />
+                                        <button
+                                            type="button"
+                                            onClick={() => setPhoneOpen(!phoneOpen)}
+                                            className="w-full bg-[#0d1a2d] border border-white/12 rounded-[10px] px-2 py-2.5 text-[13px] text-white outline-none focus:border-[#AAFF00] flex items-center gap-1.5"
+                                        >
+                                            {(() => {
+                                                const pc = phoneCodes.find(p => p.code === selectedPhone);
+                                                return pc ? (
+                                                    <img src={`https://flagcdn.com/16x12/${pc.country}.png`} alt="" className="w-4 h-3 inline" />
+                                                ) : null;
+                                            })()}
+                                            {selectedPhone}
+                                        </button>
+                                        {phoneOpen && (
+                                            <div className="absolute top-full left-0 mt-1 w-full max-h-48 overflow-y-auto bg-[#0d1a2d] border border-white/12 rounded-[10px] z-50">
+                                                {phoneCodes.map(pc => (
+                                                    <button
+                                                        key={pc.code}
+                                                        type="button"
+                                                        onClick={() => { setSelectedPhone(pc.code); setPhoneOpen(false); }}
+                                                        className="w-full flex items-center gap-1.5 px-2 py-2 text-[13px] text-white hover:bg-white/10 transition-colors"
+                                                    >
+                                                        <img src={`https://flagcdn.com/16x12/${pc.country}.png`} alt="" className="w-4 h-3" />
+                                                        {pc.code}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                     <input name="phone" type="tel" placeholder="300 000 0000" required maxLength={10} />
                                 </div>
                             </Field>
