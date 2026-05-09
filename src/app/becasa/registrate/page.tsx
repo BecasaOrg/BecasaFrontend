@@ -50,7 +50,7 @@ function FormularioRegistroInner() {
   const [payerEmail, setPayerEmail] = useState("");
   const [identificationNumber, setIdentificationNumber] = useState("");
 
-  const MP_PUBLIC_KEY = "TEST-51781f49-dcbe-46fa-9776-ab649735803f";
+  const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY!;
   const { loaded: mpLoaded, error: mpError, getCardToken } = useMercadoPago(MP_PUBLIC_KEY);
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
