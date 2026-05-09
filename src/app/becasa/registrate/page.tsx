@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, Suspense } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useMercadoPago } from "@/hooks/useMercadoPago";
 import StepIndicator from "./_components/StepIndicator";
@@ -36,6 +36,7 @@ const tallasCalcetas = [
 function FormularioRegistroInner() {
   const searchParams = useSearchParams();
   const campId = searchParams.get("camp_id");
+  const campPrice = searchParams.get("camp_price");
 
   const [posicionesSeleccionadas, setPosicionesSeleccionadas] = useState<string[]>([]);
   const [clubsSeleccionados, setClubsSeleccionados] = useState<string[]>([]);
@@ -49,6 +50,7 @@ function FormularioRegistroInner() {
   const [registrationId, setRegistrationId] = useState<number | null>(null);
   const [payerEmail, setPayerEmail] = useState("");
   const [identificationNumber, setIdentificationNumber] = useState("");
+
 
   const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY!;
   const { loaded: mpLoaded, error: mpError, getCardToken } = useMercadoPago(MP_PUBLIC_KEY);
@@ -166,7 +168,7 @@ function FormularioRegistroInner() {
 
       const payload = {
         token,
-        transaction_amount: 150000,
+        transaction_amount: campPrice ?? 10000,
         description: campId
           ? `Inscripción: Campamento ${campId}`
           : "Inscripción campamento",

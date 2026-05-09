@@ -143,11 +143,10 @@ export default function DashboardPage() {
 
     const renderCampamentos = () => {
         if (loadingCamps) return <Loader />;
-
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                {camps.map((camp: Camp, idx) => (
-                    <div key={idx} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+                {camps.map((camp: Camp) => (
+                    <div key={camp.id} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
                         <div className="h-40 relative bg-gray-200 flex items-center justify-center">
                             {/* {camp.img ? (
                                 <img src={camp.img} alt={camp.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -172,7 +171,7 @@ export default function DashboardPage() {
                                 <span>${Number(camp.price).toLocaleString('es-CO')}</span>
                             </div>
                             <button
-                                onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}`)}
+                                onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}&camp_price=${Math.ceil(Number(camp.price))}`)}
                                 className="mt-4 w-full py-2 bg-gray-50 text-gray-500 font-bold text-xs rounded-xl hover:bg-[#AAFF00] hover:text-black transition-colors uppercase tracking-widest"
                             >
                                 {/* Ver Detalles */}
