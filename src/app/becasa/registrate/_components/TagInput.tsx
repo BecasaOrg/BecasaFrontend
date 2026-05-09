@@ -9,6 +9,7 @@ interface TagInputProps {
   suggestions?: string[];
   suggestionsLabel?: string;
   colSpan?: boolean;
+  name?: string;
 }
 
 export default function TagInput({
@@ -20,6 +21,7 @@ export default function TagInput({
   suggestions,
   suggestionsLabel,
   colSpan,
+  name,
 }: TagInputProps) {
   const [input, setInput] = useState("");
   const [open, setOpen] = useState(false);
@@ -82,6 +84,9 @@ export default function TagInput({
       </div>
       {suggestionsLabel && (
         <p className="text-white/30 text-[10px] mt-0.5">{suggestionsLabel}</p>
+      )}
+      {name && (
+        <input type="hidden" name={name} value={tags.join(", ")} />
       )}
       {open && filtered.length > 0 && (
         <div className="absolute top-full left-0 right-0 z-20 bg-[#0d1b2a] border border-[#1e3a4a] rounded-lg mt-1 max-h-40 overflow-y-auto shadow-xl">

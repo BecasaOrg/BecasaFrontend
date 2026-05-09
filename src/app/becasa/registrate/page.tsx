@@ -76,8 +76,6 @@ function FormularioRegistroInner() {
 
     if (campId) formData.append("camp_id", campId);
     formData.append("user_id", userId);
-    formData.append("position", posicionesSeleccionadas.join(", "));
-    formData.append("club_name", clubsSeleccionados.join(", "));
 
     const fileInput = formData.get("health_insurance_path");
     if (fileInput instanceof File && fileInput.size === 0) {
@@ -168,7 +166,7 @@ function FormularioRegistroInner() {
 
       const payload = {
         token,
-        transaction_amount: campPrice ?? 10000,
+        transaction_amount: Number(campPrice) ?? 10000,
         description: campId
           ? `Inscripción: Campamento ${campId}`
           : "Inscripción campamento",
@@ -261,6 +259,7 @@ function FormularioRegistroInner() {
                 placeholder="Escribe/Selecciona Múltiples Opciones"
                 suggestions={posiciones}
                 colSpan
+                name="position"
               />
 
               <FormSelect
@@ -285,6 +284,7 @@ function FormularioRegistroInner() {
                 placeholder="Escribe y presiona Enter para agregar"
                 suggestionsLabel="Escribe y presiona Enter para agregar"
                 colSpan
+                name="club_name"
               />
 
               <FormField
