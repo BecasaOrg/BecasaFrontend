@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaApple } from "react-icons/fa";
+import { registerAction } from "@/app/actions/auth.action";
 
 interface SelectItem {
     id: number | string;
@@ -153,24 +154,13 @@ export default function CreaTuPerfil() {
         }
 
         try {
-            const response = await fetch("/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(body),
-            });
+            const data = await registerAction(formData);
 
-            const data = await response.json();
-
-            if (response.ok && data.token) {
-                // Save token and user data
+            if (data.token) {
                 localStorage.setItem("auth_token", data.token);
                 localStorage.setItem("user_id", data.user.id);
                 setMessage({ type: "success", text: "¡Cuenta creada exitosamente!" });
 
-                // Redirect to dashboard
                 setTimeout(() => {
                     router.push("/dashboard/perfil");
                 }, 1000);
@@ -184,9 +174,8 @@ export default function CreaTuPerfil() {
                 }
                 setMessage({ type: "error", text: errorMsg });
             }
-        } catch (error: unknown) {
-            console.error("Fetch error:", error);
-            setMessage({ type: "error", text: "Error: " + ((error as Error).message || "Problema de conexión") });
+        } catch {
+            setMessage({ type: "error", text: "Error de conexión. Intente nuevamente." });
         } finally {
             setIsSubmitting(false);
         }

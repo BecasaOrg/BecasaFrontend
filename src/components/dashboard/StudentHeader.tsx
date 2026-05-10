@@ -4,30 +4,23 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Settings, FileText, LogOut, Trash2, LayoutDashboard } from 'lucide-react';
+import { Settings, FileText, LogOut, Trash2, LayoutDashboard, LogIn } from 'lucide-react';
 import { useProfile } from '@/context/ProfileContext';
+import { logoutAction } from '@/app/actions/auth.action';
 
 const StudentHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { profile } = useProfile();
   const router = useRouter();
 
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("auth_token"));
+  }, []);
+
   const handleLogout = async () => {
-    const token = localStorage.getItem("auth_token");
-    if (token) {
-      try {
-        await fetch("/api/logout", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Accept": "application/json"
-          }
-        });
-      } catch (error) {
-        console.error("Logout error:", error);
-      }
-    }
+    await logoutAction();
     localStorage.removeItem("auth_token");
     localStorage.removeItem("user_id");
     router.push("/becasa/login");
@@ -45,9 +38,20 @@ const StudentHeader = () => {
     };
   }, [menuRef]);
 
+  if (!isLoggedIn) {
+    return (
+      <Link
+        href="/becasa/login"
+        className="flex items-center gap-2 bg-[#AAFF00] text-black font-bold text-sm rounded-full px-5 py-2 hover:opacity-90 transition-opacity"
+      >
+        <LogIn className="w-4 h-4" />
+        Iniciar Sesión
+      </Link>
+    );
+  }
+
   return (
     <div className="relative" ref={menuRef}>
-      {/* Dropdown Menu */}
       <div
         className={`absolute top-0 right-0 w-[240px] rounded-[2.5rem] pt-16 pb-4 px-3 
           bg-[#0d1424]/95 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5
@@ -87,17 +91,9 @@ const StudentHeader = () => {
             <LogOut className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             Cerrar sesión
           </button>
-
-          {/* <div className="mt-1">
-            <button className="flex items-center gap-3 text-red-400/80 hover:text-red-400 hover:bg-red-500/10 px-4 py-2.5 rounded-2xl transition-all duration-300 text-[13px] font-semibold tracking-wide w-full text-left group">
-              <Trash2 className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-              Eliminar perfil
-            </button>
-          </div> */}
         </div>
       </div>
 
-      {/* Botón Principal */}
       <div
         className={`relative z-20 flex items-center justify-between gap-4 bg-[#050b14] text-white px-2.5 py-2 rounded-full shadow-xl cursor-pointer transition-all duration-300 border 
           ${isOpen ? 'border-[#AAFF00]/40 shadow-[0_0_20px_rgba(170,255,0,0.15)] ring-2 ring-[#AAFF00]/20' : 'border-white/5 hover:border-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]'}`}
