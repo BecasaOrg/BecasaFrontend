@@ -62,7 +62,7 @@ export default function BecasaCard() {
             ciudad: camp.city?.name || "No especificada",
             fecha: fechaFormateada,
             edad: `${camp.min_age} a ${camp.max_age} años`,
-            cupos: parseInt(camp.capacity, 10),
+            cupos: parseInt(camp.available_spots),
             deporte: deporteMapeado,
             logo: "/img/becasa/becasa_camp.jpg",
             slug: camp.id.toString(),
@@ -126,6 +126,7 @@ export default function BecasaCard() {
             {becasFiltradas.map((beca) => (
               <div
                 key={beca.id}
+                onClick={() => console.log(beca)}
                 className={`bg-[#0f1b2d] border border-white/10
                 rounded-2xl sm:rounded-bl-[150px] sm:rounded-tl-[150px] sm:rounded-tr-2xl sm:rounded-br-2xl p-2.5 pr-3.5 flex items-center gap-3 hover:-translate-y-0.5 transition-transform duration-200 relative
                ${oscuro ? "bg-[#0a1520] " : "bg-white/30 shadow-2xl"}`}>
