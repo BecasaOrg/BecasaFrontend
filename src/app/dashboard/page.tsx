@@ -40,6 +40,7 @@ interface Camp {
     img?: string;
     user_is_registered: boolean;
     user_payment_status: boolean;
+    registration_id?: string;
 }
 
 export default function DashboardPage() {
@@ -78,7 +79,7 @@ export default function DashboardPage() {
             } else {
                 return (
                     <div
-                        onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}&camp_price=${Math.ceil(Number(camp.price))}&step=payment`)}
+                        onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}&camp_price=${Math.ceil(Number(camp.price))}&step=payment${camp.registration_id ? `&registration_id=${camp.registration_id}` : ''}`)}
                         className="mt-4 w-full py-2 bg-[#AAFF00] text-black font-bold text-xs rounded-xl hover:text-black transition-colors uppercase tracking-widest text-center">
                         <span>Proceder al pago</span>
                     </div>
@@ -177,7 +178,7 @@ export default function DashboardPage() {
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 {camps.map((camp: Camp) => (
-                    <div onClick={() => console.log(camp.user_is_registered)} key={camp.id} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+                    <div onClick={() => console.log(camp.registration_id)} key={camp.id} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all cursor-pointer">
                         <div className="h-40 relative bg-gray-200 flex items-center justify-center">
                             {/* {camp.img ? (
                                 <img src={camp.img} alt={camp.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

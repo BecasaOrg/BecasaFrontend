@@ -38,6 +38,7 @@ function FormularioRegistroInner() {
   const campId = searchParams.get("camp_id");
   const campPrice = searchParams.get("camp_price");
   const stepFromParams = searchParams.get("step");
+  const registrationIdFromParams = searchParams.get("registration_id");
 
   const [posicionesSeleccionadas, setPosicionesSeleccionadas] = useState<string[]>([]);
   const [clubsSeleccionados, setClubsSeleccionados] = useState<string[]>([]);
