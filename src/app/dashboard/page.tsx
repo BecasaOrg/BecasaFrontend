@@ -38,6 +38,7 @@ interface Camp {
     start_date: string;
     updated_at: string;
     img?: string;
+    user_is_registered: boolean;
 }
 
 export default function DashboardPage() {
@@ -154,8 +155,14 @@ export default function DashboardPage() {
                                 <span className="text-gray-400 text-xs font-bold uppercase">Sin imagen</span>
                             )} */}
                             <img src={'https://imgs.search.brave.com/4rJFrAIVHuu2Bhh6RTS-Ugsc6xDf5ZiEDeD-fynrJm4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC9jQU81dVhq/LmpwZw'} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                            <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-white uppercase border border-white/20">
-                                {camp.is_active ? 'Activo' : 'Inactivo'}
+
+                            <div className='absolute top-4 right-4 flex flex-col gap-2'>
+                                <div className=" bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-white uppercase border border-white/20">
+                                    {camp.user_is_registered ? 'Registrado' : 'No registrado'}
+                                </div>
+                                <div className=" bg-white/20 backdrop-blur-md text-center px-3 py-1 rounded-full text-[10px] font-black text-white uppercase border border-white/20">
+                                    {camp.is_active ? 'Activo' : 'Inactivo'}
+                                </div>
                             </div>
                         </div>
                         <div className="p-6">
