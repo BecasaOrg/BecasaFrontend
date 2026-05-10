@@ -16,7 +16,7 @@ const StudentHeader = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("auth_token"));
+    setIsLoggedIn(document.cookie.includes("auth_token="));
   }, []);
 
   const handleLogout = async () => {
@@ -42,7 +42,7 @@ const StudentHeader = () => {
     return (
       <Link
         href="/becasa/login"
-        className="flex items-center gap-2 bg-[#AAFF00] text-black font-bold text-sm rounded-full px-5 py-2 hover:opacity-90 transition-opacity"
+        className="flex items-center gap-2 border text-white border-[#AAFF00] text-black font-bold text-sm rounded-full px-5 py-2 hover:opacity-90 transition-opacity"
       >
         <LogIn className="w-4 h-4" />
         Iniciar Sesión

@@ -20,7 +20,6 @@ export async function loginAction(formData: FormData) {
     const cookieStore = await cookies();
     cookieStore.set("auth_token", data.token, {
       path: "/",
-      httpOnly: true,
       sameSite: "lax",
       maxAge: 86400,
     });
@@ -47,7 +46,6 @@ export async function registerAction(formData: FormData) {
     const cookieStore = await cookies();
     cookieStore.set("auth_token", data.token, {
       path: "/",
-      httpOnly: true,
       sameSite: "lax",
       maxAge: 86400,
     });
@@ -60,7 +58,6 @@ export async function logoutAction() {
   const cookieStore = await cookies();
   cookieStore.set("auth_token", "", {
     path: "/",
-    httpOnly: true,
     sameSite: "lax",
     maxAge: 0,
   });
