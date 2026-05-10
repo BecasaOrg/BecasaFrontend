@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaApple, FaGoogle } from "react-icons/fa";
+import { loginAction } from "@/app/actions/auth.action";
 
 export default function Login() {
     const [showP1, setShowP1] = useState(false);
@@ -15,28 +16,15 @@ export default function Login() {
         setMessage(null);
         setIsSubmitting(true);
 
-        const formElement = e.currentTarget;
-        const formData = new FormData(formElement);
-        const body = Object.fromEntries(formData.entries());
+        const formData = new FormData(e.currentTarget);
 
         try {
-            const response = await fetch("/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(body),
-            });
+            const data = await loginAction(formData);
 
-            const data = await response.json();
-
-            if (response.ok && data.token) {
-                // Save token and user data
+            if (data.token) {
                 localStorage.setItem("auth_token", data.token);
                 localStorage.setItem("user_id", data.user.id);
                 setMessage({ type: "success", text: "¡Inicio de sesión exitoso!" });
-
 
                 setTimeout(() => {
                     router.push("/dashboard");
@@ -44,7 +32,7 @@ export default function Login() {
             } else {
                 setMessage({ type: "error", text: data.message || "Credenciales incorrectas." });
             }
-        } catch (error) {
+        } catch {
             setMessage({ type: "error", text: "Error de conexión. Intente nuevamente." });
         } finally {
             setIsSubmitting(false);
