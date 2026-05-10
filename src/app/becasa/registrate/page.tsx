@@ -37,6 +37,7 @@ function FormularioRegistroInner() {
   const searchParams = useSearchParams();
   const campId = searchParams.get("camp_id");
   const campPrice = searchParams.get("camp_price");
+  const stepFromParams = searchParams.get("step");
 
   const [posicionesSeleccionadas, setPosicionesSeleccionadas] = useState<string[]>([]);
   const [clubsSeleccionados, setClubsSeleccionados] = useState<string[]>([]);
@@ -46,7 +47,7 @@ function FormularioRegistroInner() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  const [step, setStep] = useState<"register" | "payment">("register");
+  const [step, setStep] = useState<"register" | "payment">((stepFromParams as "register" | "payment") || "register");
   const [registrationId, setRegistrationId] = useState<number | null>(null);
   const [payerEmail, setPayerEmail] = useState("");
   const [identificationNumber, setIdentificationNumber] = useState("");
@@ -76,6 +77,8 @@ function FormularioRegistroInner() {
 
     if (campId) formData.append("camp_id", campId);
     formData.append("user_id", userId);
+    formData.set("position", posicionesSeleccionadas.join(", "));
+    formData.set("club_name", clubsSeleccionados.join(", "));
 
     const fileInput = formData.get("health_insurance_path");
     if (fileInput instanceof File && fileInput.size === 0) {

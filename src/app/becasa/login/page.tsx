@@ -29,9 +29,16 @@ export default function Login() {
                 setTimeout(() => {
                     router.push("/dashboard");
                 }, 1000);
-            } else {
-                setMessage({ type: "error", text: data.message || "Credenciales incorrectas." });
-            }
+        } else {
+            return (
+                <button
+                    onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}&camp_price=${Math.ceil(Number(camp.price))}`)}
+                    className="mt-4 w-full py-2 bg-gray-50 text-gray-500 font-bold text-xs rounded-xl hover:bg-[#AAFF00] hover:text-black transition-colors uppercase tracking-widest"
+                >
+                    Inscribirse
+                </button>
+            );
+        }
         } catch {
             setMessage({ type: "error", text: "Error de conexión. Intente nuevamente." });
         } finally {

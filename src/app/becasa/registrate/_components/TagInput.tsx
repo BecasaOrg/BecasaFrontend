@@ -77,7 +77,7 @@ export default function TagInput({
           }}
           onFocus={() => setOpen(true)}
           onBlur={() => setTimeout(() => setOpen(false), 150)}
-          onKeyDown={suggestions ? (e) => { if (e.key === "Enter") e.preventDefault(); } : handleKeyDown}
+          onKeyDown={handleKeyDown}
           placeholder={tags.length === 0 ? placeholder : ""}
           className="bg-transparent text-white text-sm placeholder:text-white/25 outline-none flex-1 min-w-[160px]"
         />
