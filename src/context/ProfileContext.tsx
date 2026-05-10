@@ -47,14 +47,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
       .then(data => {
         if (data && !data.message) {
           let avatarUrl = data.avatar;
-          if (avatarUrl) {
-            if (avatarUrl.includes('/storage/')) {
-              const parts = avatarUrl.split('/storage/');
-              avatarUrl = `/storage/${parts[parts.length - 1]}`;
-            } else if (!avatarUrl.startsWith('http') && !avatarUrl.startsWith('blob:')) {
-              avatarUrl = `/storage/${avatarUrl}`;
-            }
-          } else {
+          if (!avatarUrl) {
             avatarUrl = "https://randomuser.me/api/portraits/men/32.jpg";
           }
 
@@ -75,14 +68,6 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const updateProfile = (newData: Partial<ProfileData>) => {
-    if (newData.avatar) {
-      if (newData.avatar.includes('/storage/')) {
-        const parts = newData.avatar.split('/storage/');
-        newData.avatar = `/storage/${parts[parts.length - 1]}`;
-      } else if (!newData.avatar.startsWith('http') && !newData.avatar.startsWith('blob:') && !newData.avatar.startsWith('/')) {
-        newData.avatar = `/storage/${newData.avatar}`;
-      }
-    }
     setProfile((prev) => ({ ...prev, ...newData }));
   };
 
