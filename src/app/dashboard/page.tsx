@@ -160,7 +160,7 @@ export default function DashboardPage() {
                                 <div className=" bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-white uppercase border border-white/20">
                                     {camp.user_is_registered ? 'Registrado' : 'No registrado'}
                                 </div>
-                                <div className=" bg-white/20 backdrop-blur-md text-center px-3 py-1 rounded-full text-[10px] font-black text-white uppercase border border-white/20">
+                                <div className=" bg-[#AAFF00]/50 backdrop-blur-md text-center px-3 py-1 rounded-full text-[10px] font-black text-white uppercase border border-white/20">
                                     {camp.is_active ? 'Activo' : 'Inactivo'}
                                 </div>
                             </div>
