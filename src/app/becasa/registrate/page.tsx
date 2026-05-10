@@ -144,6 +144,8 @@ function FormularioRegistroInner() {
     const cardholderName = (form.namedItem("cardholder_name") as HTMLInputElement).value;
     const cardExpiry = (form.namedItem("card_expiry") as HTMLInputElement).value;
     const cardCvv = (form.namedItem("card_cvv") as HTMLInputElement).value;
+    const payerEmailInput = (form.namedItem("payer_email") as HTMLInputElement)?.value || payerEmail;
+    const payerIdInput = (form.namedItem("payer_identification") as HTMLInputElement)?.value || identificationNumber;
 
     if (!cardNumber || !cardholderName || !cardExpiry || !cardCvv) {
       setMessage({ type: "error", text: "Completa todos los datos de la tarjeta." });
@@ -167,7 +169,7 @@ function FormularioRegistroInner() {
         cardExpirationYear: "20" + expYear,
         securityCode: cardCvv,
         identificationType: "CC",
-        identificationNumber,
+        identificationNumber: payerIdInput,
       });
 
       const payload = {
@@ -178,10 +180,10 @@ function FormularioRegistroInner() {
           : "Inscripción campamento",
         installments: 1,
         payer: {
-          email: payerEmail,
+          email: payerEmailInput,
           identification: {
             type: "CC",
-            number: identificationNumber,
+            number: payerIdInput,
           },
         },
         registration_id: registrationId,
@@ -378,6 +380,25 @@ function FormularioRegistroInner() {
                   </div>
 
                   {mpError && <p className="text-red-400 text-xs">{mpError}</p>}
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      label="Email del pagador *"
+                      name="payer_email"
+                      type="email"
+                      placeholder="usuario@gmail.com"
+                      defaultValue={payerEmail}
+                      required
+                    />
+                    <FormField
+                      label="Número de identificación *"
+                      name="payer_identification"
+                      type="text"
+                      placeholder="C.C o T.I"
+                      defaultValue={identificationNumber}
+                      required
+                    />
+                  </div>
 
                   <FormField
                     label="Nombre del titular de la tarjeta *"
