@@ -49,7 +49,9 @@ function FormularioRegistroInner() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const [step, setStep] = useState<"register" | "payment">((stepFromParams as "register" | "payment") || "register");
-  const [registrationId, setRegistrationId] = useState<number | null>(null);
+  const [registrationId, setRegistrationId] = useState<number | null>(
+    registrationIdFromParams ? Number(registrationIdFromParams) : null
+  );
   const [payerEmail, setPayerEmail] = useState("");
   const [identificationNumber, setIdentificationNumber] = useState("");
 
