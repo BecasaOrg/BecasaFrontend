@@ -37,7 +37,7 @@ const mapDeporte: Record<string, string> = {
 };
 
 export default function BecasaCard() {
-  const [deporteActivo, setDeporteActivo] = useState("Fútbol");
+  const [deporteActivo, setDeporteActivo] = useState("Voleibol");
   const [becas, setBecas] = useState<Beca[]>([]);
   const [cargando, setCargando] = useState(true);
   const { oscuro } = useTema();
