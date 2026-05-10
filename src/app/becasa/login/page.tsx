@@ -37,7 +37,7 @@ export default function Login() {
                 localStorage.setItem("user_id", data.user.id);
                 setMessage({ type: "success", text: "¡Inicio de sesión exitoso!" });
 
-                // Redirect to dashboard
+
                 setTimeout(() => {
                     router.push("/dashboard");
                 }, 1000);
