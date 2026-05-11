@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useMercadoPago } from "@/hooks/useMercadoPago";
 import StepIndicator from "./_components/StepIndicator";
 import InfoPanel from "./_components/InfoPanel";
@@ -39,6 +39,8 @@ function FormularioRegistroInner() {
   const stepFromParams = searchParams.get("step");
   const registrationIdFromParams = searchParams.get("registration_id");
 
+  const router = useRouter();
+
   const [posicionesSeleccionadas, setPosicionesSeleccionadas] = useState<string[]>([]);
   const [clubsSeleccionados, setClubsSeleccionados] = useState<string[]>([]);
   const [archivoNombre, setArchivoNombre] = useState<string | null>(null);
@@ -57,19 +59,21 @@ function FormularioRegistroInner() {
   const [identificationNumber, setIdentificationNumber] = useState("");
 
   useEffect(() => {
-    if (campId) {
-      setPriceLoading(true);
-      fetch(`/api/camps/${campId}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.price) {
-            setServerCampPrice(Math.ceil(Number(data.price)));
-          }
-        })
-        .catch(console.error)
-        .finally(() => setPriceLoading(false));
-    }
-  }, [campId]);
+    if (!campId) return;
+    setPriceLoading(true);
+    fetch(`/api/camps/${campId}`)
+      .then(res => {
+        if (!res.ok) throw new Error("Camp not found");
+        return res.json();
+      })
+      .then(data => {
+        if (data.price) {
+          setServerCampPrice(Math.ceil(Number(data.price)));
+        }
+      })
+      .catch(() => router.back())
+      .finally(() => setPriceLoading(false));
+  }, [campId, router]);
 
   const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY!;
   const { loaded: mpLoaded, error: mpError, getCardToken } = useMercadoPago(MP_PUBLIC_KEY);
