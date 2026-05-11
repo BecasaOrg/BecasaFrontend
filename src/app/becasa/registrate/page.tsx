@@ -36,7 +36,6 @@ const tallasCalcetas = [
 function FormularioRegistroInner() {
   const searchParams = useSearchParams();
   const campId = searchParams.get("camp_id");
-  const campPrice = searchParams.get("camp_price");
   const stepFromParams = searchParams.get("step");
   const registrationIdFromParams = searchParams.get("registration_id");
 
@@ -52,9 +51,25 @@ function FormularioRegistroInner() {
   const [registrationId, setRegistrationId] = useState<number | null>(
     registrationIdFromParams ? Number(registrationIdFromParams) : null
   );
+  const [serverCampPrice, setServerCampPrice] = useState<number | null>(null);
+  const [priceLoading, setPriceLoading] = useState(false);
   const [payerEmail, setPayerEmail] = useState("");
   const [identificationNumber, setIdentificationNumber] = useState("");
 
+  useEffect(() => {
+    if (campId) {
+      setPriceLoading(true);
+      fetch(`/api/camps/${campId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.price) {
+            setServerCampPrice(Math.ceil(Number(data.price)));
+          }
+        })
+        .catch(console.error)
+        .finally(() => setPriceLoading(false));
+    }
+  }, [campId]);
 
   const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY!;
   const { loaded: mpLoaded, error: mpError, getCardToken } = useMercadoPago(MP_PUBLIC_KEY);
@@ -174,7 +189,7 @@ function FormularioRegistroInner() {
 
       const payload = {
         token,
-        transaction_amount: Number(campPrice) ?? 10000,
+        transaction_amount: serverCampPrice ?? 0,
         description: campId
           ? `Inscripción: Campamento ${campId}`
           : "Inscripción campamento",
@@ -373,7 +388,7 @@ function FormularioRegistroInner() {
               ) : (
                 <>
                   <div className="border border-[#AAFF00]/20 bg-[#AAFF00]/5 rounded-lg p-3 mb-2">
-                    <p className="text-[#AAFF00] text-sm font-bold">Total a pagar $ {Number(campPrice).toLocaleString("es-CO")}</p>
+                    <p className="text-[#AAFF00] text-sm font-bold">Total a pagar $ {priceLoading ? "..." : (serverCampPrice ?? 0).toLocaleString("es-CO")}</p>
                     {/* <p className="text-white/70 text-xs">
                       Registro #{registrationId} creado correctamente. Ahora completa el pago
                       para confirmar tu cupo.
@@ -456,8 +471,8 @@ function FormularioRegistroInner() {
                     />
                   </div>
 
-                  <button type="submit" disabled={isSubmitting} className={btnClass}>
-                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${Number(campPrice).toLocaleString("es-CO")}`}
+                  <button type="submit" disabled={isSubmitting || priceLoading} className={btnClass}>
+                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${(serverCampPrice ?? 0).toLocaleString("es-CO")}`}
                   </button>
                 </>
               )}
