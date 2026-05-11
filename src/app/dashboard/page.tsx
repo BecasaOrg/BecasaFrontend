@@ -79,7 +79,7 @@ export default function DashboardPage() {
             } else {
                 return (
                     <div
-                        onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}&step=payment${camp.registration_id ? `&registration_id=${camp.registration_id}` : ''}`)}
+                        onClick={() => router.push(`/becasa/registrate?camp_id=${camp.id}&step=payment`)}
                         className="mt-4 w-full py-2 bg-[#AAFF00] text-black font-bold text-xs rounded-xl hover:text-black transition-colors uppercase tracking-widest text-center">
                         <span>Proceder al pago</span>
                     </div>

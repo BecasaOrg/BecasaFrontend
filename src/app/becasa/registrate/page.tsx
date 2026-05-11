@@ -9,6 +9,7 @@ import Alert from "./_components/Alert";
 import { FormField, FormSelect } from "./_components/FormField";
 import TagInput from "./_components/TagInput";
 import FileUpload from "./_components/FileUpload";
+import { getCampById } from "@/app/actions/camp.action";
 
 const posiciones = [
   "Delantero", "Mediocampista", "Defensor", "Portero",
@@ -37,7 +38,6 @@ function FormularioRegistroInner() {
   const searchParams = useSearchParams();
   const campId = searchParams.get("camp_id");
   const stepFromParams = searchParams.get("step");
-  const registrationIdFromParams = searchParams.get("registration_id");
 
   const router = useRouter();
 
@@ -50,9 +50,7 @@ function FormularioRegistroInner() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const [step, setStep] = useState<"register" | "payment">((stepFromParams as "register" | "payment") || "register");
-  const [registrationId, setRegistrationId] = useState<number | null>(
-    registrationIdFromParams ? Number(registrationIdFromParams) : null
-  );
+  const [registrationId, setRegistrationId] = useState<number | null>(null);
   const [serverCampPrice, setServerCampPrice] = useState<number | null>(null);
   const [priceLoading, setPriceLoading] = useState(false);
   const [payerEmail, setPayerEmail] = useState("");
@@ -60,19 +58,10 @@ function FormularioRegistroInner() {
 
   useEffect(() => {
     if (!campId) return;
-    setPriceLoading(true);
-    fetch(`/api/camps/${campId}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Camp not found");
-        return res.json();
-      })
-      .then(data => {
-        if (data.price) {
-          setServerCampPrice(Math.ceil(Number(data.price)));
-        }
-      })
-      .catch(() => router.back())
-      .finally(() => setPriceLoading(false));
+    getCampById(Number(campId)).then((camp) => {
+      setServerCampPrice(camp.price);
+      setRegistrationId(camp.registration_id);
+    });
   }, [campId, router]);
 
   const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY!;
@@ -392,7 +381,7 @@ function FormularioRegistroInner() {
               ) : (
                 <>
                   <div className="border border-[#AAFF00]/20 bg-[#AAFF00]/5 rounded-lg p-3 mb-2">
-                    <p className="text-[#AAFF00] text-sm font-bold">Total a pagar $ {priceLoading ? "..." : (serverCampPrice ?? 0).toLocaleString("es-CO")}</p>
+                    <p className="text-[#AAFF00] text-sm font-bold">Total a pagar $ {priceLoading ? "..." : Number(serverCampPrice ?? 0).toLocaleString("es-CO")}</p>
                     {/* <p className="text-white/70 text-xs">
                       Registro #{registrationId} creado correctamente. Ahora completa el pago
                       para confirmar tu cupo.
@@ -476,7 +465,7 @@ function FormularioRegistroInner() {
                   </div>
 
                   <button type="submit" disabled={isSubmitting || priceLoading} className={btnClass}>
-                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${(serverCampPrice ?? 0).toLocaleString("es-CO")}`}
+                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${Number(serverCampPrice ?? 0).toLocaleString("es-CO")}`}
                   </button>
                 </>
               )}
