@@ -10,14 +10,11 @@ import { logoutAction } from '@/app/actions/auth.action';
 
 const StudentHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { profile } = useProfile();
   const router = useRouter();
 
-  useEffect(() => {
-    setIsLoggedIn(document.cookie.includes("auth_token="));
-  }, []);
+  const isLoggedIn = typeof document !== 'undefined' && document.cookie.includes("auth_token=");
 
   const handleLogout = async () => {
     await logoutAction();
