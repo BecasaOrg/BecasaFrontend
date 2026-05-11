@@ -210,10 +210,10 @@ function FormularioRegistroInner() {
 
       const data = await response.json();
 
-      if (response.ok && data.success) {
+      if (response.ok && data.success && data.status !== "rejected") {
         setMessage({ type: "success", text: "Pago procesado exitosamente." });
       } else {
-        setMessage({ type: "error", text: data.message || data.error || "Hubo un error al procesar el pago." });
+        setMessage({ type: "error", text: data.detail || data.message || data.error || "Hubo un error al procesar el pago." });
       }
     } catch (error: unknown) {
       const errMsg = error instanceof Error ? error.message : "Error de conexión. Intente nuevamente.";
@@ -256,6 +256,7 @@ function FormularioRegistroInner() {
                 type="text"
                 placeholder="Numero..."
                 required
+                maxLength={10}
               />
 
               <FormField
@@ -406,6 +407,7 @@ function FormularioRegistroInner() {
                       placeholder="C.C o T.I"
                       defaultValue={identificationNumber}
                       required
+                      maxLength={10}
                     />
                   </div>
 
