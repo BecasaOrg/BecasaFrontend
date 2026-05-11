@@ -25,8 +25,8 @@ const StudentSidebar = () => {
                     <Image
                         src={profile.avatar}
                         alt={`${profile.nombres} ${profile.apellidos} - Profile Picture`}
+                        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                         fill
-                        unoptimized
                         className="object-cover"
                     />
                 </div>

@@ -373,10 +373,11 @@ function FormularioRegistroInner() {
               ) : (
                 <>
                   <div className="border border-[#AAFF00]/20 bg-[#AAFF00]/5 rounded-lg p-3 mb-2">
-                    <p className="text-white/70 text-xs">
+                    <p className="text-[#AAFF00] text-sm font-bold">Total a pagar $ {Number(campPrice).toLocaleString("es-CO")}</p>
+                    {/* <p className="text-white/70 text-xs">
                       Registro #{registrationId} creado correctamente. Ahora completa el pago
                       para confirmar tu cupo.
-                    </p>
+                    </p> */}
                   </div>
 
                   {mpError && <p className="text-red-400 text-xs">{mpError}</p>}
@@ -456,7 +457,7 @@ function FormularioRegistroInner() {
                   </div>
 
                   <button type="submit" disabled={isSubmitting} className={btnClass}>
-                    {isSubmitting ? "Procesando pago..." : "Pagar"}
+                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${Number(campPrice).toLocaleString("es-CO")}`}
                   </button>
                 </>
               )}
