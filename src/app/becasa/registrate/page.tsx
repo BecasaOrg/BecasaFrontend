@@ -11,6 +11,21 @@ import TagInput from "./_components/TagInput";
 import FileUpload from "./_components/FileUpload";
 import { getCampById } from "@/app/actions/camp.action";
 
+const reasonTranslations: Record<string, string> = {
+  cc_rejected_other_reason: "Tarjeta rechazada. Intenta con otro medio de pago.",
+  cc_rejected_bad_filled_card_number: "Número de tarjeta inválido.",
+  cc_rejected_bad_filled_date: "Fecha de vencimiento inválida.",
+  cc_rejected_bad_filled_security_code: "Código de seguridad inválido.",
+  cc_rejected_card_disabled: "Tarjeta deshabilitada.",
+  cc_rejected_insufficient_amount: "Fondos insuficientes.",
+  cc_rejected_max_attempts: "Se excedió el límite de intentos.",
+  cc_rejected_duplicated_payment: "Pago duplicado.",
+  cc_rejected_high_risk: "Transacción rechazada por seguridad.",
+  cc_call_for_authorize: "Debes autorizar el pago con tu banco.",
+};
+
+const translateReason = (detail: string) => reasonTranslations[detail] || detail;
+
 const posiciones = [
   "Delantero", "Mediocampista", "Defensor", "Portero",
   "Base", "Escolta", "Alero", "Ala-Pívot", "Pívot",
@@ -182,7 +197,7 @@ function FormularioRegistroInner() {
 
       const payload = {
         token,
-        transaction_amount: serverCampPrice ?? 0,
+        transaction_amount: Number(serverCampPrice) ?? 0,
         description: campId
           ? `Inscripción: Campamento ${campId}`
           : "Inscripción campamento",
@@ -213,7 +228,7 @@ function FormularioRegistroInner() {
       if (response.ok && data.success && data.status !== "rejected") {
         setMessage({ type: "success", text: "Pago procesado exitosamente." });
       } else {
-        setMessage({ type: "error", text: data.detail || data.message || data.error || "Hubo un error al procesar el pago." });
+        setMessage({ type: "error", text: translateReason(data.detail) || data.message || data.error || "Hubo un error al procesar el pago." });
       }
     } catch (error: unknown) {
       const errMsg = error instanceof Error ? error.message : "Error de conexión. Intente nuevamente.";
