@@ -203,7 +203,7 @@ function FormularioRegistroInner() {
 
       const payload = {
         token,
-        transaction_amount: discountedPrice ?? Number(serverCampPrice) ?? 0,
+        transaction_amount: Number(serverCampPrice) ?? 0,
         description: campId
           ? `Inscripción: Campamento ${campId}`
           : "Inscripción campamento",
@@ -217,6 +217,7 @@ function FormularioRegistroInner() {
         },
         registration_id: registrationId,
         ...(campId ? { camp_id: Number(campId) } : {}),
+        ...(appliedCoupon ? { discount_code: appliedCoupon.code } : {}),
       };
 
       const response = await fetch("/api/payments/process-card", {

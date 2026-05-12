@@ -27,11 +27,16 @@ export const getCouponByCode = async (code: string) => {
         body: JSON.stringify({ code }),
     });
 
+    const json = await res.json();
+
     if (!res.ok) {
         if (res.status === 404) throw new Error("Cupón no encontrado");
-        throw new Error("Error al verificar el cupón");
+        throw new Error(json.message || "Error al verificar el cupón");
     }
 
-    const json = await res.json();
+    if (json.success === false) {
+        throw new Error(json.message || "Cupón no disponible");
+    }
+
     return json.data ?? json;
 }
