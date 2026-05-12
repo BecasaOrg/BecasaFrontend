@@ -481,6 +481,7 @@ function FormularioRegistroInner() {
                       maxLength={4}
                     />
                   </div>
+                  <CouponVerifier />
 
                   <button type="submit" disabled={isSubmitting || priceLoading} className={btnClass}>
                     {isSubmitting ? "Procesando pago..." : `Pagar $ ${Number(serverCampPrice ?? 0).toLocaleString("es-CO")}`}
@@ -492,7 +493,6 @@ function FormularioRegistroInner() {
         </div>
 
         <InfoPanel />
-        <CouponVerifier />
       </div>
     </section>
   );
