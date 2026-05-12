@@ -90,7 +90,6 @@ export default function CouponVerifier({ originalPrice, appliedCoupon, onApply, 
                     className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#AAFF00] text-black font-bold text-sm transition-all hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                     {loading ? <Loader size={16} className="animate-spin" /> : <Search size={16} />}
-                    Verificar
                 </button>
             </div>
 

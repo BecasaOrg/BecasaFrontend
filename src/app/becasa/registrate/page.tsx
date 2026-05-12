@@ -11,6 +11,7 @@ import TagInput from "./_components/TagInput";
 import FileUpload from "./_components/FileUpload";
 import { getCampById } from "@/app/actions/camp.action";
 import CouponVerifier from "@/components/coupons/coupon-verifier";
+import { Coupon } from "@/app/actions/coupon.action";
 
 const reasonTranslations: Record<string, string> = {
   cc_rejected_other_reason: "Tarjeta rechazada. Intenta con otro medio de pago.",
@@ -71,6 +72,10 @@ function FormularioRegistroInner() {
   const [priceLoading, setPriceLoading] = useState(false);
   const [payerEmail, setPayerEmail] = useState("");
   const [identificationNumber, setIdentificationNumber] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+
+  const discount = appliedCoupon ? Number(appliedCoupon.discount_percentage) : 0;
+  const discountedPrice = serverCampPrice ? serverCampPrice * (1 - discount / 100) : null;
 
   useEffect(() => {
     if (!campId) return;
@@ -198,7 +203,7 @@ function FormularioRegistroInner() {
 
       const payload = {
         token,
-        transaction_amount: Number(serverCampPrice) ?? 0,
+        transaction_amount: discountedPrice ?? Number(serverCampPrice) ?? 0,
         description: campId
           ? `Inscripción: Campamento ${campId}`
           : "Inscripción campamento",
@@ -397,12 +402,20 @@ function FormularioRegistroInner() {
                 </div>
               ) : (
                 <>
-                  <div className="border border-[#AAFF00]/20 bg-[#AAFF00]/5 rounded-lg p-3 mb-2">
-                    <p className="text-[#AAFF00] text-sm font-bold">Total a pagar $ {priceLoading ? "..." : Number(serverCampPrice ?? 0).toLocaleString("es-CO")}</p>
-                    {/* <p className="text-white/70 text-xs">
-                      Registro #{registrationId} creado correctamente. Ahora completa el pago
-                      para confirmar tu cupo.
-                    </p> */}
+                  <div className="border border-[#AAFF00]/20 bg-[#AAFF00]/5 rounded-lg p-3 mb-2 flex flex-col gap-1">
+                    {appliedCoupon && serverCampPrice && (
+                      <p className="text-white/60 text-xs line-through">
+                        ${serverCampPrice.toLocaleString("es-CO")}
+                      </p>
+                    )}
+                    <p className="text-[#AAFF00] text-sm font-bold">
+                      Total a pagar $ {priceLoading ? "..." : (discountedPrice ?? serverCampPrice ?? 0).toLocaleString("es-CO")}
+                    </p>
+                    {appliedCoupon && (
+                      <p className="text-[#AAFF00]/70 text-xs">
+                        Descuento {Math.ceil(discount)}% aplicado
+                      </p>
+                    )}
                   </div>
 
                   {mpError && <p className="text-red-400 text-xs">{mpError}</p>}
@@ -481,10 +494,15 @@ function FormularioRegistroInner() {
                       maxLength={4}
                     />
                   </div>
-                  <CouponVerifier />
+                  <CouponVerifier
+                    originalPrice={serverCampPrice ?? 0}
+                    appliedCoupon={appliedCoupon}
+                    onApply={(c) => setAppliedCoupon(c)}
+                    onRemove={() => setAppliedCoupon(null)}
+                  />
 
                   <button type="submit" disabled={isSubmitting || priceLoading} className={btnClass}>
-                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${Number(serverCampPrice ?? 0).toLocaleString("es-CO")}`}
+                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${(discountedPrice ?? serverCampPrice ?? 0).toLocaleString("es-CO")}`}
                   </button>
                 </>
               )}
