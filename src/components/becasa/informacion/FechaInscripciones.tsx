@@ -99,14 +99,19 @@ export default function FechasInscripciones({
         </div>
 
         {/* Botón */}
-        <Link
+        {/*<Link
           href={campId ? `/becasa/registrate?camp_id=${campId}` : "/becasa/registrate"}
           className="bg-[#AAFF00] text-[#0A0E2A] font-bold text-sm px-10 py-3 rounded-full
             hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200
             shadow-[0_4px_24px_rgba(170,255,0,0.35)]"
         >
           Regístrate ahora
-        </Link>
+        </Link>*/}
+
+        <a href="https://tally.so/r/A78WRo
+" className="bg-[#AAFF00] text-[#0A0E2A] font-bold text-sm px-10 py-3 rounded-full
+            hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200
+            shadow-[0_4px_24px_rgba(170,255,0,0.35)]">Regístrate ahora</a>
 
       </div>
     </section>

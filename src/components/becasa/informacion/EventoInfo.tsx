@@ -107,10 +107,10 @@ export default function EventoInfo({ fechaInicio, fechaFin, direccion, ciudad }:
             <div className="z-1">
               <div
                 className="text-black group-hover:text-white font-black leading-none mb-1.5 text-[28px] "
-                style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }} >
+                style={{ fontFamily: "var(--font-barlow), sans-serif", letterSpacing: "-0.01em", transform: "scaleY(1.2)" }} >
                 {card.titulo}
               </div>
-              <p className="text-black/50 group-hover:text-white/50 text-xs leading-snug" >
+              <p className="text-black/50 group-hover:text-white/50 text-xs leading-snug" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }} >
                 {card.subtitulo}
               </p>
             </div>
