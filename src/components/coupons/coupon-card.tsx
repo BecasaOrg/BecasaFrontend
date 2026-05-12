@@ -38,15 +38,15 @@ export default function CouponCard({ coupon }: CouponCardProps) {
     return (
         <div
             className={`relative rounded-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${oscuro
-                    ? "bg-zinc-900 border-zinc-700 hover:shadow-zinc-800/50"
-                    : "bg-white border-gray-200 hover:shadow-gray-200/80"
+                ? "bg-zinc-900 border-zinc-700 hover:shadow-zinc-800/50"
+                : "bg-white border-gray-200 hover:shadow-gray-200/80"
                 } ${!coupon.is_active ? "opacity-60" : ""}`}
         >
             <div className="absolute top-3 right-3">
                 <span
                     className={`text-xs font-bold px-3 py-1 rounded-full ${coupon.is_active
-                            ? "bg-[#AAFF00] text-black"
-                            : "bg-gray-500 text-white"
+                        ? "bg-[#AAFF00] text-black"
+                        : "bg-gray-500 text-white"
                         }`}
                 >
                     {coupon.is_active ? "Activo" : "Inactivo"}
@@ -56,7 +56,7 @@ export default function CouponCard({ coupon }: CouponCardProps) {
             <div className="p-5 flex flex-col gap-4">
                 <div>
                     <span className="inline-block bg-[#AAFF00] text-black text-sm font-bold px-3 py-1 rounded-lg mb-3">
-                        {coupon.discount_percentage}% OFF
+                        {Math.ceil(Number(coupon.discount_percentage))}% OFF
                     </span>
                     <div className="flex items-center justify-between gap-2">
                         <code
@@ -68,8 +68,8 @@ export default function CouponCard({ coupon }: CouponCardProps) {
                         <button
                             onClick={copyCode}
                             className={`p-2 rounded-lg transition-colors cursor-pointer ${oscuro
-                                    ? "hover:bg-zinc-800 text-gray-400 hover:text-white"
-                                    : "hover:bg-gray-100 text-gray-500 hover:text-gray-900"
+                                ? "hover:bg-zinc-800 text-gray-400 hover:text-white"
+                                : "hover:bg-gray-100 text-gray-500 hover:text-gray-900"
                                 }`}
                             title="Copiar código"
                         >
