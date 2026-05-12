@@ -89,7 +89,7 @@ function InformacionContent() {
                 campId={campData?.id}
             />
             <QueMasTendras />
-            <PatrocinadoresAliados />
+           {/*  <PatrocinadoresAliados /> */}
             <QueHaceDiferente />
             <OrganizadoresResponsables />
             <FundacionASA />

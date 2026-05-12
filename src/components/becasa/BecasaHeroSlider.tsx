@@ -1,8 +1,9 @@
 "use client"
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
+  
 
 const slides = [
   {
@@ -40,6 +41,11 @@ export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titu
   };
 
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const isNameLink = pathname === "/becasa";
+  const isInformacion = pathname.startsWith("/becasa/informacion") && id !== null;
+
 
   const bgImg = pathname.startsWith('/becasa/informacion') ? slides[current].bgInfo : slides[current].bgBecasa;
 
@@ -89,7 +95,7 @@ export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titu
             Campamentos
           </Link>
           <Link href="/becasa/crea-tu-perfil" className="px-4 py-2 rounded-full bg-[#c8f500] text-black font-bold text-md tracking-wide shadow-[0_4px_24px_rgba(200,245,0,0.4)] hover:bg-[#d6ff1a] hover:scale-105 hover:shadow-[0_6px_32px_rgba(200,245,0,0.6)] transition-all duration-200">
-            Crea tu perfil
+            {isInformacion ? "Registrate a este evento"  : "Crea tu perfil"}
           </Link>
         </div>
       </div>
