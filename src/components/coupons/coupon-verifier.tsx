@@ -6,6 +6,8 @@ import { useState } from "react";
 import CouponCard from "./coupon-card";
 import { getCouponByCode, Coupon } from "@/app/actions/coupon.action";
 
+type CouponData = Awaited<ReturnType<typeof getCouponByCode>> extends { success: true; data: infer D } ? D : never;
+
 interface CouponVerifierProps {
     originalPrice: number;
     appliedCoupon: Coupon | null;
@@ -16,7 +18,7 @@ interface CouponVerifierProps {
 export default function CouponVerifier({ originalPrice, appliedCoupon, onApply, onRemove }: CouponVerifierProps) {
     const { oscuro } = useTema();
     const [code, setCode] = useState("");
-    const [coupon, setCoupon] = useState<Awaited<ReturnType<typeof getCouponByCode>> | null>(null);
+    const [coupon, setCoupon] = useState<Coupon | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -26,14 +28,15 @@ export default function CouponVerifier({ originalPrice, appliedCoupon, onApply, 
         setError("");
         setCoupon(null);
 
-        try {
-            const data = await getCouponByCode(code.trim());
-            setCoupon(data);
-        } catch (err) {
-            setError(err instanceof Error ? err.message : "Error inesperado");
-        } finally {
-            setLoading(false);
+        const result = await getCouponByCode(code.trim());
+
+        if (result.success) {
+            setCoupon(result.data);
+        } else {
+            setError(result.error);
         }
+
+        setLoading(false);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {

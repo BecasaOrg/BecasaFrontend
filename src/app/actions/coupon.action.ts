@@ -13,30 +13,38 @@ export interface Coupon {
     updated_at: string;
 }
 
-export const getCouponByCode = async (code: string) => {
+export type CouponResult =
+    | { success: true; data: Coupon }
+    | { success: false; error: string };
+
+export const getCouponByCode = async (code: string): Promise<CouponResult> => {
     const cookiesStore = await cookies();
     const token = cookiesStore.get("auth_token")?.value;
 
-    const res = await fetch("https://athleticscholarshipagency.com/api/discounts", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({ code }),
-    });
+    try {
+        const res = await fetch("https://athleticscholarshipagency.com/api/discounts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify({ code }),
+        });
 
-    const json = await res.json();
+        const json = await res.json();
 
-    if (!res.ok) {
-        if (res.status === 404) throw new Error("Cupón no encontrado");
-        throw new Error(json.message || "Error al verificar el cupón");
+        if (!res.ok) {
+            if (res.status === 404) return { success: false, error: "Cupón no encontrado" };
+            return { success: false, error: json.message || "Error al verificar el cupón" };
+        }
+
+        if (json.success === false) {
+            return { success: false, error: json.message || "Cupón no disponible" };
+        }
+
+        return { success: true, data: json.data ?? json };
+    } catch {
+        return { success: false, error: "Error de conexión al verificar el cupón" };
     }
-
-    if (json.success === false) {
-        throw new Error(json.message || "Cupón no disponible");
-    }
-
-    return json.data ?? json;
 }
