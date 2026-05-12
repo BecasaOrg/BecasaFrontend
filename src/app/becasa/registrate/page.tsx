@@ -10,6 +10,7 @@ import { FormField, FormSelect } from "./_components/FormField";
 import TagInput from "./_components/TagInput";
 import FileUpload from "./_components/FileUpload";
 import { getCampById } from "@/app/actions/camp.action";
+import CouponVerifier from "@/components/coupons/coupon-verifier";
 
 const reasonTranslations: Record<string, string> = {
   cc_rejected_other_reason: "Tarjeta rechazada. Intenta con otro medio de pago.",
@@ -491,6 +492,7 @@ function FormularioRegistroInner() {
         </div>
 
         <InfoPanel />
+        <CouponVerifier />
       </div>
     </section>
   );
