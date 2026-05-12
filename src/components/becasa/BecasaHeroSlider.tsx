@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+
   
 
 const slides = [
@@ -19,6 +20,24 @@ const slides = [
     bgInfo: "/img/becasa/slide6.png",
   },
 ];
+
+
+
+function RegistrateLink() {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const id = searchParams.get("id");
+  const isInformacion = pathname.startsWith("/becasa/informacion") && id !== null;
+
+  return (
+    <Link
+      href="/becasa/crea-tu-perfil"
+      className="px-4 py-2 rounded-full bg-[#c8f500] text-black font-bold text-md tracking-wide shadow-[0_4px_24px_rgba(200,245,0,0.4)] hover:bg-[#d6ff1a] hover:scale-105 hover:shadow-[0_6px_32px_rgba(200,245,0,0.6)] transition-all duration-200"
+    >
+      {isInformacion ? "Registrate a este evento" : "Crea tu perfil"}
+    </Link>
+  );
+}
 
 export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titulo?: string }) {
   const [current, setCurrent] = useState(0);
@@ -41,12 +60,11 @@ export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titu
   };
 
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  const isNameLink = pathname === "/becasa";
-  const isInformacion = pathname.startsWith("/becasa/informacion") && id !== null;
 
 
+
+
+  
   const bgImg = pathname.startsWith('/becasa/informacion') ? slides[current].bgInfo : slides[current].bgBecasa;
 
   return (
@@ -94,9 +112,14 @@ export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titu
           <Link href="/becasa#becasaCampamento" className="px-4 py-2 rounded-full bg-white text-black font-bold text-md tracking-wide transition-all duration-200 hover:scale-105" >
             Campamentos
           </Link>
-          <Link href="/becasa/crea-tu-perfil" className="px-4 py-2 rounded-full bg-[#c8f500] text-black font-bold text-md tracking-wide shadow-[0_4px_24px_rgba(200,245,0,0.4)] hover:bg-[#d6ff1a] hover:scale-105 hover:shadow-[0_6px_32px_rgba(200,245,0,0.6)] transition-all duration-200">
-            {isInformacion ? "Registrate a este evento"  : "Crea tu perfil"}
-          </Link>
+          
+          <Suspense fallback={
+            <span className="px-4 py-2 rounded-full bg-[#c8f500] text-black font-bold text-md tracking-wide">
+              Crea tu perfil
+            </span>
+          }>
+            <RegistrateLink />
+          </Suspense>
         </div>
       </div>
 
