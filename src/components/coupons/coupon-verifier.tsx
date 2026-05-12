@@ -4,22 +4,12 @@ import { useTema } from "@/context/TemaContext";
 import { Search, Loader } from "lucide-react";
 import { useState } from "react";
 import CouponCard from "./coupon-card";
-
-interface Coupon {
-    id: number;
-    code: string;
-    discount_percentage: string;
-    max_installments: string;
-    valid_until: string;
-    is_active: boolean;
-    created_at: string;
-    updated_at: string;
-}
+import { getCouponByCode } from "@/app/actions/coupon.action";
 
 export default function CouponVerifier() {
     const { oscuro } = useTema();
     const [code, setCode] = useState("");
-    const [coupon, setCoupon] = useState<Coupon | null>(null);
+    const [coupon, setCoupon] = useState<Awaited<ReturnType<typeof getCouponByCode>> | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -30,21 +20,8 @@ export default function CouponVerifier() {
         setCoupon(null);
 
         try {
-            const res = await fetch(`/api/discounts`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ code }),
-            });
-
-            if (!res.ok) {
-                if (res.status === 404) throw new Error("Cupón no encontrado");
-                throw new Error("Error al verificar el cupón");
-            }
-
-            const json = await res.json();
-            setCoupon(json.data ?? json);
+            const data = await getCouponByCode(code.trim());
+            setCoupon(data);
         } catch (err) {
             setError(err instanceof Error ? err.message : "Error inesperado");
         } finally {
