@@ -43,16 +43,15 @@ export default function ExperienciaCamp() {
         setCurrentSlide(0);
     };
 
-    // Tamaño/alto por posición del carrusel
     const slideClasses = [
         // Posición 0 la más grande
-        "flex-none w-[330px] h-[440px] rounded-2xl opacity-100 overflow-hidden relative transition-all duration-400 ease-out bg-[red] ",
+        "flex-none w-[220px] h-[450px] md:w-[330px] md:h-[440px] rounded-2xl overflow-hidden relative transition-all duration-400 ease-out bg-[grey]/70 ",
         // Posición 1 mas pequeña
-        "flex-none w-[250px] h-[370px] rounded-[14px] opacity-90 overflow-hidden relative transition-all duration-400 ease-out bg-[red] ",
+        "flex-none w-[120px] h-[370px] md:w-[250px] rounded-[14px] overflow-hidden relative transition-all duration-400 ease-out bg-[grey]/70 ",
         //Posición 2 igual de pequena que la 1
-        "flex-none w-[220px] h-[340px] rounded-[14px] opacity-90 overflow-hidden relative transition-all duration-400 ease-out bg-[red] ",
+        "flex-none w-[120px] h-[370px] md:w-[250px] rounded-[14px] overflow-hidden relative transition-all duration-400 ease-out bg-[grey]/70 ",
         //Posición 3 igual de pequena que la 1
-        "flex-none w-[220px] h-[310px] rounded-[14px] opacity-90 overflow-hidden relative transition-all duration-400 ease-out bg-[red] ",
+        "flex-none w-[120px] h-[370px] md:w-[250px] rounded-[14px] overflow-hidden relative transition-all duration-400 ease-out bg-[grey]/70 ",
     ];
 
     return (
@@ -60,22 +59,26 @@ export default function ExperienciaCamp() {
 
             <div className="text-center mb-10 px-2">
                 <hr />
-                <h2 className="text-[40px] font-black tracking-[3px] mb-4 uppercase mt-5" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}>
+                <h2 className="font-black tracking-[3px] mb-4 uppercase mt-5"
+                    style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)", fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
+                >
                     EXPERIENCIA BECASA CAMP
                 </h2>
-                <p className="text-sm max-w-[680px] mx-auto leading-[-2.7]">
+                <p className="text-sm max-w-[680px] mx-auto leading-[-2.7]"
+                    style={{ fontSize: "clamp(0.9rem, 1.4vw, 1.05rem)" }}
+                >
                     BECASA CAMP es una experiencia integral donde el entrenamiento, la educación y la orientación se conectan para ayudarte a entender tu camino como estudiante-atleta. Está diseñado para que no solo vivas el proceso, sino que tengas más claridad de tan lejos quieres llegar.
                 </p>
             </div>
 
             {/* menú para el el cambio de info del carrusel  */}
-            <div className="flex justify-center mb-12">
-                <nav className="flex border rounded-full py-0.5 w-[90%] sm:w-auto overflow-y-scroll " style={{scrollbarWidth: "none"}}>
+            <div className="flex justify-center mb-5 [@media(min-width:480px)]:mb-12">
+                <nav className="flex border rounded-full py-0.5 min:w-[97%] overflow-y-scroll " style={{ scrollbarWidth: "none" }}>
                     {TABS.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => handleTabChange(tab.id)}
-                            className={`relative px-3 py-0.5 text-[13px] tracking-[0.5px] cursor-pointer border-none transition-colors duration-200 whitespace-nowrap
+                            className={`relative flex-1 sm:flex-0 px-3 py-0.5 text-[10px] sm:text-[13px] tracking-[0.5px] cursor-pointer border-none transition-colors duration-200 whitespace-nowrap
                                 ${activeTab === tab.id
                                     ? "text-[#111] font-bold bg-[#AAFF00] rounded-full "
                                     : "font-medium"
@@ -87,28 +90,28 @@ export default function ExperienciaCamp() {
                 </nav>
             </div>
 
-            <div className="flex gap-7 md:gap-12 items-start relative">
+            <div className="flex flex-col [@media(min-width:480px)]:flex-row [@media(min-width:480px)]:gap-7 md:gap-12 md:mt-27 [@media(min-width:480px)]:items-start relative ">
 
-                <div className="flex-none w-[180px] pt-2 pl-3 md:pl-6 mt-25 md:mt-0 hidden sm:block ">
-                    <h3 className="text-[22px] font-extrabold mb-4 leading-tight" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 500 }}>
+                <div className="flex-none [@media(min-width:480px)]:w-[120px] md:min-w-[180px] pt-2 [@media(min-width:480px)]:pl-3 md:pl-6 [@media(min-width:480px)]:mt-6 md:mt-0 [@media(min-width:480px)]:block text-center [@media(min-width:480px)]:text-start flex flex-col items-center">
+                    <h3 className="text-[20px] sm:text-[22px] mb-4 leading-tight" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 500 }}>
                         {tabData.title}
                     </h3>
-                    <p className="text-[12px] leading-[1.8] m-0">
+                    <p className="text-[12px] leading-[1.8] m-0 text-justify w-[90%] [@media(min-width:480px)]:w-auto ">
                         {tabData.description}
                     </p>
                 </div>
 
-                <div className="flex-1 flex flex-col gap-4 min-w-0">
+                <div className="flex-1 flex flex-col gap-4 min-w-0 relative">
 
                     {/* Controles arriba a la derecha */}
-                    <div className="flex justify-end items-end gap-5 absolute right-0 md:-top-20 -top-7 ">
+                    <div className="flex justify-end items-end gap-2 md:gap-5 absolute right-0 md:-top-20  ">
 
                         {/* Flechas */}
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-col sm:flex-row">
                             <button
                                 onClick={() => goToSlide("prev")}
                                 aria-label="Anterior"
-                                className="w-5 h-5 rounded-full border border-[#ddd] bg-white cursor-pointer flex items-center justify-center text-[#333] transition-all duration-200 hover:border-[#999] hover:bg-gray-50 p-0"
+                                className="w-5 h-5 rounded-full border border-[#ddd] bg-white cursor-pointer flex items-center justify-center text-[#333] transition-all duration-200 hover:border-[#999] hover:bg-gray-50 p-0 red"
                             >
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -136,7 +139,7 @@ export default function ExperienciaCamp() {
                                 <span className="text-sm font-semibold text-[#aaa]">/</span>
                             </div>
                             <span
-                                className="text-[62px] font-black leading-none"
+                                className="text-[42px] md:text-[62px] font-black leading-none"
                                 style={{ fontFamily: "'Arial Black', Arial, sans-serif" }}
                             >
                                 {String(currentSlide + 1).padStart(2, "0")}
@@ -146,10 +149,10 @@ export default function ExperienciaCamp() {
                     </div>
 
                     {/* Track del carrusel */}
-                    <div className="flex items-end gap-3 overflow-hidden mt-25 md:mt-0 pl-6 sm:pl-0 ">
+                    <div className="flex items-end gap-3 overflow-hidden mt-2 md:mt-0 pl-6 [@media(min-width:480px)]:pl-6 duration-700 ">
                         {visibleSlides.map((slide, i) => (
                             <div
-                                key={`${slide.id}-${i}`}
+                                key={`${slide.id}`}
                                 className={slideClasses[i]}
                             >
                                 {/* Badge del año */}
@@ -174,7 +177,7 @@ export default function ExperienciaCamp() {
                                 {/* Caption overlay solo en la slide principal */}
                                 {i === 0 && (
                                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/75 to-transparent pt-10 px-4 pb-4 z-10">
-                                        <p className="text-white p-8 rounded-md backdrop-blur-sm  bg-[#00000042] text-xs m-0 leading-[1.4]">
+                                        <p className="text-white p-3 rounded-md backdrop-blur-sm  bg-[#00000042] text-xs m-0 leading-[1.4]">
                                             {slide.caption}
                                         </p>
                                     </div>
