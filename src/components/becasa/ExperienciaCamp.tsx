@@ -55,12 +55,14 @@ export default function ExperienciaCamp() {
     ];
 
     return (
-        <section className="pt-16 pb-20 max-w-[1280px] mx-auto font-serif" >
-
+        <section className="pt-9 pb-20 max-w-[1280px] mx-auto font-serif" >
+            <p className="text-[11px] sm:text-[13px] leading-relaxed text-center font-bold my-4 mx-3">
+                Claridad para entender tu nivel, dirección para dar el siguiente paso, herramientas para construir tu proceso y confianza para creer en tu futuro, mientras aprendes, compartes con otros atletas y disfrutas una experiencia que te impulsa de verdad.
+            </p>
             <div className="text-center mb-10 px-2">
                 <hr />
-                <h2 className="font-black tracking-[3px] mb-4 uppercase mt-5"
-                    style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)", fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
+                <h2 className="font-black tracking-tighter mb-4 uppercase mt-5"
+                    style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.05em", transform: "scaleY(1.2)", fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
                 >
                     EXPERIENCIA BECASA CAMP
                 </h2>
@@ -72,23 +74,22 @@ export default function ExperienciaCamp() {
             </div>
 
             {/* menú para el el cambio de info del carrusel  */}
-            <div className="flex justify-center mb-5 [@media(min-width:480px)]:mb-12">
-                <nav className="flex border rounded-full py-0.5 min:w-[97%] overflow-y-scroll " style={{ scrollbarWidth: "none" }}>
+            <nav className="flex justify-center mb-5 [@media(min-width:480px)]:mb-12">
+                <div className="border rounded-full px-1.5 py-0.5 w-[95%] sm:w-auto sm:gap-6 flex overflow-none [scrollbar-width:none] items-center " style={{ scrollbarWidth: "none" }}>
                     {TABS.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => handleTabChange(tab.id)}
-                            className={`relative flex-1 sm:flex-0 px-3 py-0.5 text-[10px] sm:text-[13px] tracking-[0.5px] cursor-pointer border-none transition-colors duration-200 whitespace-nowrap
-                                ${activeTab === tab.id
-                                    ? "text-[#111] font-bold bg-[#AAFF00] rounded-full "
-                                    : "font-medium"
+                            className={`px-1 rounded-full text-[8px] sm:text-[14px] font-medium transition-all duration-200 whitespace-nowrap flex items-center justify-center flex-1  ${activeTab === tab.id
+                                    ? "bg-[#AAFF00] text-black border-[#AAFF00] font-bold"
+                                    : ""
                                 }`}
                         >
                             {tab.label}
                         </button>
                     ))}
-                </nav>
-            </div>
+                </div>
+            </nav>
 
             <div className="flex flex-col [@media(min-width:480px)]:flex-row [@media(min-width:480px)]:gap-7 md:gap-12 md:mt-27 [@media(min-width:480px)]:items-start relative ">
 
