@@ -545,7 +545,7 @@ function FormularioRegistroInner() {
                   />
 
                   <button type="submit" disabled={isSubmitting || priceLoading} className={btnClass}>
-                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${(discountedPrice ?? serverCampPrice ?? 0).toLocaleString("es-CO")}`}
+                    {isSubmitting ? "Procesando pago..." : `Pagar $ ${((discountedPrice ?? serverCampPrice ?? 0) / selectedInstallments).toLocaleString("es-CO")}${selectedInstallments > 1 ? " c/u" : ""}`}
                   </button>
                 </>
               )}
