@@ -145,7 +145,7 @@ export default function BecasaCard() {
                       {beca.titulo}
                     </p>
                     <p className="text-[11px] mt-0.5 leading-relaxed font-bold text-white/70">
-                      {beca.ciudad} — {beca.fecha}
+                      {beca.ciudad} — {beca.fecha} — 
                       {/* <br /> */}
                       {beca.edad}
                     </p>

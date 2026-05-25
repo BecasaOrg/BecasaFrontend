@@ -8,6 +8,7 @@ const TABS: { id: keyof typeof SLIDES_DATA; label: string }[] = [
     { id: "rendimiento", label: "Rendimiento" },
     { id: "aula", label: "Aula Becasa" },
     { id: "autoconocimiento", label: "Autoconocimiento" },
+    { id: "recruiting", label: "Recruiting Lab" },
     { id: "showcase", label: "Showcase" },
     { id: "comunidad", label: "Comunidad" },
 ];
