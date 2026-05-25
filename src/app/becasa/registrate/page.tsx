@@ -64,7 +64,7 @@ function FormularioRegistroInner() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [message, setMessage] = useState<{ type: "success" | "error" | "warning"; text: string } | null>(null);
 
   const [step, setStep] = useState<"register" | "payment">((stepFromParams as "register" | "payment") || "register");
   const [registrationId, setRegistrationId] = useState<number | null>(null);
@@ -245,8 +245,10 @@ function FormularioRegistroInner() {
 
       const data = await response.json();
 
-      if (response.ok && data.success && data.status !== "rejected") {
+      if (response.ok && data.success && data.status !== "rejected" && data.status !== "in_process") {
         setMessage({ type: "success", text: "Pago procesado exitosamente." });
+      } else if (data.status === "in_process") {
+        setMessage({ type: "warning", text: "Pago en revisión. Te notificaremos cuando se confirme." });
       } else {
         setMessage({ type: "error", text: translateReason(data.detail) || data.message || data.error || "Hubo un error al procesar el pago." });
       }
