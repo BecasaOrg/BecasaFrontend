@@ -73,9 +73,20 @@ function FormularioRegistroInner() {
   const [payerEmail, setPayerEmail] = useState("");
   const [identificationNumber, setIdentificationNumber] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+  const [selectedInstallments, setSelectedInstallments] = useState(1);
 
   const discount = appliedCoupon ? Number(appliedCoupon.discount_percentage) : 0;
   const discountedPrice = serverCampPrice ? serverCampPrice * (1 - discount / 100) : null;
+
+  const maxInstallments = appliedCoupon && Number(appliedCoupon.max_installments) > 0
+    ? Math.min(Number(appliedCoupon.max_installments), 3)
+    : 3;
+
+  useEffect(() => {
+    if (selectedInstallments > maxInstallments) {
+      setSelectedInstallments(maxInstallments);
+    }
+  }, [maxInstallments, selectedInstallments]);
 
   useEffect(() => {
     if (!campId) return;
@@ -207,7 +218,9 @@ function FormularioRegistroInner() {
         description: campId
           ? `Inscripción: Campamento ${campId}`
           : "Inscripción campamento",
-        installments: 1,
+        installments: selectedInstallments,
+        installment_number: 1,
+        total_installments: selectedInstallments,
         payer: {
           email: payerEmailInput,
           identification: {
@@ -418,6 +431,33 @@ function FormularioRegistroInner() {
                       </p>
                     )}
                   </div>
+
+                  {serverCampPrice && (
+                    <div className="border border-white/10 rounded-lg p-3">
+                      <p className="text-white/60 text-xs mb-2">Número de cuotas</p>
+                      <div className="flex gap-2">
+                        {Array.from({ length: maxInstallments }, (_, i) => i + 1).map((num) => (
+                          <button
+                            key={num}
+                            type="button"
+                            onClick={() => setSelectedInstallments(num)}
+                            className={`flex-1 py-2 px-3 rounded-lg text-sm font-bold transition-all cursor-pointer ${
+                              selectedInstallments === num
+                                ? "bg-[#AAFF00] text-black"
+                                : "bg-white/5 text-white/60 hover:bg-white/10"
+                            }`}
+                          >
+                            {num} {num === 1 ? "cuota" : "cuotas"}
+                          </button>
+                        ))}
+                      </div>
+                      {selectedInstallments > 1 && (
+                        <p className="text-white/50 text-xs mt-2">
+                          {selectedInstallments} pagos de ${((discountedPrice ?? serverCampPrice) / selectedInstallments).toLocaleString("es-CO")} c/u
+                        </p>
+                      )}
+                    </div>
+                  )}
 
                   {mpError && <p className="text-red-400 text-xs">{mpError}</p>}
 
