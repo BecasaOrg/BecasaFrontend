@@ -61,10 +61,6 @@ export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titu
 
   const pathname = usePathname();
 
-
-
-
-  
   const bgImg = pathname.startsWith('/becasa/informacion') ? slides[current].bgInfo : slides[current].bgBecasa;
 
   return (
@@ -97,7 +93,7 @@ export default function BecasaHeroSlider({ titulo = "BECASA CAMP 2026" }: { titu
         className={`absolute inset-0 flex flex-col items-center justify-center text-center px-6 transition-all duration-400 `}
       >
         <h1 className="font-black uppercase text-[#c8f500] leading-none tracking-tight drop-shadow-lg mb-6"
-          style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)", fontSize: "clamp(3.5rem, 10vw, 7.5rem)" }}
+          style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.0)", fontSize: "clamp(3rem, 7vw, 7.5rem)" }}
         >
           {titulo}
         </h1>

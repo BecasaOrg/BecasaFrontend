@@ -1,4 +1,4 @@
-'use client'; // 1. Convertimos a componente de cliente
+'use client';
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -12,6 +12,7 @@ import OrganizadoresResponsables from "@/components/becasa/informacion/Organizad
 import PatrocinadoresAliados from "@/components/becasa/informacion/PatrocinadoresAliados";
 import QueHaceDiferente from "@/components/becasa/informacion/QueHaceDiferente";
 import QueMasTendras from "@/components/becasa/informacion/QueMasTendras";
+import LoadingInformacion from "@/components/LoadingInformacion";
 
 // 2. Componente que contiene la lógica de datos
 function InformacionContent() {
@@ -58,7 +59,7 @@ function InformacionContent() {
     }, [id]);
 
     // Si está cargando, mostramos un estado inicial para que no se vea vacío
-    if (loading) return <div className="min-h-screen flex items-center justify-center">Cargando información del campamento...</div>;
+    if (loading) return <LoadingInformacion />
     const titulo = campData?.name || "BECASA CAMP 2026";
     const fechaInicio = campData?.start_date;
     const fechaFin = campData?.end_date;
@@ -79,7 +80,7 @@ function InformacionContent() {
                 direccion={direccion}
                 ciudad={ciudad}
             />
-            <DirigidoA />
+            <DirigidoA titulo={titulo} />
             <Entrenadores />
             <FechasInscripciones
                 precioNormal={precioNormal}
@@ -89,7 +90,7 @@ function InformacionContent() {
                 campId={campData?.id}
             />
             <QueMasTendras />
-           {/*  <PatrocinadoresAliados /> */}
+            {/*  <PatrocinadoresAliados /> */}
             <QueHaceDiferente />
             <OrganizadoresResponsables />
             <FundacionASA />

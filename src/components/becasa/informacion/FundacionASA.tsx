@@ -79,62 +79,57 @@ export default function FundacionASA() {
             {/* Sección Fundación */}
             <section
                 className="w-full relative overflow-hidden pt-6 px-4"
-                style={{
-                    background: cambioTemaDegradado,
-                }}
+                style={{ background: cambioTemaDegradado }}
             >
+                <div className="relative z-1 bg-black/40 backdrop-blur-md rounded-3xl px-6 py-8">
 
-                <div className="relative z-1 grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-black/40 backdrop-blur-md rounded-3xl px-6 py-8 ">
+                    {/* Contenedor con float en tablet */}
+                    <div className="flex flex-col-reverse md:block lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
 
-                    {/* Texto */}
-                    <div>
-                        <h2
-                            className="text-[#AAFF00] uppercase text-2xl md:text-3xl tracking-wide mb-2"
-                           style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}
-                        >
-                            Fundación ASA Más
-                        </h2>
+                        {/* Imagen con flota a la derecha solo en tablet */}
+                        <div className="md:float-right md:ml-4 md:mb-3 mt-[5%] md:w-[40%] lg:float-none lg:w-full lg:ml-0 lg:mb-0 lg:order-2 relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                            <Image
+                                src="/img/becasa/fundacion-ASA.jpg"
+                                alt="Fundación ASA Más - foto grupal"
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
 
-                        <h3 className="text-white font-bold text-lg md:text-xl mb-4">
-                            Lorem ipsum dolor sit amet, consectetue.
-                        </h3>
+                        {/* Texto fluye alrededor de la imagen en tablet */}
+                        <div className="lg:order-1">
+                            <h2
+                                className="text-[#AAFF00] uppercase text-2xl lg:text-3xl tracking-wide mb-2"
+                                style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }}
+                            >
+                                Fundación ASA Más
+                            </h2>
+                            <p className="text-white/55 text-sm leading-relaxed mb-4">
+                                En Athletic Scholarship Agency (ASA) somos una organización dedicada a acompañar a atletas latinoamericanos en su camino hacia una beca deportiva y académica en Estados Unidos. Nuestro equipo está formado por ex atletas universitarios, entrenadores, mentores y profesionales que han vivido este proceso en primera persona y ahora trabajan para hacerlo más claro, accesible y estratégico para ti.
+                            </p>
+                            <p className="text-white/55 text-sm leading-relaxed mb-4">
+                                Evaluamos tu perfil, te preparamos, te guiamos con honestidad y te conectamos con universidades que realmente valoren tu talento. Nuestra misión es ayudarte a alcanzar tu máximo potencial como atleta, estudiante y líder, mientras construyes un proyecto de vida lleno de propósito.
+                            </p>
+                            <p className="text-white/55 text-sm leading-relaxed">
+                                Muy pronto recibirás información sobre las siguientes etapas del evento, oportunidades educativas y recursos exclusivos para tu desarrollo.
+                            </p>
+                            <p className="font-bold text-white">
+                                Esto apenas comienza.
+                            </p>
+                            <p className="text-white/55 text-sm leading-relaxed">
+                                Tu talento puede abrirte más puertas de las que imaginas.
+                            </p>
+                            <p className="text-white leading-relaxed">
+                                Nos emociona tenerte en el camino de BECASA CAMP 2026.
+                            </p>
 
-                        <p className="text-white/55 text-sm leading-relaxed mb-4">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                            tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                            quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                            consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                            consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-                            odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-                            nulla facilisi.
-                        </p>
+                            {/* Clearfix para el float */}
+                            <div className="clear-both lg:hidden" />
+                        </div>
 
-                        <p className="text-white/55 text-sm leading-relaxed mb-4">
-                            Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod
-                            tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                            quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                            consequat.
-                        </p>
-
-                        <p className="text-white/55 text-sm leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                            tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                            quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                            consequat. Duis autem vel eum.
-                        </p>
                     </div>
-
-                    <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                        <Image
-                            src="/img/becasa/fundacion-ASA.jpg"
-                            alt="Fundación ASA Más - foto grupal"
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-
                 </div>
-            <hr className="text-white mt-5" />
+                <hr className="text-white mt-5" />
             </section>
         </div>
     );

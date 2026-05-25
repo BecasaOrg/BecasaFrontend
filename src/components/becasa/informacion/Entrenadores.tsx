@@ -19,7 +19,7 @@ const entrenadores: Entrenador[] = [
   {
     id: 1,
     nombre: "Adam Brewster",
-    resumen: "Head coach de Tabor, exarmador NCAA y profesional en Dinamarca. Aporta alto nivel técnico y gran desarrollo de talento.", 
+    resumen: "Head coach de Tabor, exarmador NCAA y profesional en Dinamarca. Aporta alto nivel técnico y gran desarrollo de talento.",
     descripcion:
       "Adam Brewster tiene una trayectoria muy fuerte como jugador. Se formó en clubes como MAVS, KAMO y HPSTL, donde acumuló reconocimientos importantes, incluyendo una medalla de bronce en la Open Division de USAV Nationals y selección al All-Tournament Team. Luego jugó a nivel NCAA en Lindenwood University, donde fue armador All-Conference en dos ocasiones y récord histórico del programa. Más adelante dio el salto al profesionalismo en Nordenskov, Dinamarca, donde ganó bronce en la Danish Cup y plata en la Danish Volley Ligaen. <br>Como entrenador, Brewster suma una década de experiencia y un recorrido amplio en diferentes niveles. Ha trabajado con más de 15 equipos de club, fue asistente en MidAmerica Nazarene University y Ottawa University, además de desempeñarse con Indy Ignite Pro Volleyball. En 2022 fue nombrado NAIA Assistant Coach of the Year, ha sido presentado en espacios de AVCA y Coaches Insider, y ha contribuido al desarrollo de All-Americans en NAIA. Actualmente vive su primera experiencia como head coach universitario en Tabor College.",
     foto: "/img/becasa/entrenadores/entrenadores1.jpg",
@@ -29,7 +29,7 @@ const entrenadores: Entrenador[] = [
   {
     id: 2,
     nombre: "Dillon Dahl",
-    resumen: "Head coach de ONU y ex Asistente del Año AVCA NAIA 2023. Lidera un programa histórico, competitivo y sólido en NAIA.", 
+    resumen: "Head coach de ONU y ex Asistente del Año AVCA NAIA 2023. Lidera un programa histórico, competitivo y sólido en NAIA.",
     descripcion:
       "Antes de consolidarse como entrenador de voleibol, Dillon Dahl construyó una base competitiva desde el deporte universitario, compitiendo en decatlón y jabalina durante cuatro temporadas en Northern State. Esa etapa refleja un perfil disciplinado, versátil y orientado al alto rendimiento, complementado además por reconocimientos académicos de conferencia que hablan de su constancia dentro y fuera del deporte. <br>Como entrenador, ha tenido un ascenso muy sólido. Fue asistente en Dordt University y Black Hills State University antes de asumir como head coach del programa masculino de Olivet Nazarene University en 2024. Bajo su dirección, ONU logró temporadas competitivas en 2024 y 2025, llegó por primera vez a una final de conferencia, venció a un equipo top 7 nacional y llevó al programa a liderar la NAIA en blocks por set, además de sumar múltiples reconocimientos All-CCAC.",
     foto: "/img/becasa/entrenadores/entrenadores2.jpg",
@@ -39,7 +39,7 @@ const entrenadores: Entrenador[] = [
   {
     id: 3,
     nombre: "Audrye Alejandro-Rivera",
-    resumen: "Coach de Webber con pasado profesional en Puerto Rico y experiencia NCAA/NAIA. Forma equipos competitivos con liderazgo y método.", 
+    resumen: "Coach de Webber con pasado profesional en Puerto Rico y experiencia NCAA/NAIA. Forma equipos competitivos con liderazgo y método.",
     descripcion:
       "Audrye Alejandro-Rivera llega con una trayectoria muy completa como deportista. Jugó voleibol universitario durante tres años en Elms College, donde fue top 10 líbero nacional, Freshman Athlete of the Year y NECC Defensive Player of the Year. Luego continuó su carrera en Warner University como estudiante de maestría, siendo reconocido dos veces como Mid-South Conference Defensive Player of the Week y como NCCAA Scholar Athlete. Después de esa etapa, fue reclutado por la liga profesional de Puerto Rico, consolidando así una carrera competitiva de 17 años. <br> Su recorrido como entrenador también es amplio y progresivo. Empezó en Elms como Student Intern Coach, luego trabajó durante cuatro temporadas en Warner, donde ayudó al equipo masculino a terminar invicto en temporada regular de conferencia y fue nombrado Assistant Coach of the Year en 2023. Más adelante pasó por Polk State College, dirigió en 2024 a Culver-Stockton College con una mejora de 10 victorias y actualmente lidera el programa de Webber University. Además, ha trabajado en voleibol de club con Top Select Club.",
     foto: "/img/becasa/entrenadores/entrenadores3.jpg",
@@ -49,7 +49,7 @@ const entrenadores: Entrenador[] = [
   {
     id: 4,
     nombre: "Andrés Mauricio Rosas",
-    resumen: "Head coach de Tabor, exarmador NCAA y profesional en Dinamarca. Aporta alto nivel técnico y gran desarrollo de talento.", 
+    resumen: "Head coach de Tabor, exarmador NCAA y profesional en Dinamarca. Aporta alto nivel técnico y gran desarrollo de talento.",
     descripcion:
       "Su identidad dentro del voleibol se ve marcada por más de 15 años de trabajo en desarrollo, perfeccionamiento y alto rendimiento, con una mirada muy enfocada en la evolución integral del atleta. <br>Como entrenador, Rosas ha dirigido en escenarios importantes del voleibol colombiano. Actualmente está vinculado a la Selección Colombia Sub-17 Masculina y también ha liderado procesos con Zion en la Superliga de Bogotá, la Universidad Central, CNG Athletics y la Selección Bogotá en distintas categorías. Su metodología se describe como sistémico-relacional, influenciada por principios del sistema americano de voleibol, con especial énfasis en táctica por posiciones, transición al alto rendimiento y cultura de equipo.",
     foto: "/img/becasa/entrenadores/entrenadores4.jpg",
@@ -72,7 +72,7 @@ function EntrenadorWindow({ entrenador, onCerrar }: { entrenador: Entrenador | n
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       <div
-        className="relative z-10 bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
+        className="relative z-10 bg-white rounded-2xl w-full max-w-5xl max-h-[90vh] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -82,8 +82,13 @@ function EntrenadorWindow({ entrenador, onCerrar }: { entrenador: Entrenador | n
           <X size={16} className="text-black" />
         </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_280px]">
-          <div className="p-8 pr-6">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+
+          <div className="relative hidden md:block h-[90vh] md:rounded-l-2xl overflow-hidden">
+            <Image src={entrenador.foto} alt={entrenador.nombre} fill className="object-cover object-top w-full h-full" />
+          </div>
+
+          <div className="p-8 pr-6 overflow-y-scroll h-[90vh] relative ">
             <h2
               className="text-black font-black uppercase text-3xl md:text-4xl leading-tight mb-1"
               style={{ fontFamily: "'Bebas Neue', 'Impact', sans-serif" }}
@@ -98,10 +103,9 @@ function EntrenadorWindow({ entrenador, onCerrar }: { entrenador: Entrenador | n
                 <p key={i} className="text-black/60 text-sm leading-relaxed">{p}</p>
               ))}
             </div>
-          </div>
-
-          <div className="relative min-h-[320px] md:min-h-full rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none overflow-hidden">
-            <Image src={entrenador.foto} alt={entrenador.nombre} fill className="object-cover object-top" />
+            <div className="relative md:hidden w-full h-[50vh] sm:w-[40vw] sm:h-[70vh] rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none overflow-hidden">
+              <Image src={entrenador.foto} alt={entrenador.nombre} fill className="object-cover object-top w-full h-full" />
+            </div>
           </div>
         </div>
       </div>
@@ -137,13 +141,13 @@ export default function Entrenadores() {
         </div>
 
         {/* Grid de cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 place-items-center ">
           {entrenadores.map((e) => {
             const estaActivo = hover === e.id;
             return (
               <div
                 key={e.id}
-                className="relative rounded-2xl overflow-hidden aspect-[3/4.5] group bg-[#0a1520]"
+                className="relative rounded-2xl overflow-hidden w-[40vw] md:w-[20vw] aspect-[2.5/3.6] md:aspect-[3/4.5] group bg-[#0a1520]"
                 onMouseEnter={() => setHover(e.id)}
                 onMouseLeave={() => setHover(null)}
               >

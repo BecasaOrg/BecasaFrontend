@@ -2,27 +2,45 @@
 
 import Image from "next/image";
 import { useTema } from "@/context/TemaContext";
+import { useState } from "react";
 
-export default function DirigidoA() {
+export default function DirigidoA({ titulo }: { titulo: string }) {
 
     const { oscuro } = useTema();
+
+    const tipoRutaUno = 'PERFORMANCE';
+    const tipoRutaDos = 'DISCOVERY';
+    const encontarTipoRuta = titulo.indexOf(tipoRutaUno) === -1 ?
+        titulo.indexOf(tipoRutaDos)
+        :
+        titulo.indexOf(tipoRutaUno);
+
+
+    const rutaFinal = encontarTipoRuta === -1 ?
+        'PERFORMANCE'
+        :
+        'DISCOVERY'
+
+    const rutaExtraida = titulo.slice(encontarTipoRuta, encontarTipoRuta + rutaFinal.length)
+
+    console.log(rutaExtraida);
 
     return (
         <section className={`w-full px-6 md:px-12 ${oscuro ? "bg-black text-white " : "bg-white text-black shadow-2xl"}`}>
 
             <hr className="pt-6" />
 
-            <h2 className="uppercase text-center text-3xl md:text-4xl tracking-widest mb-8" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }} >
+            <h2 className="uppercase text-left text-3xl md:text-4xl tracking-widest mb-8" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.01em", transform: "scaleY(1.2)" }} >
                 Dirigido A:
             </h2>
 
             <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
-                {/* ── Columna izquierda: texto ── */}
+                {/* Columna izquierda: texto */}
                 <div>
 
-                    <h3 className="font-bold text-xl mb-3">
-                        Ruta Discovery
+                    <h3 className="font-bold text-xl mb-3 ">
+                        RUTA {rutaExtraida}
                     </h3>
 
                     <p className="text-sm leading-relaxed mb-5">

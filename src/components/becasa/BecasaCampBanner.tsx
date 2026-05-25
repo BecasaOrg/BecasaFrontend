@@ -16,7 +16,7 @@ export default function BecasaCampBanner() {
           priority
         />
 
-        {/* Mobile — oculto en desktop */}
+        {/* Mobile - oculto en desktop */}
 
         <Image
           src="/img/becasa/BANNER-mobile2.jpg"

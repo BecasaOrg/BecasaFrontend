@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTema } from "@/context/TemaContext";
+import LoadingBecasaCard from "../LoadingBecasaCard";
 
 interface Beca {
   id: number;
@@ -114,15 +115,13 @@ export default function BecasaCard() {
 
         {/* Grid */}
         {cargando ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="w-10 h-10 border-4 border-[#AAFF00] border-t-transparent rounded-full animate-spin"></div>
-          </div>
+            <LoadingBecasaCard />
         ) : becasFiltradas.length === 0 ? (
           <p className="text-center text-white/35 py-12 text-sm">
             Próximamente nuevos campamentos BECASA.
           </p>
         ) : (
-          <div id="becasaCampamento" className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-3 lg:px-15 ">
+          <div id="becasaCampamento" className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-6 md:px-15 lg:px-7 ">
             {becasFiltradas.map((beca) => (
               <div
                 key={beca.id}
@@ -198,7 +197,7 @@ export default function BecasaCard() {
             ))}
           </div>
         )
-        }
+      }
       </div >
     </section >
   );

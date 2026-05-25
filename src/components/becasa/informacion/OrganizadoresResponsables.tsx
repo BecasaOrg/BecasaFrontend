@@ -61,7 +61,7 @@ export default function OrganizadoresResponsables() {
                                 onMouseEnter={() => setHover(org.id)}
                                 onMouseLeave={() => setHover(null)}
                             >
-                                {/* Foto — baja al hacer hover */}
+                                {/* Foto - baja al hacer hover */}
                                 <div
                                     className="absolute inset-0 transition-transform duration-500 ease-in-out"
                                     style={{ transform: estaActivo ? "translateY(30%)" : "translateY(0)" }}
