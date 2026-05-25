@@ -87,7 +87,7 @@ export default function BecasaCard() {
   const fadedCircleTwo = "w-[400px] h-[500px] rounded-full bg-[radial-gradient(circle,_rgba(170,255,0,0.8)_0%,_rgba(170,255,0,0.3)_50%,_transparent_80%)] blur-2xl absolute "
 
   return (
-    <section className={`w-full py-10 px-2 relative bg-[#0A0E2A] overflow-hidden `}>
+    <section className={`w-full px-1 sm:px-3 py-3 relative bg-[#0A0E2A] overflow-hidden `}>
       <div className={` ${fadedCircleOne} -top-30 -left-60`} />
       <div className={` ${fadedCircleTwo} -top-30 left-[50%] `} />
       <div className={` ${fadedCircleOne} -bottom-40 -right-60 `} />
@@ -95,12 +95,12 @@ export default function BecasaCard() {
       <div className="bg-[#0A0E2A]/80 py-5 rounded-3xl relative ">
         {/* Filtros */}
         <div className="mb-8 flex flex-col items-center ">
-          <div className="gap-3 bg-white/70 rounded-full px-5 py-0.5 w-[90%] md:w-auto flex overflow-y-scroll [scrollbar-width:none] ">
+          <div className="bg-white/70 rounded-full px-1.5 py-0.5 w-[95%] sm:w-auto sm:gap-6 flex overflow-none [scrollbar-width:none] items-center">
             {DEPORTES.map((d) => (
               <button
                 key={d}
                 onClick={() => setDeporteActivo(d)}
-                className={`px-4 py-0.5 rounded-full text-[13px] font-medium transition-all duration-200 whitespace-nowrap
+                className={`px-1 rounded-full text-[8px] sm:text-[14px] font-medium transition-all duration-200 whitespace-nowrap flex items-center justify-center flex-1 
               ${deporteActivo === d
                     ? "bg-[#AAFF00] text-black border-[#AAFF00] font-bold"
                     : "text-white"
@@ -122,16 +122,14 @@ export default function BecasaCard() {
             Próximamente nuevos campamentos BECASA.
           </p>
         ) : (
-          <div id="becasaCampamento" className="grid grid-cols-1 md:grid-cols-2 gap-3 px-3 sm:px-10 ">
+          <div id="becasaCampamento" className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-3 lg:px-15 ">
             {becasFiltradas.map((beca) => (
               <div
                 key={beca.id}
                 onClick={() => console.log(beca)}
-                className={`bg-[#0f1b2d] border border-white/10
-                rounded-2xl sm:rounded-bl-[150px] sm:rounded-tl-[150px] sm:rounded-tr-2xl sm:rounded-br-2xl p-2.5 pr-3.5 flex items-center gap-3 hover:-translate-y-0.5 transition-transform duration-200 relative
-               ${oscuro ? "bg-[#0a1520] " : "bg-white/30 shadow-2xl"}`}>
+                className={`bg-[#0f1b2d] border border-white/10 rounded-2xl md:rounded-bl-[150px] md:rounded-tl-[150px] md:rounded-tr-2xl md:rounded-br-2xl p-2.5 pr-3.5 flex items-center gap-3 hover:-translate-y-0.5 transition-transform duration-200 relative ${beca.titulo.length > 24 ? "col-span-2 lg:col-span-1" : ""} ${oscuro ? "bg-[#0a1520] " : "bg-white/30 shadow-2xl"}`}>
                 {/* Logo */}
-                <div className="relative w-[58px] h-[58px] sm:w-[68px] sm:h-[68px] overflow-hidden rounded-full bg-[#1a2e45] flex-shrink-0">
+                <div className="relative sm:w-[68px] sm:h-[68px] overflow-hidden rounded-full bg-[#1a2e45] flex-shrink-0 hidden md:block">
                   <Image
                     src={beca.logo}
                     alt={beca.titulo}
@@ -143,41 +141,59 @@ export default function BecasaCard() {
                 {/* Contenido */}
                 <div className="flex-1 min-w-0 flex flex-col gap-2">
                   <div>
-                    <p className="font-bold text-[15px] sm:text-[25px] md:text-[20px] lg:text-[25px] xl:text-[30px] leading-snug tracking-wide text-white whitespace-nowrap" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700 }} >
+                    <p className="font-bold text-[15px] sm:text-[18px] md:text-[20px]leading-snug tracking-tighter text-white whitespace-nowrap uppercase" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.09em" }} >
                       {beca.titulo}
                     </p>
-                    <p className="text-[11px] mt-0.5 leading-relaxed text-white/70">
-                      {beca.ciudad} — {beca.fecha}
+                    <p className="text-[11px] mt-0.5 leading-relaxed font-bold text-white/70">
+                      {beca.ciudad} — {beca.fecha} — 
                       {/* <br /> */}
                       {beca.edad}
                     </p>
                   </div>
 
                   {/* Botones */}
-                  <div className="flex gap-2 whitespace-nowrap">
-                    <Link
-                      href={`/becasa/informacion?id=${beca.id}`}
-                      className="text-[12px] font-bold rounded-full py-1 px-2 sm:px-5 bg-white transition-colors whitespace-nowrap text-black "
-                    >
-                      Información
-                    </Link>
+                  <div className="flex justify-between gap-2 whitespace-nowrap">
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/becasa/informacion?id=${beca.id}`}
+                        className="text-[12px] font-bold rounded-full py-1 px-2 sm:px-5 bg-white transition-colors whitespace-nowrap text-black "
+                      >
+                        Información
+                      </Link>
 
-                    {/*<Link
+                      {/*<Link
                       href={`becasa/registrate?camp_id=${beca.id}`}
                       className="text-[12px] font-bold text-black bg-[#AAFF00] rounded-full py-1 px-2 sm:px-5 hover:opacity-85 transition-opacity whitespace-nowrap"
                     >
                       Regístrate
                     </Link>*/}
-                    <a href="https://tally.so/r/A78WRo
-" className="text-[12px] font-bold text-black bg-[#AAFF00] rounded-full py-1 px-2 sm:px-5 hover:opacity-85 transition-opacity whitespace-nowrap">Regístrate</a>
+                      <a href="https://tally.so/r/A78WRo"
+                        className="text-[12px] font-bold text-black bg-[#AAFF00] rounded-full py-1 px-2 sm:px-5 hover:opacity-85 transition-opacity whitespace-nowrap">Regístrate</a>
+                    </div>
+                    {/* moviles  */}
+                    <div className="md:hidden flex gap-2">
+                      <div className="flex flex-col items-center justify-center " >
+                        <span className="w-5 h-5 rounded-full bg-[#AAFF00] text-[10px] flex items-center justify-center font-bold text-black leading-none">{beca.cupos}</span>
+                        <span className="text-[5px] font-bold text-black tracking-widest">CUPOS</span>
+                      </div>
+                      <div className="relative w-6 h-6 overflow-hidden rounded-full bg-[#1a2e45] flex-shrink-0">
+                        <Image
+                          src="/img/becasa/becasa_camp.jpg"
+                          alt="Logo becasa"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 {/*cupos */}
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#AAFF00] flex flex-col items-center justify-center absolute -top-4 -right-3 sm:static md:absolute md:-top-4 md:-right-6 lg:static " >
-                  <span className="text-[18px] font-black text-black leading-none">{beca.cupos}</span>
+                <div className="w-10 h-10 rounded-full bg-[#AAFF00] md:flex md:flex-col md:items-center md:justify-center md:absolute md:right-2 lg:static hidden " >
+                  <span className="text-[15px] font-black text-black leading-none">{beca.cupos}</span>
                   <span className="text-[8px] font-black text-black tracking-widest">CUPOS</span>
                 </div>
+
               </div>
             ))}
           </div>

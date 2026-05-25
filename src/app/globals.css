@@ -14,6 +14,7 @@
   /* este es para un diseño personalizado para el scroll de la pagina  */
   ::-webkit-scrollbar {
     width: 6px;
+    height: 3px;
   }
 
   ::-webkit-scrollbar-track {

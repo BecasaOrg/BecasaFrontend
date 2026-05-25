@@ -106,7 +106,7 @@ export default function EventoInfo({ fechaInicio, fechaFin, direccion, ciudad }:
             {/* Título + subtítulo */}
             <div className="z-1">
               <div
-                className="text-black group-hover:text-white font-black leading-none mb-1.5 text-[28px] "
+                className="text-black group-hover:text-white font-black leading-tight mb-1.5 text-xs md:text-sm break-words line-clamp-2 "
                 style={{ fontFamily: "var(--font-barlow), sans-serif", letterSpacing: "-0.01em", transform: "scaleY(1.2)" }} >
                 {card.titulo}
               </div>
