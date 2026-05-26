@@ -44,15 +44,17 @@ export default function DirigidoA({ titulo }: { titulo: string }) {
                     </h3>
 
                     <p className="text-sm leading-relaxed mb-5">
-                        está diseñada para atletas en etapa de formación, entre los 11 y 14 años, que están empezando a construir su camino en el deporte con más intención. Es una experiencia pensada para quienes sueñan con llevar su talento más lejos, pero todavía necesitan entender mejor qué significa realmente convertirse en un estudiante-atleta y qué pasos deben empezar a dar desde ahora.
+                        {rutaExtraida == 'PERFORMAN' ? 'está diseñada para atletas entre los 15 y 25 años que se encuentran en una etapa decisiva de su proceso, ya sea en los últimos años del colegio o en transición hacia la universidad. Es una ruta pensada para quienes no solo quieren seguir mejorando su nivel, sino comenzar a proyectarse con intención hacia oportunidades universitarias reales en Estados Unidos.' : 'está diseñada para atletas en etapa de formación, entre los 11 y 14 años, que están empezando a construir su camino en el deporte con más intención. Es una experiencia pensada para quienes sueñan con llevar su talento más lejos, pero todavía necesitan entender mejor qué significa realmente convertirse en un estudiante-atleta y qué pasos deben empezar a dar desde ahora.'}
+                       
+
                     </p>
 
                     <p className="text-sm leading-relaxed mb-5">
-                        En esta ruta, el enfoque no está solo en entrenar, sino en formar bases sólidas. Los atletas fortalecen fundamentos técnicos, aprenden mejores hábitos, reciben orientación sobre su desarrollo deportivo y comienzan a ganar visión sobre cómo el deporte, la educación y el carácter pueden trabajar juntos para abrir oportunidades reales en el futuro.
+                        {rutaExtraida == 'PERFORMAN' ? 'Aquí el enfoque está en evaluar, exponer y preparar. Los atletas reciben feedback estratégico, viven espacios de competencia y showcase, y entienden mejor cómo presentarse frente a entrenadores, cómo fortalecer su perfil y qué necesitan para dar el siguiente paso con más claridad.' : 'En esta ruta, el enfoque no está solo en entrenar, sino en formar bases sólidas. Los atletas fortalecen fundamentos técnicos, aprenden mejores hábitos, reciben orientación sobre su desarrollo deportivo y comienzan a ganar visión sobre cómo el deporte, la educación y el carácter pueden trabajar juntos para abrir oportunidades reales en el futuro.'}
                     </p>
 
                     <p className="text-sm leading-relaxed">
-                        La Ruta Discovery también busca que las familias comprendan mejor este camino. Por eso, integra espacios que acercan a los participantes a la experiencia del estudiante-atleta, combinando entrenamiento, aprendizaje, autoconocimiento y mentoría en un entorno que inspira, reta y acompaña.
+                         {rutaExtraida == 'PERFORMAN' ? '' : 'En esta ruta, el enfoque no está solo en entrenar, sino en formar bases sólidas. Los atletas fortalecen fundamentos técnicos, aprenden mejores hábitos, reciben orientación sobre su desarrollo deportivo y comienzan a ganar visión sobre cómo el deporte, la educación y el carácter pueden trabajar juntos para abrir oportunidades reales en el futuro.'}
                     </p>
                 </div>
 
