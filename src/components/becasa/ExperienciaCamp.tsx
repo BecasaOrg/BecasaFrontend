@@ -63,7 +63,7 @@ export default function ExperienciaCamp() {
             <div className="text-center mb-10 px-2">
                 <hr />
                 <h2 className="font-black tracking-tighter mb-4 uppercase mt-5"
-                    style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 700, letterSpacing: "-0.05em", transform: "scaleY(1.2)", fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
+                    style={{ fontFamily: "Acumin", fontWeight: 700, letterSpacing: "-0.05em", transform: "scaleY(1.2)", fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
                 >
                     EXPERIENCIA BECASA CAMP
                 </h2>
@@ -95,7 +95,7 @@ export default function ExperienciaCamp() {
             <div className="flex flex-col [@media(min-width:480px)]:flex-row [@media(min-width:480px)]:gap-7 md:gap-12 md:mt-27 [@media(min-width:480px)]:items-start relative ">
 
                 <div className="flex-none [@media(min-width:480px)]:w-[120px] md:min-w-[180px] pt-2 [@media(min-width:480px)]:pl-3 md:pl-6 [@media(min-width:480px)]:mt-6 md:mt-0 [@media(min-width:480px)]:block text-center [@media(min-width:480px)]:text-start flex flex-col items-center">
-                    <h3 className="text-[20px] sm:text-[22px] mb-4 leading-tight" style={{ fontFamily: "var(--font-barlow), sans-serif", fontWeight: 500 }}>
+                    <h3 className="text-[20px] sm:text-[22px] mb-4 leading-tight" style={{ fontFamily: "Acumin", fontWeight: 500 }}>
                         {tabData.title}
                     </h3>
                     <p className="text-[12px] leading-[1.8] m-0 text-justify w-[90%] [@media(min-width:480px)]:w-auto ">
@@ -134,7 +134,7 @@ export default function ExperienciaCamp() {
                             <div className="flex items-center gap-0.5">
                                 <span
                                     className="text-sm font-semibold text-[#aaa] tracking-wide"
-                                    style={{ fontFamily: "'Arial Black', Arial, sans-serif" }}
+                                    style={{ fontFamily: "Acumin" }}
                                 >
                                     {String(total).padStart(2, "0")}
                                 </span>
@@ -142,7 +142,7 @@ export default function ExperienciaCamp() {
                             </div>
                             <span
                                 className="text-[42px] md:text-[62px] font-black leading-none"
-                                style={{ fontFamily: "'Arial Black', Arial, sans-serif" }}
+                                style={{ fontFamily: "Acumin" }}
                             >
                                 {String(currentSlide + 1).padStart(2, "0")}
                             </span>
