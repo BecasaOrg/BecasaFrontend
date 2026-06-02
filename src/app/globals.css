@@ -2,7 +2,13 @@
 
 @font-face {
   font-family: 'Acumin';
-  src: url('/fonts/AcuminVariableConcept.otf') format('opentype');
+  src: url('/fonts/AcuminVariableConcept.otf') ;
+  font-display: swap;
+}
+
+@font-face{
+  font-family: 'acuminCursive';
+  src: url('/fonts/Acumin-ItPro.otf');
   font-display: swap;
 }
 
@@ -33,6 +39,10 @@
 
 body {
   font-family: 'Acumin' !important;
+}
+
+.textCursive{
+  font-family: 'acuminCursive' !important;
 }
 
 @theme inline {

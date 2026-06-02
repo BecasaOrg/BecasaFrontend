@@ -6,19 +6,19 @@ export const SLIDES_DATA = {
     slides: [
       {
         id: 1,
-        year: "2023",
+        year: "2025",
         image: "/img/experiencia/carrusel-1.jpg",
         caption: "Entrenamiento técnico y táctico enfocado en elevar tu rendimiento real en juego.",
       },
       {
         id: 2,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-2.jpg",
         caption: "Información clara sobre el sistema universitario y el proceso de becas deportivas.",
       },
       {
         id: 3,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-3.jpg",
         caption: "Explora tu perfil y toma decisiones con mayor claridad.",
       },
@@ -50,19 +50,19 @@ export const SLIDES_DATA = {
     slides: [
        {
         id: 1,
-        year: "2023",
+        year: "2025",
         image: "/img/experiencia/carrusel-1.jpg",
         caption: "Entrenamiento técnico y táctico enfocado en elevar tu rendimiento real en juego.",
       },
       {
         id: 2,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-2.jpg",
         caption: "Información clara sobre el sistema universitario y el proceso de becas deportivas.",
       },
       {
         id: 3,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-3.jpg",
         caption: "Explora tu perfil y toma decisiones con mayor claridad.",
       },
@@ -93,19 +93,19 @@ export const SLIDES_DATA = {
     slides: [
        {
         id: 1,
-        year: "2023",
+        year: "2025",
         image: "/img/experiencia/carrusel-1.jpg",
         caption: "Entrenamiento técnico y táctico enfocado en elevar tu rendimiento real en juego.",
       },
       {
         id: 2,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-2.jpg",
         caption: "Información clara sobre el sistema universitario y el proceso de becas deportivas.",
       },
       {
         id: 3,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-3.jpg",
         caption: "Explora tu perfil y toma decisiones con mayor claridad.",
       },
@@ -136,19 +136,19 @@ export const SLIDES_DATA = {
     slides: [
       {
         id: 1,
-        year: "2023",
+        year: "2025",
         image: "/img/experiencia/carrusel-1.jpg",
         caption: "Entrenamiento técnico y táctico enfocado en elevar tu rendimiento real en juego.",
       },
       {
         id: 2,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-2.jpg",
         caption: "Información clara sobre el sistema universitario y el proceso de becas deportivas.",
       },
       {
         id: 3,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-3.jpg",
         caption: "Explora tu perfil y toma decisiones con mayor claridad.",
       },
@@ -179,19 +179,19 @@ export const SLIDES_DATA = {
     slides: [
       {
         id: 1,
-        year: "2023",
+        year: "2025",
         image: "/img/experiencia/carrusel-1.jpg",
         caption: "Entrenamiento técnico y táctico enfocado en elevar tu rendimiento real en juego.",
       },
       {
         id: 2,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-2.jpg",
         caption: "Información clara sobre el sistema universitario y el proceso de becas deportivas.",
       },
       {
         id: 3,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-3.jpg",
         caption: "Explora tu perfil y toma decisiones con mayor claridad.",
       },
@@ -222,19 +222,19 @@ export const SLIDES_DATA = {
     slides: [
        {
         id: 1,
-        year: "2023",
+        year: "2025",
         image: "/img/experiencia/carrusel-1.jpg",
         caption: "Entrenamiento técnico y táctico enfocado en elevar tu rendimiento real en juego.",
       },
       {
         id: 2,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-2.jpg",
         caption: "Información clara sobre el sistema universitario y el proceso de becas deportivas.",
       },
       {
         id: 3,
-        year: "2024",
+        year: "2025",
         image: "/img/experiencia/carrusel-3.jpg",
         caption: "Explora tu perfil y toma decisiones con mayor claridad.",
       },

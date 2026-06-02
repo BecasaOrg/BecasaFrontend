@@ -55,7 +55,7 @@ export default function BecasaCard() {
           const deporteMapeado = mapDeporte[apiSportLower] || camp.sport_type || "Fútbol";
 
           const fechaObj = new Date(camp.start_date);
-          const fechaFormateada = `${fechaObj.getDate().toString().padStart(2, '0')} / ${(fechaObj.getMonth() + 1).toString().padStart(2, '0')} / ${fechaObj.getFullYear()}`;
+          const fechaFormateada = `${fechaObj.getDate().toString().padStart(2, '0')} / ${fechaObj.toLocaleString('es-ES', { month: 'long' })} / ${fechaObj.getFullYear()}`;
 
           return {
             id: camp.id,
@@ -118,7 +118,7 @@ export default function BecasaCard() {
             <LoadingBecasaCard />
         ) : becasFiltradas.length === 0 ? (
           <p className="text-center text-white/35 py-12 text-sm">
-            Próximamente nuevos campamentos BECASA.
+            Próximamente nuevos BECASA CAMPS.
           </p>
         ) : (
           <div id="becasaCampamento" className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-6 md:px-15 lg:px-7 ">
@@ -146,7 +146,7 @@ export default function BecasaCard() {
                     <p className="text-[11px] mt-0.5 leading-relaxed font-bold text-white/70">
                       {beca.ciudad} — {beca.fecha} — 
                       {/* <br /> */}
-                      {beca.edad}
+                       {beca.edad}
                     </p>
                   </div>
 

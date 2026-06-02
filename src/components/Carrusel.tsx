@@ -5,6 +5,7 @@ import { useTema } from "@/context/TemaContext";
 import Link from "next/link";
 import { slides } from "@/data/slides";
 
+
 export default function Carrusel() {
   const [actual, setActual] = useState<number>(0);
 
@@ -50,19 +51,19 @@ export default function Carrusel() {
 
           {/* Contenido de la imagen */}
           <div className="absolute inset-0 flex items-center z-1">
-            <div className="px-8 md:px-16 lg:px-24 max-w-xl">
+            <div className="px-8 md:px-16 lg:px-24 ">
 
-              <h2 className="text-[#AAFF00] font-black text-4xl md:text-5xl lg:text-6xl uppercase leading-tight">
+              <h2 className="text-[#c2ff00] text-2xl sm:text-4xl md:text-6xl textCursive font-bold mb-4 text-lime max-w-3xl uppercase leading-tight">
                 {slide.deporte}
               </h2>
 
-              <p className="text-white text-sm md:text-base leading-relaxed mt-4 mb-8 max-w-sm">
+              <p className="text-white text-base sm:text-xl font-bold mb-8 max-w-3xl parrafo hidden sm:block ">
                 {slide.descripcion}
               </p>
 
               <Link
                 href="/unete"
-                className="inline-block text-black bg-[#AAFF00] font-bold px-6 py-2 rounded-tl-full rounded-tr-full rounded-br-full transition-all duration-300 text-sm tracking-widest"
+                className="inline-block text-black bg-[#c2ff00] font-bold px-6 py-2 rounded-tl-full rounded-tr-full rounded-br-full transition-all duration-300 text-sm tracking-widest"
               >
                 Comenzar
               </Link>
