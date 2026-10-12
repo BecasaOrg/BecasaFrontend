@@ -37,9 +37,18 @@ export type Athlete = {
 
 export const GENDER_TO_API: Record<string, 'M' | 'F' | 'Other'> = { Femenino: 'F', Masculino: 'M', 'Prefiero no decir': 'Other' }
 const GENDER_FROM_API: Record<string, string> = { F: 'Femenino', M: 'Masculino', Other: 'Prefiero no decir' }
-/** Niveles del diseño → valores que acepta el backend (principiante | intermedio | avanzado). */
+/** Niveles del evento de voleibol → valores del enum en base de datos. */
 export const LEVEL_TO_API: Record<string, string> = {
-  'Formativo / escolar': 'principiante', 'Club / liga': 'intermedio', Departamental: 'avanzado', 'Selección nacional': 'avanzado',
+  '1 - Principiante (Nuevo en el Voleibol y quiero seguir aprendiendo)': '1_principiante',
+  '2 - Básico (En desarrollo y con fundamentos básicos)': '2_basico',
+  '3 - Intermedio (Ya he competido en varios eventos de nivel)': '3_intermedio',
+  '4 - Competitivo (Jugador experimentado y de los mejores en mi club)': '4_competitivo',
+  '5 - Jugador de Liga/Selección Departamental': '5_liga',
+  '6 - Jugador de Selección Nacional': '6_seleccion',
+  'Formativo / escolar': '1_principiante',
+  'Club / liga': '3_intermedio',
+  'Departamental': '5_liga',
+  'Selección nacional': '6_seleccion',
 }
 
 /* ---------- Relación campamento del sitio ↔ campamento del backend ---------- */

@@ -191,20 +191,34 @@ export async function registerToCamp(form: FormData): Promise<Result<Registratio
   form.set('user_id', String(session.user.id))
   const file = form.get('health_insurance_path')
   if (file instanceof File && file.size === 0) form.delete('health_insurance_path')
-  for (const k of ['discount_code', 'club_name', 'dietary_restrictions', 'medical_conditions']) if (form.get(k) === '') form.delete(k)
-  const r = await api<{ success?: boolean; data?: { id?: number }; checkout_url?: string; message?: string }>('/registrations', { method: 'POST', form })
+  for (const k of ['discount_code', 'club_name', 'dietary_restrictions', 'medical_conditions', 'additional_comments']) if (form.get(k) === '') form.delete(k)
+  const r = await api<{ success?: boolean; data?: { id?: number }; checkout_url?: string; message?: string; errors?: Record<string, string[]> }>('/registrations', { method: 'POST', form })
   if (r.ok && r.data?.success !== false) {
     return { ok: true, data: { checkoutUrl: r.data?.checkout_url, registrationId: r.data?.data?.id } }
   }
+  const fErrs = fieldErrors(r.data, {
+    identification_number: 'documento', years_experience: 'experiencia', position: 'posicion', skill_level: 'nivel',
+    shirt_size: 'talla', club_name: 'club', school_name: 'colegio', health_insurance_path: 'eps', medical_conditions: 'medica',
+    dietary_restrictions: 'medica', guardian_name: 'acudiente', guardian_phone: 'acudienteTel', guardian_phone_country_code: 'acudienteTelCode',
+    guardian_email: 'acudienteMail', additional_comments: 'comentarios', consent: 'termsEvent',
+    discount_code: 'cupon', installments_count: 'cupon',
+  })
+  let errorMsg = msgOf(r.data, 'No pudimos completar la inscripción.')
+  if (fErrs && Object.keys(fErrs).length > 0) {
+    const labels: Record<string, string> = {
+      documento: 'documento de identidad', experiencia: 'años de experiencia', posicion: 'posición en la cancha',
+      nivel: 'nivel de juego', talla: 'talla de camiseta', club: 'club', colegio: 'colegio/universidad',
+      eps: 'certificado EPS', medica: 'condición médica', acudiente: 'nombre del acudiente',
+      acudienteTel: 'celular del acudiente', acudienteMail: 'correo del acudiente',
+      termsEvent: 'términos y condiciones', comentarios: 'comentarios adicionales',
+    }
+    const problematic = Object.keys(fErrs).map(k => labels[k] || k)
+    errorMsg = `Revisa los siguientes campos: ${problematic.join(', ')}.`
+  }
   return {
     ok: false,
-    error: msgOf(r.data, 'No pudimos completar la inscripción.'),
-    fields: fieldErrors(r.data, {
-      identification_number: 'documento', years_experience: 'experiencia', position: 'posicion', skill_level: 'nivel',
-      shirt_size: 'talla', club_name: 'club', school_name: 'colegio', health_insurance_path: 'eps', medical_conditions: 'medica',
-      dietary_restrictions: 'medica', guardian_name: 'acudiente', guardian_phone: 'acudienteTel', guardian_email: 'acudienteMail',
-      discount_code: 'cupon', installments_count: 'cupon',
-    }),
+    error: errorMsg,
+    fields: fErrs,
   }
 }
 

@@ -66,6 +66,13 @@ textarea.input { min-height: 84px; resize: vertical; }
 .chips span { padding: .45em .95em; border-radius: var(--pill); border: 1.5px solid var(--gray-200); font-weight: 700; font-size: var(--fs-small); cursor: pointer; }
 .chips input:checked + span { background: var(--blue); color: var(--lime); border-color: var(--blue); }
 .chips input:focus-visible + span { outline: 3px solid var(--lime); outline-offset: 2px; }
+.posList { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 6px; }
+.posItem { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--gray-200); background: var(--gray-100); cursor: pointer; transition: all .15s ease; width: 100%; font-size: var(--fs-small); font-weight: 600; text-align: left; }
+.posItem:hover { border-color: var(--blue); }
+.posItem input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.posBadge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: #222; color: #fff; font-weight: 800; font-size: 13px; flex-shrink: 0; }
+.posItem:has(input:checked) { background: #f0f7ff; border-color: var(--blue); color: var(--blue); }
+.posItem:has(input:checked) .posBadge { background: var(--blue); color: var(--lime); }
 .check { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: var(--fs-small); }
 .check input { width: 22px; height: 22px; accent-color: var(--blue); margin: 0; }
 .linkBtn { display: inline; text-align: left; background: none; border: 0; padding: 0; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; color: var(--blue); }
