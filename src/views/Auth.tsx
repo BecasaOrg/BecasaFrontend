@@ -41,14 +41,15 @@ function DialCode({ id, name }: { id: string; name: string }) {
   )
 }
 
-/** Nombres legibles de cada campo, para decir exactamente qué falló (Notion: "indicar cuál es el error"). */
 const fieldNames: Record<string, string> = {
   nombres: 'Nombres', apellidos: 'Apellidos', nacimiento: 'Fecha de nacimiento', genero: 'Género', deporte: 'Deporte', graduacion: 'Año de graduación',
   whatsapp: 'Número de WhatsApp (celular)', correo: 'Correo electrónico', pais: 'País', departamento: 'Departamento o estado', ciudad: 'Ciudad de residencia', cupon: 'Código de descuento', general: 'Error', pass: 'Contraseña', pass2: 'Confirmar contraseña',
-  terms: 'Aceptar las políticas', documento: 'Documento de identidad', experiencia: 'Años de experiencia', posicion: 'Posición en cancha', nivel: 'Nivel de juego',
-  talla: 'Talla de camiseta', club: 'Club(es) o equipo(s)', colegio: 'Colegio o universidad', eps: 'Certificado de EPS', medica: 'Condición médica, restricción alimenticia o alergias',
-  acudiente: 'Nombre del acudiente', acudienteTel: 'Celular del acudiente', acudienteMail: 'Correo del acudiente', termsEvent: 'Autorización y consentimiento', edad: 'Edad',
+  terms: 'Aceptar las políticas', documento: 'Documento de identidad o pasaporte', experiencia: 'Años de experiencia competitiva', posicion: 'Posición en la cancha', nivel: 'Nivel de juego',
+  talla: 'Talla de camisa', club: 'Club(es) o equipo(s)', colegio: 'Colegio o universidad actual', eps: 'Certificado de EPS o carnet de salud', medica: 'Condición médica o alergias',
+  acudiente: 'Nombre del acudiente', acudienteTel: 'Celular del acudiente', acudienteTelCode: 'Indicativo de país del acudiente', acudienteMail: 'Correo del acudiente',
+  termsEvent: 'Autorización y consentimiento', comentarios: 'Comentarios adicionales o preguntas', edad: 'Edad',
 }
+
 function ErrorSummary({ errors }: { errors: Errors }) {
   const keys = Object.keys(errors).filter(k => k !== 'general')
   if (!keys.length && !errors.general) return null
@@ -99,20 +100,43 @@ function SocialLogin({ verb }: { verb: string }) {
   )
 }
 
+const VOLLEYBALL_POSITIONS = [
+  { key: 'A', label: 'Armador' },
+  { key: 'B', label: 'Libero' },
+  { key: 'C', label: 'Auxiliar o Punta Atacante' },
+  { key: 'D', label: 'Opuesto' },
+  { key: 'E', label: 'Central' },
+  { key: 'F', label: 'Todavía no tengo una posición, pero me gusta atacar' },
+  { key: 'G', label: 'Todavía no tengo una posición, pero me gusta defender' },
+  { key: 'H', label: 'Todavía no tengo una posición, pero me gusta armar' },
+]
+
+const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'X', 'XL', 'XXL']
+
+const VOLLEYBALL_LEVELS = [
+  '1 - Principiante (Nuevo en el Voleibol y quiero seguir aprendiendo)',
+  '2 - Básico (En desarrollo y con fundamentos básicos)',
+  '3 - Intermedio (Ya he competido en varios eventos de nivel)',
+  '4 - Competitivo (Jugador experimentado y de los mejores en mi club)',
+  '5 - Jugador de Liga/Selección Departamental',
+  '6 - Jugador de Selección Nacional',
+]
+
 /* Campos que pide la inscripción a un evento. Solo se muestran los que el perfil todavía no tiene. */
 const eventFields: { key: keyof Athlete; label: string; group?: string }[] = [
-  { key: 'documento', label: 'CC, documento de identidad o pasaporte' },
+  { key: 'documento', label: 'CC o documento de Identidad - o PASAPORTE' },
   { key: 'experiencia', label: 'Años de experiencia competitiva' },
   { key: 'posicion', label: 'Posición en la cancha' },
-  { key: 'nivel', label: 'Nivel de juego estimado' },
-  { key: 'talla', label: 'Talla de camiseta' },
-  { key: 'club', label: 'Club(es) o equipo(s)' },
-  { key: 'colegio', label: 'Colegio o universidad actual' },
-  { key: 'eps', label: 'Certificado de EPS o carné de salud' },
-  { key: 'medica', label: 'Condición médica, restricción alimenticia o alergias' },
+  { key: 'nivel', label: 'Nivel de Juego' },
+  { key: 'talla', label: 'Talla de Camisa' },
+  { key: 'club', label: 'Club(es) o equipo(s) al que perteneces' },
+  { key: 'colegio', label: 'Nombre del colegio o universidad actual' },
+  { key: 'eps', label: 'Certificado de afiliación a la EPS o carnet de salud' },
+  { key: 'medica', label: '¿Tiene alguna condición médica, restricción alimenticia o alergias?' },
   { key: 'acudiente', label: 'Nombre del acudiente', group: 'Acudiente' },
   { key: 'acudienteTel', label: 'Contacto del acudiente', group: 'Acudiente' },
   { key: 'acudienteMail', label: 'Correo del acudiente', group: 'Acudiente' },
+  { key: 'comentarios', label: 'Comentarios adicionales o preguntas' },
 ]
 const filled = (v: unknown) => (Array.isArray(v) ? v.length > 0 : !!String(v ?? '').trim())
 
@@ -227,14 +251,15 @@ export default function Auth({ mode, camp: campSlug, redirect, googleError }: { 
     const val = (k: string) => String(f.get(k) ?? '').trim()
     const er: Errors = {}
     missing.forEach(m => {
-      if (m.key === 'posicion') { if (!f.getAll('posicion').length) er.posicion = 'Elige al menos una posición.' }
-      else if (m.key === 'eps') { if (!epsFile) er.eps = 'Adjunta el certificado de la EPS o el carné de salud.'; else if (epsFile.size > 5 * 1024 * 1024) er.eps = 'El archivo pesa más de 5 MB.' }
+      if (m.key === 'comentarios') return // opcional
+      if (m.key === 'posicion') { if (!f.getAll('posicion').length) er.posicion = 'Elige al menos una posición en cancha.' }
+      else if (m.key === 'eps') { if (!epsFile) er.eps = 'Adjunta el certificado de la EPS o carnet de salud.'; else if (epsFile.size > 5 * 1024 * 1024) er.eps = 'El archivo pesa más de 5 MB.' }
       else if (!val(m.key)) er[m.key] = 'Este campo es obligatorio.'
     })
-    if (has('acudienteTel') && val('acudienteTel') && val('acudienteTel').replace(/\D/g, '').length < 7) er.acudienteTel = 'El celular del acudiente parece incompleto.'
+    if (has('acudienteTel') && val('acudienteTel') && val('acudienteTel').replace(/\D/g, '').length < 7) er.acudienteTel = 'El celular del acudiente parece incompleto (mínimo 7 dígitos).'
     if (has('acudienteMail') && val('acudienteMail') && !emailOk(val('acudienteMail'))) er.acudienteMail = 'Revisa el formato del correo.'
     if (user?.birth && camp) { const a = age(user.birth); if (a < 11 || a > 25) er.edad = `BECASA Camp es para atletas de 11 a 25 años. Según tu perfil tienes ${a}.` }
-    if (!acceptedEvent) er.termsEvent = 'Debes aceptar las políticas y condiciones del evento.'
+    if (!acceptedEvent) er.termsEvent = 'Debes aceptar la autorización y términos del evento.'
     setErrors(er)
     if (Object.keys(er).length) { focusFirst(er); return }
     const apiCamp = camp && apiCamps ? apiCampFor(camp.slug, apiCamps) : undefined
@@ -246,7 +271,7 @@ export default function Auth({ mode, camp: campSlug, redirect, googleError }: { 
     body.set('identification_number', pick('documento'))
     body.set('years_experience', pick('experiencia'))
     body.set('position', (has('posicion') ? f.getAll('posicion').map(String) : user?.posicion ?? []).join(', '))
-    body.set('skill_level', LEVEL_TO_API[pick('nivel')] ?? 'principiante')
+    body.set('skill_level', LEVEL_TO_API[pick('nivel')] ?? '1_principiante')
     body.set('shirt_size', pick('talla'))
     body.set('club_name', pick('club'))
     body.set('school_name', pick('colegio'))
@@ -254,8 +279,13 @@ export default function Auth({ mode, camp: campSlug, redirect, googleError }: { 
     body.set('medical_conditions', pick('medica'))
     body.set('dietary_restrictions', pick('medica'))
     body.set('guardian_name', pick('acudiente'))
-    body.set('guardian_phone', has('acudienteTel') ? `${val('acudienteTelCode') || '+57'} ${val('acudienteTel')}` : user?.acudienteTel ?? '')
+    const guardianCode = val('acudienteTelCode') || '+57'
+    const guardianNumber = val('acudienteTel')
+    body.set('guardian_phone_country_code', guardianCode)
+    body.set('guardian_phone', has('acudienteTel') ? `${guardianCode} ${guardianNumber}` : user?.acudienteTel ?? '')
     body.set('guardian_email', pick('acudienteMail'))
+    if (val('comentarios')) body.set('additional_comments', val('comentarios'))
+    body.set('consent', acceptedEvent ? '1' : '0')
     if (coupon) { body.set('discount_code', coupon.code); body.set('installments_count', String(cuotas)) }
     setLoading(true)
     const r = await registerToCamp(body).catch(() => ({ ok: false as const, error: 'Error de conexión. Intenta de nuevo.', fields: undefined }))
@@ -414,32 +444,46 @@ export default function Auth({ mode, camp: campSlug, redirect, googleError }: { 
                 <div className="sr-only" aria-hidden="true"><label>Empresa<input name="empresa" tabIndex={-1} autoComplete="off" /></label></div>
                 <ErrorSummary errors={errors} />
                 {missing.length === 0 && <p className={`${s.allSet} ${s.full}`}>Tu perfil ya tiene todos los datos que pide el evento. Solo confirma y acepta las políticas.</p>}
-                {has('documento') && <Field id="documento" label="CC, documento de identidad o pasaporte" error={err('documento')}><input className={s.input} id="documento" name="documento" placeholder="Número de documento o pasaporte" {...inv('documento')} /></Field>}
-                {has('experiencia') && <Field id="experiencia" label="Años de experiencia competitiva" error={err('experiencia')}><input className={s.input} id="experiencia" name="experiencia" type="number" min={0} max={25} placeholder="Ej. 4" {...inv('experiencia')} /></Field>}
+                {has('documento') && <Field id="documento" label="CC o documento de Identidad - o PASAPORTE" error={err('documento')}><input className={s.input} id="documento" name="documento" placeholder="Número de documento o pasaporte" {...inv('documento')} /></Field>}
+                {has('experiencia') && <Field id="experiencia" label="Años de experiencia competitiva" error={err('experiencia')}><input className={s.input} id="experiencia" name="experiencia" type="number" min={0} max={25} placeholder="Ej. 3" {...inv('experiencia')} /></Field>}
                 {has('posicion') && (
                   <div className={`${s.field} ${s.full}`}>
-                    <span id="posicion-l" style={{ fontSize: 'var(--fs-small)', fontWeight: 700 }}>Posición en la cancha <i style={{ color: '#c0392b', fontStyle: 'normal' }}>*</i></span>
-                    <div className={s.chips} role="group" aria-labelledby="posicion-l" id="posicion" tabIndex={-1}>
-                      {['Armador/a', 'Opuesto/a', 'Central', 'Punta', 'Líbero', 'Aún no definida'].map(p => <label key={p}><input type="checkbox" name="posicion" value={p} /><span>{p}</span></label>)}
+                    <label id="posicion-l" style={{ fontSize: 'var(--fs-small)', fontWeight: 700 }}>
+                      Posición en la cancha <small style={{ fontWeight: 400, color: 'var(--ink-soft)' }}>(Puedes seleccionar múltiples)</small> <i style={{ color: '#c0392b', fontStyle: 'normal' }}>*</i>
+                    </label>
+                    <div className={s.posList} role="group" aria-labelledby="posicion-l" id="posicion" tabIndex={-1}>
+                      {VOLLEYBALL_POSITIONS.map(p => (
+                        <label key={p.key} className={s.posItem}>
+                          <input type="checkbox" name="posicion" value={p.label} />
+                          <span className={s.posBadge}>{p.key}</span>
+                          <span>{p.label}</span>
+                        </label>
+                      ))}
                     </div>
                     {err('posicion') && <span className={s.err} role="alert">{err('posicion')}</span>}
                   </div>
                 )}
                 {has('nivel') && (
-                  <Field id="nivel" label="Nivel de juego" error={err('nivel')}>
-                    <select className={s.input} id="nivel" name="nivel" defaultValue="" {...inv('nivel')}><option value="" disabled>Selecciona</option><option>Formativo / escolar</option><option>Club / liga</option><option>Departamental</option><option>Selección nacional</option></select>
+                  <Field id="nivel" label="Nivel de Juego" error={err('nivel')} full>
+                    <select className={s.input} id="nivel" name="nivel" defaultValue="" {...inv('nivel')}>
+                      <option value="" disabled>Selecciona tu nivel de juego</option>
+                      {VOLLEYBALL_LEVELS.map(lvl => <option key={lvl} value={lvl}>{lvl}</option>)}
+                    </select>
                   </Field>
                 )}
                 {has('talla') && (
-                  <Field id="talla" label="Talla de camisa" error={err('talla')}>
-                    <select className={s.input} id="talla" name="talla" defaultValue="" {...inv('talla')}><option value="" disabled>Selecciona</option>{['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(t => <option key={t}>{t}</option>)}</select>
+                  <Field id="talla" label="Talla de Camisa" error={err('talla')}>
+                    <select className={s.input} id="talla" name="talla" defaultValue="" {...inv('talla')}>
+                      <option value="" disabled>Selecciona tu talla de camiseta</option>
+                      {SHIRT_SIZES.map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
                   </Field>
                 )}
                 {has('club') && <Field id="club" label="Club(es) o equipo(s) al que perteneces" hint="separa con comas" error={err('club')}><input className={s.input} id="club" name="club" placeholder="Ej. Club Voleibol Santander" {...inv('club')} /></Field>}
                 {has('colegio') && <Field id="colegio" label="Nombre del colegio o universidad actual" error={err('colegio')}><input className={s.input} id="colegio" name="colegio" placeholder="Nombre de la institución" {...inv('colegio')} /></Field>}
                 {has('eps') && (
                   <div className={`${s.field} ${s.full}`}>
-                    <span style={{ fontSize: 'var(--fs-small)', fontWeight: 700 }}>Certificado de afiliación a la EPS o carné de salud <i style={{ color: '#c0392b', fontStyle: 'normal' }}>*</i></span>
+                    <span style={{ fontSize: 'var(--fs-small)', fontWeight: 700 }}>Certificado de afiliación a la EPS o carnet de salud <i style={{ color: '#c0392b', fontStyle: 'normal' }}>*</i></span>
                     <label className={s.file} id="eps" tabIndex={-1}>
                       <img src={img('icons/clip.svg')} alt="" />
                       <span>{fileName || 'Adjuntar archivo (PDF o imagen)'}</span>
@@ -448,15 +492,20 @@ export default function Auth({ mode, camp: campSlug, redirect, googleError }: { 
                     {err('eps') && <span className={s.err} role="alert">{err('eps')}</span>}
                   </div>
                 )}
-                {has('medica') && <Field id="medica" label="¿Tienes alguna condición médica, restricción alimenticia o alergias?" hint='escribe "Ninguna" si no' error={err('medica')} full><input className={s.input} id="medica" name="medica" placeholder="Escribe…" {...inv('medica')} /></Field>}
+                {has('medica') && <Field id="medica" label="¿Tiene alguna condición médica, restricción alimenticia o alergias?" hint='escribe "Ninguna" si no tienes' error={err('medica')} full><input className={s.input} id="medica" name="medica" placeholder="Escribe aquí…" {...inv('medica')} /></Field>}
                 {(has('acudiente') || has('acudienteTel') || has('acudienteMail')) && <p className={s.group}>Acudiente</p>}
                 {has('acudiente') && <Field id="acudiente" label="Nombre completo del acudiente" error={err('acudiente')}><input className={s.input} id="acudiente" name="acudiente" placeholder="Nombre completo" {...inv('acudiente')} /></Field>}
                 {has('acudienteTel') && (
-                  <Field id="acudienteTel" label="Celular del acudiente" hint="elige el indicativo del país" error={err('acudienteTel')}>
+                  <Field id="acudienteTel" label="Número del acudiente" hint="asegurar que se puede escoger el indicativo de cada país" error={err('acudienteTel')}>
                     <div className={s.prefix}><DialCode id="acudienteTelCode" name="acudienteTelCode" /><input className={s.input} id="acudienteTel" name="acudienteTel" type="tel" inputMode="numeric" placeholder="300 000 0000" {...inv('acudienteTel')} /></div>
                   </Field>
                 )}
                 {has('acudienteMail') && <Field id="acudienteMail" label="Correo del acudiente" error={err('acudienteMail')} full><input className={s.input} id="acudienteMail" name="acudienteMail" type="email" placeholder="nombre@correo.com" {...inv('acudienteMail')} /></Field>}
+                
+                {/* Pregunta abierta no obligatoria */}
+                <Field id="comentarios" label="Comentarios adicionales o preguntas" req={false} hint="PREGUNTA ABIERTA NO OBLIGATORIA" error={err('comentarios')} full>
+                  <textarea className={s.input} id="comentarios" name="comentarios" rows={3} placeholder="Escribe aquí cualquier comentario o pregunta adicional…" {...inv('comentarios')} style={{ resize: 'vertical', minHeight: 70 }} />
+                </Field>
                 <p className={s.group}>Pago</p>
                 <Field id="cupon" label="Código de descuento" req={false} hint="opcional" error={err('cupon')} full>
                   <div className={s.prefix}>
