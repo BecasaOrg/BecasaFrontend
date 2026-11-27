@@ -35,7 +35,7 @@ export function Photo({ pic, className = '', eager }: { pic: Pic; className?: st
 
 /** Hero como los slides de BECASA: mitad izquierda oscura con el texto, mitad derecha a color (fotos que rotan). */
 export function PageHero({ pills, title, accent, lead, actions, photos, aside, bleed }: {
-  bleed?: boolean; pills: { text: string; lime?: boolean }[]; title: ReactNode; accent?: ReactNode; lead: ReactNode; actions?: ReactNode; photos: Pic[]; aside?: ReactNode
+  bleed?: boolean; pills: { text: string; lime?: boolean; href?: string }[]; title: ReactNode; accent?: ReactNode; lead: ReactNode; actions?: ReactNode; photos: Pic[]; aside?: ReactNode
 }) {
   const [k, setK] = useState(0)
   useEffect(() => {
@@ -50,7 +50,9 @@ export function PageHero({ pills, title, accent, lead, actions, photos, aside, b
       </div>
       <div className={`container ${s.heroInner}`}>
         <div className={s.heroCopy}>
-          <div className={s.pills}>{pills.map(p => <span key={p.text} className={`${s.pill} ${p.lime ? s.pillLime : ''}`}>{p.text}</span>)}</div>
+          <div className={s.pills}>{pills.map(p => p.href
+            ? <a key={p.text} href={p.href} className={`${s.pill} ${s.pillLink}`}>{p.text}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+            : <span key={p.text} className={`${s.pill} ${p.lime ? s.pillLime : ''}`}>{p.text}</span>)}</div>
           <h1 className={`display ${s.heroTitle}`}>{title}{accent && <span>{accent}</span>}</h1>
           <p className={s.heroLead}>{lead}</p>
           {actions && <div className={s.actions}>{actions}</div>}

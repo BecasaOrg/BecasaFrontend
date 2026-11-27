@@ -42,6 +42,12 @@
 .pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .pill { display: inline-flex; align-items: center; padding: .32em .9em; border-radius: var(--pill); border: 1.5px solid currentColor; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
 .pillLime { background: var(--lime); color: var(--blue); border-color: var(--lime); }
+/* Etiqueta que enlaza (Fundación ASA Más): borde chartreuse y flecha */
+.pillLink { gap: 6px; border-color: var(--lime); color: var(--lime); text-decoration: none; transition: background .2s var(--ease), color .2s var(--ease); }
+.pillLink svg { width: 13px; height: 13px; transition: transform .2s var(--ease); }
+.pillLink:hover, .pillLink:focus-visible { background: var(--lime); color: var(--blue); }
+.pillLink:hover svg { transform: translateX(2px); }
+.pillLink:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
 .heroTitle { font-size: clamp(2.6rem, 1.5rem + 5vw, 6rem); color: var(--white); max-width: 13ch; }
 .heroTitle span { display: block; color: var(--lime); }
 .heroLead { max-width: 36rem; font-size: var(--fs-lead); color: rgba(255,255,255,.9); }
@@ -294,6 +300,12 @@
   border: 2px solid rgba(255,255,255,.35); background: rgba(255,255,255,.06); color: rgba(255,255,255,.85); font-weight: 700; font-size: 1rem; cursor: not-allowed; }
 .soonBtn span { padding: .45em .9em; border-radius: var(--pill); background: var(--lime); color: var(--blue); font-size: var(--fs-xs); font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .soonBtn { white-space: nowrap; }
+/* Botón activo "Conoce la Fundación ASA+": misma forma que el de "próximamente" */
+.foundBtn { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 6px; padding: 6px 20px; border-radius: var(--pill); border: 2px solid rgba(255,255,255,.35); background: rgba(255,255,255,.06); color: var(--white); font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap; transition: background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease); }
+.foundBtn svg { width: 18px; height: 18px; transition: transform .2s var(--ease); }
+.foundBtn:hover, .foundBtn:focus-visible { background: var(--lime); border-color: var(--lime); color: var(--blue); }
+.foundBtn:hover svg { transform: translateX(3px); }
+.foundBtn:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
 @media (max-width: 420px) { .soonBtn { width: 100%; justify-content: space-between; gap: 6px; padding-left: 14px; font-size: .85rem; } .soonBtn span { font-size: .62rem; padding: .45em .7em; } }
 .banner { text-decoration: none; }
 

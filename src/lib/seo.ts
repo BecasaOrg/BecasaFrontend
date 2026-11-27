@@ -6,6 +6,7 @@ const meta: Record<string, [string, string]> = {
   '/servicios': ['Servicios · Siete fases y un puente · ASA', 'Tu camino al campus fase por fase: diagnóstico gratuito, roadmap, perfil, promoción, decisión, visa y mentoría en la universidad.'],
   '/becasa': ['BECASA Camp · Campamento deportivo-académico · ASA', 'Entrena con coaches de universidades de Estados Unidos, entiende el sistema de becas y construye tu perfil de estudiante-atleta.'],
   '/becasa/bucaramanga': ['BECASA Camp 2026 Bucaramanga · 7 y 8 de noviembre', 'Voleibol en Bucaramanga: rutas Discovery y Performance, coaches de Estados Unidos, Media Day y Scorecard ASA. Inscríbete.'],
+  '/fundacion-asa-mas': ['Fundación ASA Más · Registro Web RTE (DIAN)', 'Transparencia y Régimen Tributario Especial de la Fundación ASA Más: información del artículo 364-5 del Estatuto Tributario, documentos de consulta pública y comentarios ante la DIAN.'],
   '/aviso-legal': ['Aviso legal · ASA', 'Responsable del sitio y condiciones de uso de athleticsa.com.'],
   '/privacidad': ['Política de privacidad · ASA', 'Cómo tratamos los datos personales de atletas, familias y acudientes.'],
   '/cookies': ['Política de cookies · ASA', 'Qué cookies usa athleticsa.com y cómo puedes desactivarlas.'],
