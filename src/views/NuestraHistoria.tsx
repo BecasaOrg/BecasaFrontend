@@ -24,7 +24,7 @@ export default function NuestraHistoria() {
   return (
     <>
       <PageHero
-        pills={[{ text: 'Nuestra historia', lime: true }, { text: 'Fundada por estudiantes-atletas' }]}
+        pills={[{ text: 'Nuestra historia', lime: true }, { text: 'Fundada por estudiantes-atletas' }, { text: 'Fundación ASA Más', href: '/fundacion-asa-mas' }]}
         title="Tu talento ya tiene una historia." accent="Aquí encuentra dirección."
         lead={<>ASA acompaña a <strong>estudiantes-atletas latinoamericanos</strong> con formación, representación y mentoría para que amplíen sus oportunidades, estudien y compitan en Estados Unidos, y decidan con criterio qué viene después.</>}
         photos={[{ src: img('slider/nuestra-historia.webp'), alt: 'Andrés y Sebastián, fundadores de ASA' }]}
@@ -123,9 +123,9 @@ export default function NuestraHistoria() {
               <p className={s.kicker}>Brazo social</p>
               <h2 className="display">Fundación ASA+</h2>
               <p>Juntos, Sebastián y Andrés fundaron también la Fundación ASA+, el brazo social de ASA, con foco en Colombia.</p>
-              <button type="button" className={s.soonBtn} disabled aria-label="Conoce la Fundación ASA+ (próximamente)">
-                Conoce la Fundación ASA+ <span>Próximamente</span>
-              </button>
+              <a href="/fundacion-asa-mas" className={s.foundBtn}>
+                Conoce la Fundación ASA+ {Icon.arrow}
+              </a>
             </div>
             <FoundationCarousel />
           </div>
