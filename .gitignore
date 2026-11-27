@@ -6,10 +6,10 @@
 next-env.d.ts
 *.tsbuildinfo
 # entorno (nunca subir secretos)
-.env*
 !.env.example
 # vercel
 .vercel
 # sistema
 .DS_Store
 npm-debug.log*
+config.bat

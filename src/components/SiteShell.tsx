@@ -14,7 +14,7 @@ import { auth, setRouter } from '../lib/app'
 import { camps } from '../data/becasa'
 
 const BAND = ['/becasa/crea-tu-perfil', '/becasa/login', '/becasa/registrate']
-const HERO = ['/', '/nuestra-historia', '/servicios', '/becasa', ...camps.map(c => `/becasa/${c.slug}`)]
+const HERO = ['/', '/nuestra-historia', '/servicios', '/becasa', '/fundacion-asa-mas', ...camps.map(c => `/becasa/${c.slug}`)]
 
 /** Estructura común: header, footer, botones flotantes, aviso de cookies y animaciones de entrada. */
 export default function SiteShell({ children }: { children: ReactNode }) {
